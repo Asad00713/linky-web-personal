@@ -8,10 +8,10 @@ export default function Layout({
     children: React.ReactNode;
 }>) {
     return (
-        <div className="mx-auto max-w-375">
+        <div className="mx-auto max-w-[1520]">
             <Header />
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }
