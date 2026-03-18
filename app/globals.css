@@ -5,10 +5,46 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-primary: #2D7DF6;
-  --color-primary-hover: #2563EB;
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-primary: #0052D4;
+  --color-primary-mid: #65C7F7;
+  --color-primary-light: #9CECFB;
+  --color-primary-hover: #0041AA;
+  --color-primary-gradient: linear-gradient(to right, #9CECFB, #65C7F7, #0052D4);
+  --color-body: #1F2323;
+
+  /* Fonts */
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-poppins);
+
+  /* Typography scale */
+  --text-h1: 77.1px;
+  --leading-h1: 92.57px;
+  --tracking-h1: -2.3px;
+
+  --text-h2: 32px;
+  --leading-h2: 40px;
+  --tracking-h2: -0.64px;
+
+  --text-card-para: 16px;
+  --leading-card-para: 20px;
+  --tracking-card-para: -0.16px;
+  --color-card-para: #454545;
+
+  --text-para: 16px;
+  --leading-para: 24px;
+  --tracking-para: 0.16px;
+
+  --text-eyebrow: 16px;
+  --leading-eyebrow: 24px;
+  --tracking-eyebrow: -0.32px;
+  --color-eyebrow: #16B8C3;
+  --color-accent-blue: #5EA8E7;
+
+  --text-lead: 22px;
+  --leading-lead: 32px;
+  --tracking-lead: -0.16px;
+  --color-lead: #484F56;
   --container-max-width: 1600px;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -53,7 +89,7 @@ body {
   max-width: 1600px;
   margin: 0 auto;
   background: #ffffff;
-  color: #171717;
+  color: var(--color-body);
 }
 
 :root {
