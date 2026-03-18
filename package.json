@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "push:client": "git push origin $(git branch --show-current)",
+    "push:personal": "git push personal $(git branch --show-current)",
+    "push:all": "git push origin $(git branch --show-current) && git push personal $(git branch --show-current)"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
