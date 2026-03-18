@@ -7,8 +7,8 @@ export default function HeroSection() {
       </div>
 
       {/* Decorative concentric circles */}
-      <div className="pointer-events-none absolute top-1/2 right-0 -z-[5] -translate-y-1/2 translate-x-[10%]">
-        <div className="relative h-[700px] w-[700px] lg:h-[800px] lg:w-[800px]">
+      <div className="pointer-events-none absolute top-1/2 right-0 -z-5 -translate-y-1/2 translate-x-[10%]">
+        <div className="relative h-175 w-175 lg:h-200 lg:w-200">
           {[1, 2, 3, 4, 5].map((i) => (
             <div
               key={i}
@@ -60,7 +60,7 @@ export default function HeroSection() {
             <WifiSignal className="absolute top-16 right-[15%] text-[#6366F1]/40" size={20} />
 
             {/* Phone Mockup */}
-            <div className="relative z-10 w-[260px] sm:w-[280px]">
+            <div className="relative z-10 w-65 sm:w-70">
               <PhoneMockup />
             </div>
 
@@ -122,7 +122,7 @@ function WifiSignal({
 function PhoneMockup() {
   return (
     <div className="rounded-[40px] border border-gray-200 bg-white p-2 shadow-2xl shadow-black/10">
-      <div className="rounded-[32px] bg-gray-50 overflow-hidden">
+      <div className="rounded-4xl bg-gray-50 overflow-hidden">
         {/* Status bar */}
         <div className="flex items-center justify-between px-6 pt-3 pb-2 text-[10px] font-semibold text-gray-800">
           <span>9:41</span>
@@ -138,7 +138,7 @@ function PhoneMockup() {
 
         {/* Profile header */}
         <div className="flex flex-col items-center px-4 pt-2 pb-4">
-          <div className="h-16 w-16 rounded-full bg-linear-to-br from-[#C4B5FD] to-[#93C5FD] p-[2px]">
+          <div className="h-16 w-16 rounded-full bg-linear-to-br from-[#C4B5FD] to-[#93C5FD] p-0.5">
             <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-200">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
@@ -220,7 +220,7 @@ function PhoneMockup() {
 /* ── NFC Card ──────────────────────────────────────── */
 function NFCCard() {
   return (
-    <div className="w-[260px] sm:w-[300px] rotate-[-8deg]">
+    <div className="w-65 sm:w-75 rotate-[-8deg]">
       <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-[#1F2937] via-[#374151] to-[#111827] p-6 shadow-2xl shadow-black/30">
         {/* Subtle shine */}
         <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/[0.07] to-transparent" />
@@ -248,7 +248,7 @@ function NFCCard() {
             />
           </svg>
           {/* Chip */}
-          <div className="h-7 w-9 rounded-sm bg-gradient-to-br from-[#D4AF37] to-[#C5972C] opacity-80" />
+          <div className="h-7 w-9 rounded-sm bg-linear-to-br from-[#D4AF37] to-[#C5972C] opacity-80" />
         </div>
 
         {/* Card branding */}
