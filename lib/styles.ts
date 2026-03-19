@@ -13,3 +13,8 @@ export const gradientTextStyle: React.CSSProperties = {
 export const gradientBgStyle: React.CSSProperties = {
   background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)",
 };
+
+export const gradientBorderStyle: React.CSSProperties = {
+  background: "linear-gradient(white, white) padding-box, linear-gradient(to right, #9CECFB, #65C7F7, #0052D4) border-box",
+  border: "2px solid transparent",
+};

@@ -11,5 +11,10 @@ export const IMAGES = {
   scrollRibbonSvg7: '/images/SoulPage.svg',
   advantageCardImage: '/images/AdvantageCardImage.svg',
   advantageAbsoluteImage: '/images/AdvantageAbsoluteImage.svg',
-  firstMoveableVector: '/images/FirstMoveableVector.svg'
+  firstMoveableVector: '/images/FirstMoveableVector.svg',
+  worksIcon1: '/images/WorksIcon1.svg',
+  worksIcon2: '/images/WorksIcon2.svg',
+  worksIcon3: '/images/WorksIcon3.svg',
+  hashIcon: '/images/HashIcon.svg',
+  memberBenefitsIcon: '/images/MemberBenefitsIcon.svg'
 }

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
+import { SectionHeader } from "@/components/shared/SectionHeader";
+import { IMAGES } from "@/assets/images";
 import { Card, CardContent } from "@/components/ui/card";
 import StarIcon from "@/public/images/LocalRewardLogo.svg"
 import DealsIcon from "@/public/images/MemberIcon1.svg"
@@ -59,13 +61,12 @@ export default function MemberBenefitsSection() {
     <section className="py-10 lg:py-24 px-[5%]">
 
       {/* ── Member Benefits ── */}
-      <div className="flex flex-col items-center text-center mb-14">
-        <h2 className="heading-2 text-(--color-body) mb-4">Everything a Member Needs</h2>
-        <p className="para text-(--color-card-para) max-w-3xl">
-          The Path to Digital Networking A seamless five-step process to transition from a
-          physical card to a thriving digital network without the need for an app.
-        </p>
-      </div>
+      <SectionHeader
+        icon={IMAGES.hashIcon}
+        eyebrow="Member Benefits"
+        heading="Everything a Member Needs"
+        description="The Path to Digital Networking A seamless five-step process to transition from a physical card to a thriving digital network without the need for an app."
+      />
 
       {/* 5 Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-20">
