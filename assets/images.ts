@@ -1,5 +1,15 @@
 export const IMAGES = {
   logo: "/images/LinkyLogo.svg",
   homeHeroImage: "/images/HeroSectionImage.webp",
-  backgroundSvg: '/images/HeroBackground.svg'
+  backgroundSvg: '/images/HeroBackground.svg',
+  scrollRibbonSvg1: '/images/Deloitte.svg',
+  scrollRibbonSvg2: '/images/Appsmith.svg',
+  scrollRibbonSvg3: '/images/Vigilant.svg',
+  scrollRibbonSvg4: '/images/EdIsOn.svg',
+  scrollRibbonSvg5: '/images/Kobe.svg',
+  scrollRibbonSvg6: '/images/Simplamo.svg',
+  scrollRibbonSvg7: '/images/SoulPage.svg',
+  advantageCardImage: '/images/AdvantageCardImage.svg',
+  advantageAbsoluteImage: '/images/AdvantageAbsoluteImage.svg',
+  firstMoveableVector: '/images/FirstMoveableVector.svg'
 }

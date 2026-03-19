@@ -56,7 +56,7 @@ const rewardCards = [
 
 export default function MemberBenefitsSection() {
   return (
-    <section className="py-16 lg:py-24 px-[5%]">
+    <section className="py-10 lg:py-24 px-[5%]">
 
       {/* ── Member Benefits ── */}
       <div className="flex flex-col items-center text-center mb-14">
