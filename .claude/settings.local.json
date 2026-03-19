@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(curl -L -o reviewer-natasha.jpg \"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face\")",
+      "Bash(curl -L -o reviewer-kaejenn.jpg \"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face\")",
+      "Bash(curl -L -o reviewer-angel.jpg \"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face\")",
+      "Bash(curl -L -o reviewer-annarose.jpg \"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face\")",
+      "Bash(curl -L -o reviewer-ozana.jpg \"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face\")"
+    ]
+  }
+}
