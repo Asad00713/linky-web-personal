@@ -6,7 +6,26 @@
       "Bash(curl -L -o reviewer-kaejenn.jpg \"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face\")",
       "Bash(curl -L -o reviewer-angel.jpg \"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face\")",
       "Bash(curl -L -o reviewer-annarose.jpg \"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face\")",
-      "Bash(curl -L -o reviewer-ozana.jpg \"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face\")"
+      "Bash(curl -L -o reviewer-ozana.jpg \"https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face\")",
+      "Bash(npx next:*)",
+      "Bash(ls -la c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/nfc-products/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/email-signatures/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/contact-wallet/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/business-card-scanner/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ai-branding/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/cv-attachment/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/analytics/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/privacy-controls/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ice-emergency-screen/page.tsx)",
+      "Bash(wc -l c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/digital-business-card/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/card-swop/page.tsx)",
+      "Bash(ls c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/business-card-scanner/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/cv-attachment/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/analytics/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/privacy-controls/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ice-emergency-screen/page.tsx)",
+      "Bash(ls c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/business-card-scanner/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/cv-attachment/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/privacy-controls/page.tsx c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ice-emergency-screen/page.tsx)",
+      "Bash(ls c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ice-emergency-screen/page.tsx)",
+      "Bash(ls c:/Projects/linky-web-personal/app/\\\\\\(main\\\\\\)/ice-emergency-screen/)",
+      "Bash(npm install:*)",
+      "Bash(ls c:/Projects/linky-web-personal/components/ui/badge* c:/Projects/linky-web-personal/components/ui/Badge*)",
+      "Bash(mv components/ui/badge.tsx components/ui/Badge_temp.tsx)",
+      "Bash(mv components/ui/Badge_temp.tsx components/ui/Badge.tsx)",
+      "Bash(npx tsc:*)",
+      "Bash(ls app/\\\\\\(main\\\\\\)/)",
+      "Bash(for f:*)",
+      "Bash(do sed:*)",
+      "Bash(done)"
+    ],
+    "additionalDirectories": [
+      "c:\\Projects\\linky-web-personal\\components"
     ]
   }
 }

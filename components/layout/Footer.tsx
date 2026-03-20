@@ -4,32 +4,62 @@ import { IMAGES } from "@/assets/images";
 
 const footerColumns = [
   {
-    title: "Shop",
+    title: "Product",
     links: [
-      { label: "NFC Cards", href: "#" },
-      { label: "Custom NFC Cards", href: "#" },
-      { label: "Custom Metal NFC Cards", href: "#" },
-      { label: "All Products", href: "#" },
+      { label: "Digital Business Card", href: "/digital-business-card" },
+      { label: "NFC Products Store", href: "/nfc-products" },
+      { label: "Card Swop", href: "/card-swop" },
+      { label: "Email Signatures", href: "/email-signatures" },
+      { label: "Contact Wallet", href: "/contact-wallet" },
+      { label: "Paper Card Scanner", href: "/business-card-scanner" },
+      { label: "Networking Analytics", href: "/analytics" },
+      { label: "Privacy Controls", href: "/privacy-controls" },
     ],
   },
   {
-    title: "Resources",
+    title: "Business",
     links: [
-      { label: "Blog", href: "#" },
-      { label: "Help Center", href: "#" },
-      { label: "Contact Us", href: "#" },
+      { label: "Business Digital Card", href: "/business-digital-card" },
+      { label: "Staff Card Management", href: "/staff-cards" },
+      { label: "Event Lead Capture", href: "/event-lead-capture" },
+      { label: "Lead Inbox & Mini CRM", href: "/lead-inbox" },
+      { label: "Deals & Promotions", href: "/deals-promotions" },
+      { label: "Loyalty & Rewards", href: "/loyalty-rewards" },
+      { label: "Business Analytics", href: "/business-analytics" },
+      { label: "All Integrations", href: "/integrations" },
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [
+      { label: "For Sales Teams", href: "/solutions/sales-teams" },
+      { label: "For SMEs", href: "/solutions/small-business" },
+      { label: "For Freelancers", href: "/solutions/freelancers" },
+      { label: "For Event Marketers", href: "/solutions/event-marketers" },
+      { label: "For Retail & Hospitality", href: "/solutions/retail" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Why LINKey", href: "/why-linkey" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Partner Program", href: "/partners" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Blog", href: "/blog" },
+      { label: "Help Centre", href: "/help" },
+      { label: "Book a Demo", href: "/book-demo" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-      { label: "Data Privacy Addendum", href: "#" },
-      { label: "Refund Policy", href: "#" },
-      { label: "Shipping Policy", href: "#" },
-      { label: "Contact Information", href: "#" },
-      { label: "Trust Report", href: "#" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Security", href: "/security" },
+      { label: "Cookie Policy", href: "/cookies" },
     ],
   },
 ];
@@ -58,10 +88,10 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-[#E2E8F9]">
       <div className="mx-auto px-6 py-12 sm:px-10 lg:px-16">
-        <div className="flex flex-col gap-10 lg:flex-row lg:gap-20">
+        {/* Main grid */}
+        <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
           {/* Left Column - Logo, Social, Badges, Description */}
-          <div className="flex-shrink-0 lg:max-w-[300px]">
-            {/* Logo */}
+          <div className="flex-shrink-0 lg:max-w-[280px]">
             <Link href="/">
               <Image
                 src={IMAGES.logo}
@@ -78,7 +108,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 transition-colors hover:border-gray-500"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 transition-colors hover:border-primary hover:bg-primary/5"
                 >
                   <Image
                     src={social.src}
@@ -106,50 +136,31 @@ export default function Footer() {
               />
             </div>
 
-            {/* Description */}
             <p className="mt-5 text-[10px] leading-[18px] tracking-[-0.2px] text-[#5F6368]">
-              Wave Connect is the leading digital business card platform for
-              teams. Replace paper cards with a secure electronic business card
-              (or virtual business card) that works on iOS and Android. Hosted in
-              North America.
+              LINKey Digital is the modern digital identity and business
+              networking platform for professionals and teams. Replace paper
+              cards with a secure digital business card that works everywhere.
             </p>
           </div>
 
           {/* Right Columns - Links */}
-          <div className="grid flex-1 grid-cols-1 gap-8 sm:grid-cols-3">
+          <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {footerColumns.map((col) => (
               <div key={col.title}>
-                <h4 className="text-base font-semibold text-gray-900">
+                <h4 className="text-sm font-semibold text-gray-900">
                   {col.title}
                 </h4>
-                <ul className="mt-4 space-y-3">
+                <ul className="mt-4 space-y-2.5">
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <a
+                      <Link
                         href={link.href}
-                        className="text-base text-[#5F6982] transition-colors hover:text-gray-900"
+                        className="text-sm text-[#5F6982] transition-colors hover:text-primary"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
-                  {/* Your Privacy Choices - only in Legal column */}
-                  {col.title === "Legal" && (
-                    <li>
-                      <a
-                        href="#"
-                        className="inline-flex items-center gap-1.5 text-base text-[#5F6982] transition-colors hover:text-gray-900"
-                      >
-                        Your Privacy Choices
-                        <Image
-                          src={IMAGES.footerPrivacyChoices}
-                          alt="Privacy Choices"
-                          width={30}
-                          height={14}
-                        />
-                      </a>
-                    </li>
-                  )}
                 </ul>
               </div>
             ))}
@@ -162,38 +173,14 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700">
               English
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                className="ml-1"
-              >
-                <path
-                  d="M3 4.5L6 7.5L9 4.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="ml-1">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             <div className="flex items-center gap-1 rounded border border-gray-300 px-3 py-2 text-sm text-gray-700">
               USD $
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                className="ml-1"
-              >
-                <path
-                  d="M3 4.5L6 7.5L9 4.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="ml-1">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>
@@ -234,7 +221,7 @@ export default function Footer() {
               ))}
             </div>
             <span className="text-sm text-gray-500">
-              &copy; 2026 Wave Connect
+              &copy; 2026 LINKey Digital. All rights reserved.
             </span>
           </div>
         </div>
