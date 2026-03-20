@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Marquee } from "@/components/ui/marquee";
 import { IMAGES } from "@/assets/images";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const reviews = [
   {
@@ -64,6 +68,23 @@ const firstColumn = reviews.slice(0, 3);
 const secondColumn = reviews.slice(3, 6);
 const thirdColumn = reviews.slice(6, 9);
 
+function StarRating() {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg
+          key={i}
+          className="w-3.5 h-3.5 text-amber-400 fill-current"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
 function ReviewCard({
   name,
   role,
@@ -76,9 +97,20 @@ function ReviewCard({
   img: string;
 }) {
   return (
-    <figure className="relative w-full rounded-2xl border border-[#E2E8F0] bg-white p-6">
+    <figure className="group relative w-full rounded-2xl border border-[#E2E8F0] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-transparent overflow-hidden">
+      {/* Gradient border on hover */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(white, white) padding-box, linear-gradient(to right, #9CECFB, #65C7F7, #0052D4) border-box",
+          border: "2px solid transparent",
+          borderRadius: "inherit",
+        }}
+      />
+
       {/* Header */}
-      <div className="flex items-center gap-3">
+      <div className="relative flex items-center gap-3">
         <Image
           className="h-10 w-10 rounded-full object-cover"
           src={img}
@@ -91,25 +123,27 @@ function ReviewCard({
             <figcaption className="text-sm font-normal text-[#1A1A2E]">
               {name}
             </figcaption>
-            <Image
-              src={IMAGES.verifiedIcon}
-              alt="Verified"
-              width={18}
-              height={18}
-            />
+            <div className="group/verified inline-flex transition-transform duration-200 hover:scale-110">
+              <Image
+                src={IMAGES.verifiedIcon}
+                alt="Verified"
+                width={18}
+                height={18}
+              />
+            </div>
           </div>
           <p className="text-xs text-[#64748B]">{role}</p>
         </div>
       </div>
 
       {/* Quote */}
-      <blockquote className="mt-4 text-sm leading-6 text-[#334155]">
+      <blockquote className="relative mt-4 text-sm leading-6 text-[#334155]">
         {body}
       </blockquote>
 
       {/* Footer */}
-      <div className="mt-4 flex items-center justify-between">
-        <span className="text-[9px] text-[#334155]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <div className="relative mt-4 flex items-center justify-between">
+        <StarRating />
         <Image
           src={IMAGES.reviewsCardBottomIcon}
           alt=""
@@ -122,27 +156,82 @@ function ReviewCard({
   );
 }
 
+function AnimatedHeading() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const words = "What People Love About Us".split(" ");
+
+  return (
+    <h2
+      ref={ref}
+      className="mt-4 text-[32px] font-semibold leading-[40px] tracking-[-0.64px] text-[#1F2323] flex flex-wrap justify-center gap-x-2"
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            delay: i * 0.08,
+            type: "spring",
+            stiffness: 200,
+            damping: 15,
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </h2>
+  );
+}
+
 export default function ReviewsSection() {
+  const { ref: headerRef, inView: headerInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
   return (
     <section className="w-full bg-[#F6FAFB] px-6 py-16">
       {/* Header */}
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center text-center">
-        <Image
-          src={IMAGES.reviewsIcon}
-          alt="Reviews"
-          width={64}
-          height={64}
-        />
-        <span className="mt-2 text-base font-semibold text-[#16B8C3]">
+      <div
+        ref={headerRef}
+        className="mx-auto flex max-w-[1440px] flex-col items-center text-center"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={headerInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+        >
+          <Image
+            src={IMAGES.reviewsIcon}
+            alt="Reviews"
+            width={64}
+            height={64}
+          />
+        </motion.div>
+        <motion.span
+          className="mt-2 text-base font-semibold text-[#16B8C3]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1, duration: 0.4 }}
+        >
           Reviews
-        </span>
-        <div className="mx-auto mt-1 h-[1px] w-[250px] bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
-        <h2 className="mt-4 text-[32px] font-semibold leading-[40px] tracking-[-0.64px] text-[#1F2323]">
-          What People Love About Us
-        </h2>
-        <p className="mt-3 text-base font-light leading-6 text-[#1F2323]">
+        </motion.span>
+        <motion.div
+          className="mx-auto mt-1 h-[1px] w-[250px] bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]"
+          initial={{ scaleX: 0 }}
+          animate={headerInView ? { scaleX: 1 } : {}}
+          transition={{ delay: 0.15, duration: 0.5 }}
+        />
+        <AnimatedHeading />
+        <motion.p
+          className="mt-3 text-base font-light leading-6 text-[#1F2323]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.4 }}
+        >
           Honest experiences from users who trust our platform.
-        </p>
+        </motion.p>
       </div>
 
       {/* Marquee Cards */}

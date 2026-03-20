@@ -1,11 +1,12 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
+import Image from "next/image"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
+import { useRef } from "react"
+import { CheckCircle2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton"
+import { gradientBgStyle } from "@/lib/styles"
 import CubeIcon from "@/public/images/CubeIcon.svg"
 import ToolImage1 from "@/public/images/ToolsImage1.svg"
 import ToolImage2 from "@/public/images/ToolsImage2.svg"
@@ -16,13 +17,13 @@ const membersFeatures = [
   "Smart Link: Share via QR, NFC, or URL instantly.",
   "Card Swop: Tap phones to exchange digital business cards.",
   "Loyalty Wallet: Keep all stamp cards digital and organized.",
-];
+]
 
 const businessFeatures = [
   "Staff Cards: Unified digital identities for your entire team.",
   "CRM Tracking: See who viewed and saved your team's cards.",
   "Campaign Manager: Launch targeted loyalty and NFC promos.",
-];
+]
 
 function EyebrowLabel({ label }: { label: string }) {
   return (
@@ -30,53 +31,120 @@ function EyebrowLabel({ label }: { label: string }) {
       <span className="text-eyebrow">{label}</span>
       <div className="mt-2 w-full h-px bg-eyebrow/30" />
     </div>
-  );
+  )
 }
 
-function FeatureList({ items }: { items: string[] }) {
+function WordStagger({ text, className }: { text: string; className?: string }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const words = text.split(" ")
+
   return (
-    <ul className="flex flex-col gap-3">
+    <h2 ref={ref} className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+          transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
+          className="inline-block mr-[0.3em]"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </h2>
+  )
+}
+
+function AnimatedFeatureList({ items }: { items: string[] }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-40px" })
+
+  return (
+    <ul ref={ref} className="flex flex-col gap-3">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <CheckCircle2
-            className="w-5 h-5 shrink-0 mt-0.5"
-            style={{ color: "var(--color-eyebrow)" }}
-            fill="var(--color-eyebrow)"
-            stroke="white"
-            strokeWidth={2}
-          />
+        <motion.li
+          key={i}
+          initial={{ opacity: 0, x: -16 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{
+            duration: 0.4,
+            delay: i * 0.12,
+            ease: "easeOut",
+          }}
+          className="flex items-start gap-3"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: -90 }}
+            animate={isInView ? { scale: 1, rotate: 0 } : {}}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 12,
+              delay: i * 0.12 + 0.05,
+            }}
+            className="shrink-0 mt-0.5"
+          >
+            <CheckCircle2
+              className="w-5 h-5"
+              style={{ color: "var(--color-eyebrow)" }}
+              fill="var(--color-eyebrow)"
+              stroke="white"
+              strokeWidth={2}
+            />
+          </motion.div>
           <span className="para text-(--color-card-para)">{item}</span>
-        </li>
+        </motion.li>
       ))}
     </ul>
-  );
+  )
 }
 
 function CtaButtons() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
-      <Button variant="gradient" size="pill">Start Free</Button>
-      <GradientOutlineButton>
-        Create Your Card
-      </GradientOutlineButton>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
+        <Button variant="gradient" size="pill">Start Free</Button>
+      </motion.div>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
+        <GradientOutlineButton>
+          Create Your Card
+        </GradientOutlineButton>
+      </motion.div>
     </div>
-  );
+  )
+}
+
+function AnimatedImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative max-w-120 w-full rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500"
+    >
+      <Image src={src} alt={alt} width={480} height={420} className="w-full object-cover" />
+    </motion.div>
+  )
 }
 
 export default function FeaturesSection() {
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
+  const ref1 = useRef(null)
+  const ref2 = useRef(null)
 
-  const { scrollYProgress: scroll1 } = useScroll({ target: ref1, offset: ["start end", "center center"] });
-  const { scrollYProgress: scroll2 } = useScroll({ target: ref2, offset: ["start end", "center center"] });
+  const { scrollYProgress: scroll1 } = useScroll({ target: ref1, offset: ["start end", "center center"] })
+  const { scrollYProgress: scroll2 } = useScroll({ target: ref2, offset: ["start end", "center center"] })
 
-  // Blob starts fully off-screen, slides to rest position partially hanging off the edge
-  const blob1X = useTransform(scroll1, [0, 1], [800, 0]);
-  const blob2X = useTransform(scroll2, [0, 1], [-800, 0]);
+  const blob1X = useTransform(scroll1, [0, 1], [800, 0])
+  const blob2X = useTransform(scroll2, [0, 1], [-800, 0])
+
+  const content1Ref = useRef(null)
+  const content2Ref = useRef(null)
+  const content1InView = useInView(content1Ref, { once: true, margin: "-80px" })
+  const content2InView = useInView(content2Ref, { once: true, margin: "-80px" })
 
   return (
     <section className="overflow-hidden">
-      {/* ── Row 1: For Members ── */}
+      {/* Row 1: For Members */}
       <div ref={ref1} className="relative py-8 lg:py-24">
         <div
           className="hidden lg:block absolute pointer-events-none"
@@ -88,29 +156,45 @@ export default function FeaturesSection() {
         </div>
 
         <div className="relative px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="flex flex-col gap-5">
-            <div>
+          <div ref={content1Ref} className="flex flex-col gap-5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={content1InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
               <Image src={CubeIcon} alt="Linky icon" width={52} height={52} className="mb-4" />
               <EyebrowLabel label="For Members" />
-            </div>
-            <h2 className="heading-2 text-(--color-body)">Personalized Networking Tools</h2>
-            <p className="para text-(--color-card-para)">
+            </motion.div>
+            <WordStagger text="Personalized Networking Tools" className="heading-2 text-(--color-body)" />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={content1InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="para text-(--color-card-para)"
+            >
               Manage your professional presence with a custom LNK code and a digital
               loyalty wallet for all your stamp cards.
-            </p>
-            <FeatureList items={membersFeatures} />
-            <CtaButtons />
+            </motion.p>
+            <AnimatedFeatureList items={membersFeatures} />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={content1InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <CtaButtons />
+            </motion.div>
           </div>
 
           <div className="relative flex items-center justify-center">
-            <div className="relative max-w-120 w-full rounded-3xl overflow-hidden shadow-sm">
-              <Image src={ToolImage1} alt="Members networking" width={480} height={420} className="w-full object-cover" />
-            </div>
+            <AnimatedImage src={ToolImage1} alt="Members networking" />
           </div>
         </div>
       </div>
 
-      {/* ── Row 2: For Business ── */}
+      {/* Gradient separator */}
+      <div className="mx-[5%] h-px opacity-20" style={gradientBgStyle} />
+
+      {/* Row 2: For Business */}
       <div ref={ref2} className="relative py-10 lg:py-24">
         <div
           className="hidden lg:block absolute pointer-events-none"
@@ -123,27 +207,39 @@ export default function FeaturesSection() {
 
         <div className="relative px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="relative flex items-center justify-center order-2 lg:order-1">
-            <div className="relative max-w-120 w-full rounded-3xl overflow-hidden shadow-sm">
-              <Image src={ToolImage2} alt="Business command centre" width={480} height={420} className="w-full object-cover" />
-            </div>
+            <AnimatedImage src={ToolImage2} alt="Business command centre" />
           </div>
 
-          <div className="flex flex-col gap-5 order-1 lg:order-2">
-            <div>
+          <div ref={content2Ref} className="flex flex-col gap-5 order-1 lg:order-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={content2InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
               <Image src={CubeIcon} alt="Linky icon" width={52} height={52} className="mb-4" />
               <EyebrowLabel label="For Business" />
-            </div>
-            <h2 className="heading-2 text-(--color-body)">Your Business Command Centre</h2>
-            <p className="para text-(--color-card-para)">
+            </motion.div>
+            <WordStagger text="Your Business Command Centre" className="heading-2 text-(--color-body)" />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={content2InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="para text-(--color-card-para)"
+            >
               Equip your team with staff cards and track every lead through a
               built-in CRM and real-time analytics dashboard.
-            </p>
-            <FeatureList items={businessFeatures} />
-            <CtaButtons />
+            </motion.p>
+            <AnimatedFeatureList items={businessFeatures} />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={content2InView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <CtaButtons />
+            </motion.div>
           </div>
         </div>
-
       </div>
     </section>
-  );
+  )
 }
