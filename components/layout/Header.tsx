@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useEffect, type ReactNode } from "react"
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight, ShoppingCart } from "lucide-react";
 import {
   IdentificationCard,
   ContactlessPayment,
@@ -44,6 +44,7 @@ import { Button } from "@/components/ui/button";
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
 import { gradientBgStyle } from "@/lib/styles";
 import { MobileNav } from "./MobileNav";
+import { useCart } from "@/context/CartContext";
 
 // ---------------------------------------------------------------------------
 // Icon lookup — maps nav item titles to Phosphor duotone icons
@@ -375,6 +376,7 @@ export default function Header() {
 
         {/* ── Right CTAs ── */}
         <div className="flex items-center gap-3">
+          <CartButton />
           <GradientOutlineButton className="hidden lg:inline-flex">
             Login
           </GradientOutlineButton>
@@ -443,5 +445,48 @@ function ResourcesDropdown() {
         ))}
       </div>
     </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Cart button with item count badge
+// ---------------------------------------------------------------------------
+function CartButton() {
+  let totalItems = 0;
+  let openCart = () => {};
+
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const cart = useCart();
+    totalItems = cart.totalItems;
+    openCart = cart.openCart;
+  } catch {
+    // Not wrapped in CartProvider — render nothing
+    return null;
+  }
+
+  return (
+    <button
+      onClick={openCart}
+      className="relative flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+      aria-label="Open cart"
+    >
+      <ShoppingCart size={20} className="text-[#454545]" />
+      <AnimatePresence>
+        {totalItems > 0 && (
+          <motion.span
+            key={totalItems}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
+            style={{ background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)" }}
+          >
+            {totalItems}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </button>
   );
 }

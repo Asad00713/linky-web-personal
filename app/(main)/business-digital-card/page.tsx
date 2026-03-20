@@ -817,6 +817,16 @@ function FAQAccordion() {
 
 const logoNames = ["Noor Clinics", "TechBridge", "Vega Legal", "Bloom Retail", "Atlas Logistics", "Pinnacle Group"];
 
+function BusinessCountStat() {
+  const { ref, inView } = useInView({ triggerOnce: true });
+  return (
+    <p ref={ref} className="text-2xl md:text-3xl font-bold text-[#1F2323]">
+      {inView ? <CountUp end={4200} duration={2.5} separator="," suffix="+" /> : "0+"}
+      <span className="ml-2 font-normal text-lg text-[#454545]">businesses on LINKey</span>
+    </p>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /*  PAGE EXPORT                                                        */
 /* ------------------------------------------------------------------ */
@@ -882,15 +892,7 @@ export default function BusinessDigitalCardPage() {
       <section className="py-16 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 text-center mb-8">
           <div className="flex items-center justify-center gap-3">
-            {(() => {
-              const { ref, inView } = useInView({ triggerOnce: true });
-              return (
-                <p ref={ref} className="text-2xl md:text-3xl font-bold text-[#1F2323]">
-                  {inView ? <CountUp end={4200} duration={2.5} separator="," suffix="+" /> : "0+"}
-                  <span className="ml-2 font-normal text-lg text-[#454545]">businesses on LINKey</span>
-                </p>
-              );
-            })()}
+            <BusinessCountStat />
           </div>
         </div>
         <Marquee gradient gradientColor="white" gradientWidth={80} speed={40} pauseOnHover>

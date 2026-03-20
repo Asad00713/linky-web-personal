@@ -265,29 +265,31 @@ const showcaseFeatures = [
   { icon: <Target className="h-8 w-8" />, title: "Engagement Score", desc: "Every contact gets a score based on interaction frequency. Prioritise follow-ups with the people who actually care about your offering." },
 ];
 
+function AlternatingShowcaseRow({ f, i }: { f: typeof showcaseFeatures[number]; i: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const reversed = i % 2 !== 0;
+  return (
+    <div ref={ref} className={`grid items-center gap-12 md:grid-cols-2 ${reversed ? "md:[direction:rtl]" : ""}`}>
+      <motion.div initial={{ opacity: 0, x: reversed ? 40 : -40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }} className={reversed ? "md:[direction:ltr]" : ""}>
+        <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-primary/5 text-primary mb-5">{f.icon}</div>
+        <h3 className="heading-3 text-(--color-body) mb-4">{f.title}</h3>
+        <p className="para text-(--color-card-para)">{f.desc}</p>
+      </motion.div>
+      <motion.div initial={{ opacity: 0, x: reversed ? -40 : 40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.15 }} className={`flex justify-center ${reversed ? "md:[direction:ltr]" : ""}`}>
+        <div className="h-48 w-full max-w-sm rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10 flex items-center justify-center">
+          <div className="text-primary/30">{f.icon}</div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 function AlternatingShowcase() {
   return (
     <section className="px-[5%] py-20 md:py-28 bg-gray-50/50">
       <div className="mx-auto max-w-7xl space-y-24">
-        {showcaseFeatures.map((f, i) => {
-          const ref = useRef(null);
-          const isInView = useInView(ref, { once: true, margin: "-60px" });
-          const reversed = i % 2 !== 0;
-          return (
-            <div ref={ref} key={i} className={`grid items-center gap-12 md:grid-cols-2 ${reversed ? "md:[direction:rtl]" : ""}`}>
-              <motion.div initial={{ opacity: 0, x: reversed ? 40 : -40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }} className={reversed ? "md:[direction:ltr]" : ""}>
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-primary/5 text-primary mb-5">{f.icon}</div>
-                <h3 className="heading-3 text-(--color-body) mb-4">{f.title}</h3>
-                <p className="para text-(--color-card-para)">{f.desc}</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, x: reversed ? -40 : 40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6, delay: 0.15 }} className={`flex justify-center ${reversed ? "md:[direction:ltr]" : ""}`}>
-                <div className="h-48 w-full max-w-sm rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/10 flex items-center justify-center">
-                  <div className="text-primary/30">{f.icon}</div>
-                </div>
-              </motion.div>
-            </div>
-          );
-        })}
+        {showcaseFeatures.map((f, i) => <AlternatingShowcaseRow key={i} f={f} i={i} />)}
       </div>
     </section>
   );
