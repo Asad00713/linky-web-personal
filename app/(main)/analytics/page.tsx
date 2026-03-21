@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -215,12 +215,12 @@ function SolutionBridge() {
    ================================================================ */
 
 const metricFeatures = [
-  { icon: <Eye className="h-6 w-6" />, title: "Card Views", desc: "Know exactly how many people opened your digital card \u2014 broken down by day, week, or custom date range.", stat: 183, suffix: "" },
+  { icon: <Eye className="h-6 w-6" />, title: "Card Views", desc: "Know exactly how many people opened your digital card — broken down by day, week, or custom date range.", stat: 183, suffix: "" },
   { icon: <QrCode className="h-6 w-6" />, title: "QR Scans", desc: "Track every QR code scan including location, device type, and time of day.", stat: 47, suffix: "" },
   { icon: <Smartphone className="h-6 w-6" />, title: "NFC Taps", desc: "See exactly when and where your NFC card was tapped, so you know which in-person moments convert.", stat: 22, suffix: "" },
   { icon: <Share2 className="h-6 w-6" />, title: "Contact Saves", desc: "Find out who saved your contact to their phone. The clearest signal someone intends to follow up.", stat: 42, suffix: "" },
-  { icon: <MapPin className="h-6 w-6" />, title: "Geo-Location", desc: "Discover where your card gets the most traction \u2014 city, country, and region.", stat: 8, suffix: " cities" },
-  { icon: <Monitor className="h-6 w-6" />, title: "Device Breakdown", desc: "iPhone, Android, desktop \u2014 understand which platforms your audience uses.", stat: 3, suffix: " types" },
+  { icon: <MapPin className="h-6 w-6" />, title: "Geo-Location", desc: "Discover where your card gets the most traction — city, country, and region.", stat: 8, suffix: " cities" },
+  { icon: <Monitor className="h-6 w-6" />, title: "Device Breakdown", desc: "iPhone, Android, desktop — understand which platforms your audience uses.", stat: 3, suffix: " types" },
   { icon: <Clock className="h-6 w-6" />, title: "Time Trends", desc: "See which hours and days generate the most activity. Time your follow-ups.", stat: 14, suffix: "h peak" },
   { icon: <Flame className="h-6 w-6" />, title: "Heatmaps", desc: "Visual heatmaps show which card sections people interact with most.", stat: 6, suffix: " zones" },
 ];
@@ -260,7 +260,7 @@ function MetricGridSection() {
    ================================================================ */
 
 const showcaseFeatures = [
-  { icon: <BarChart3 className="h-8 w-8" />, title: "Real-Time Dashboard", desc: "See card views, QR scans, NFC taps, and contact saves updating live. No waiting for nightly batch reports \u2014 your data is always current. Know your ROI in rands, not guesses." },
+  { icon: <BarChart3 className="h-8 w-8" />, title: "Real-Time Dashboard", desc: "See card views, QR scans, NFC taps, and contact saves updating live. No waiting for nightly batch reports — your data is always current. Know your ROI in rands, not guesses." },
   { icon: <TrendingUp className="h-8 w-8" />, title: "Trend Lines & Comparisons", desc: "Compare this week to last week, this month to last quarter. Spot patterns so you can double down on what works and stop spending rands on what doesn't." },
   { icon: <Target className="h-8 w-8" />, title: "Engagement Score", desc: "Every contact gets a score based on interaction frequency. Prioritise follow-ups with the people who actually care about your offering." },
 ];
@@ -302,7 +302,7 @@ function AlternatingShowcase() {
 const bentoItems = [
   { icon: <Users className="h-6 w-6" />, title: "Team Analytics", desc: "Roll up analytics across your entire organisation. See which team members generate the most engagement, compare departments, and identify networking superstars.", wide: true },
   { icon: <FileDown className="h-6 w-6" />, title: "Export to PDF & Excel", desc: "Pull polished reports for stakeholders in one click. Raw data to Excel or branded PDFs for board presentations.", wide: false },
-  { icon: <CalendarRange className="h-6 w-6" />, title: "Custom Date Ranges", desc: "Filter analytics by any date range \u2014 last 7 days, a trade show duration, or a custom fiscal quarter.", wide: false },
+  { icon: <CalendarRange className="h-6 w-6" />, title: "Custom Date Ranges", desc: "Filter analytics by any date range — last 7 days, a trade show duration, or a custom fiscal quarter.", wide: false },
 ];
 
 function BentoSection() {
@@ -350,17 +350,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
           <h2 className="heading-2 text-(--color-body) mb-4">From Share to Strategy in Four Steps</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -404,8 +429,8 @@ function StatsSection() {
 function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const before = ["Hand out cards and hope for the best", "No idea who actually looked at your info", "Follow up with everyone equally \u2014 wasting time", "Cannot measure networking ROI for events", "Redesign your card based on gut feeling", "Team networking performance is invisible"];
-  const after = ["Know exactly how many people engage after every event", "See who viewed, saved, and clicked \u2014 by name when possible", "Prioritise follow-ups based on real engagement signals", "Generate ROI reports for every conference and trade show", "Optimise your card layout using heatmap data", "Benchmark team members and coach underperformers"];
+  const before = ["Hand out cards and hope for the best", "No idea who actually looked at your info", "Follow up with everyone equally — wasting time", "Cannot measure networking ROI for events", "Redesign your card based on gut feeling", "Team networking performance is invisible"];
+  const after = ["Know exactly how many people engage after every event", "See who viewed, saved, and clicked — by name when possible", "Prioritise follow-ups based on real engagement signals", "Generate ROI reports for every conference and trade show", "Optimise your card layout using heatmap data", "Benchmark team members and coach underperformers"];
 
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28">

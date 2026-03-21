@@ -108,11 +108,12 @@ const howItWorks = [
 ];
 
 const advancedFeatures = [
-  { icon: <Workflow className="h-7 w-7" />, title: "HubSpot Workflow Triggers", description: "Fire workflows when a new connection is made. Automate welcome emails, task assignments, and notifications.", wide: true },
-  { icon: <ListFilter className="h-7 w-7" />, title: "Smart Lists Integration", description: "Synced contacts automatically qualify for HubSpot smart lists, powering segmented campaigns without manual tagging." },
-  { icon: <BarChart3 className="h-7 w-7" />, title: "Attribution Reporting", description: "Track which events and networking moments drive revenue. Attribution data feeds directly into HubSpot reports." },
-  { icon: <ArrowRightLeft className="h-7 w-7" />, title: "Property Mapping", description: "Map any LINKey field to any HubSpot property — standard or custom. Full control over how data lands in HubSpot." },
-  { icon: <FlaskConical className="h-7 w-7" />, title: "Sandbox Support", description: "Test your integration safely in a HubSpot sandbox environment before going live. No risk to production data.", wide: true },
+  { icon: <Workflow className="h-7 w-7" />, title: "HubSpot Workflow Triggers", description: "Fire workflows when a new connection is made. Automate welcome emails, task assignments, and notifications.", stat: "Auto", statLabel: "triggers" },
+  { icon: <ListFilter className="h-7 w-7" />, title: "Smart Lists Integration", description: "Synced contacts automatically qualify for HubSpot smart lists, powering segmented campaigns without manual tagging.", stat: "100%", statLabel: "auto-tagged" },
+  { icon: <BarChart3 className="h-7 w-7" />, title: "Attribution Reporting", description: "Track which events and networking moments drive revenue. Attribution data feeds directly into HubSpot reports.", stat: "360°", statLabel: "visibility" },
+  { icon: <ArrowRightLeft className="h-7 w-7" />, title: "Property Mapping", description: "Map any LINKey field to any HubSpot property — standard or custom. Full control over how data lands in HubSpot.", stat: "50+", statLabel: "fields" },
+  { icon: <FlaskConical className="h-7 w-7" />, title: "Sandbox Support", description: "Test your integration safely in a HubSpot sandbox environment before going live. No risk to production data.", stat: "Zero", statLabel: "risk" },
+  { icon: <RefreshCw className="h-7 w-7" />, title: "Real-Time Sync", description: "Changes in LINKey reflect in HubSpot within seconds. Bi-directional sync keeps both systems perfectly aligned.", stat: "<2s", statLabel: "latency" },
 ];
 
 const stats = [
@@ -390,17 +391,31 @@ export default function HubSpotIntegrationPage() {
             <SectionHeading gradient="HubSpot Power Users">Built for</SectionHeading>
           </div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {advancedFeatures.map((f, i) => (
-              <motion.div key={f.title} variants={fadeUp} custom={i} whileHover={{ y: -6, transition: spring }} className={`bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-shadow ${f.wide ? "md:col-span-2 lg:col-span-2" : ""}`}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: `${BRAND.primary}10`, color: BRAND.primary }}>
-                  {f.icon}
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {f.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{f.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{f.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: BRAND.body }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: BRAND.cardPara }}>{f.description}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{f.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

@@ -23,6 +23,8 @@ import {
   TrendingUp,
   Star,
   Quote,
+  MapPin,
+  CalendarCheck,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
 
@@ -393,31 +395,52 @@ export default function SalesTeamsSolutionPage() {
         </div>
       </section>
 
-      {/* ═══════════ 8. BENTO POWER FEATURES ═══════════ */}
+      {/* ═══════════ 8. POWER FEATURES — $1M SECTION ═══════════ */}
       <Section>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <motion.span variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest mb-3 block" style={{ color: "#16B8C3" }}>Power Features</motion.span>
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">The Tools That <span style={gradientTextStyle}>Close Deals Faster</span></motion.h2>
-          </div>
-          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <span className="text-sm font-semibold uppercase tracking-widest mb-3 block" style={{ color: "#16B8C3" }}>Power Features</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">The Tools That <span style={gradientTextStyle}>Close Deals Faster</span></h2>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: <Trophy className="h-6 w-6" />, title: "Team Leaderboards", desc: "Gamify networking with live leaderboards showing card shares, leads captured, and follow-ups completed. Drive healthy competition across your sales floor.", wide: true },
-              { icon: <BellRing className="h-6 w-6" />, title: "Follow-Up Automation", desc: "Trigger personalised follow-up emails and SMS sequences the moment a lead is captured. Strike while the iron is hot — automatically." },
-              { icon: <Target className="h-6 w-6" />, title: "Pipeline Visibility", desc: "See every lead from capture to close in one view. Know exactly where deals stand and which need attention — no CRM digging required." },
+              { icon: <Trophy className="h-6 w-6" />, title: "Team Leaderboards", desc: "Gamify networking with live rankings showing card shares, leads captured, and follow-ups completed. Drive healthy competition.", stat: "Live", statLabel: "rankings" },
+              { icon: <BellRing className="h-6 w-6" />, title: "Follow-Up Automation", desc: "Trigger personalised follow-up emails the moment a lead is captured. Strike while the iron is hot — automatically.", stat: "<5s", statLabel: "auto-trigger" },
+              { icon: <Target className="h-6 w-6" />, title: "Pipeline Visibility", desc: "See every lead from capture to close in one view. Know exactly where deals stand and which need attention.", stat: "360°", statLabel: "deal view" },
+              { icon: <MapPin className="h-6 w-6" />, title: "Territory Tracking", desc: "Assign leads by region, track rep coverage, and ensure no territory goes cold. Perfect for distributed sales teams.", stat: "Auto", statLabel: "assignment" },
+              { icon: <CalendarCheck className="h-6 w-6" />, title: "Meeting Scheduler", desc: "Prospects book meetings directly from your card. Syncs with your calendar so there's zero back-and-forth.", stat: "1-tap", statLabel: "booking" },
+              { icon: <TrendingUp className="h-6 w-6" />, title: "Event ROI Dashboard", desc: "Track cost per lead, deal velocity, and revenue attribution per event. Know exactly which expos are worth the spend.", stat: "12x", statLabel: "avg ROI" },
             ].map((item, i) => (
               <motion.div
-                key={i}
-                variants={fadeUp}
-                whileHover={{ y: -6, transition: spring }}
-                className={`bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300 ${item.wide ? "md:col-span-2" : ""}`}
+                key={item.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style={gradientBgStyle}>{item.icon}</div>
-                <h3 className="text-lg font-bold text-[#1F2323] mb-2">{item.title}</h3>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {item.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                  </div>
+                </div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
                 <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </Section>
 

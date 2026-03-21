@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -72,10 +72,10 @@ const fadeUp = {
    6 source icons converge into a single pipeline
    ================================================================ */
 
-const captureSourceIcons = [
+const captureSources = [
   { Icon: Smartphone, label: "Card Swop", color: "#0052D4" },
   { Icon: QrCode, label: "QR Scan", color: "#65C7F7" },
-  { Icon: WifiHigh, label: "NFC Tap", color: "#16B8C3", phosphor: true },
+  { Icon: WifiHigh, label: "NFC Tap", color: "#16B8C3" },
   { Icon: Link2, label: "Link Share", color: "#0052D4" },
   { Icon: BadgeCheck, label: "Badge Scan", color: "#65C7F7" },
   { Icon: Mail, label: "Email Sig", color: "#16B8C3" },
@@ -83,79 +83,96 @@ const captureSourceIcons = [
 
 function AnimatedFunnel() {
   return (
-    <div className="relative w-[320px] h-[400px] mx-auto">
-      {/* Source icons arranged in a semicircle at top */}
-      {captureSourceIcons.map((s, i) => {
-        const angle = -60 + (i * 120) / (captureSourceIcons.length - 1);
-        const rad = (angle * Math.PI) / 180;
-        const radius = 130;
-        const cx = 160 + Math.cos(rad) * radius;
-        const cy = 80 + Math.sin(rad) * 60;
-
-        return (
+    <div className="flex flex-col items-center w-full max-w-md mx-auto">
+      {/* Row 1: 6 source icons in a grid */}
+      <div className="grid grid-cols-3 gap-x-6 gap-y-4 w-full mb-4">
+        {captureSources.map((s, i) => (
           <motion.div
             key={s.label}
-            className="absolute flex flex-col items-center gap-1"
-            style={{ left: cx - 24, top: cy - 24 }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 + i * 0.12, type: "spring", stiffness: 300, damping: 20 }}
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.2 + i * 0.08 }}
+            className="flex flex-col items-center"
           >
             <motion.div
-              className="h-12 w-12 rounded-xl flex items-center justify-center shadow-lg"
-              style={{ backgroundColor: s.color + "15", border: `2px solid ${s.color}30` }}
-              animate={{ y: [0, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 2 + i * 0.3, ease: "easeInOut" }}
+              className="h-12 w-12 rounded-xl flex items-center justify-center shadow-md"
+              style={{ backgroundColor: s.color + "12", border: `1.5px solid ${s.color}25` }}
+              animate={{ y: [0, -5, 0] }}
+              transition={{ repeat: Infinity, duration: 2.5 + i * 0.3, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1, boxShadow: `0 8px 25px ${s.color}20` }}
             >
               <s.Icon size={22} style={{ color: s.color }} />
             </motion.div>
-            <span className="text-[10px] font-medium text-(--color-card-para) whitespace-nowrap">{s.label}</span>
+            <span className="text-[10px] font-medium text-[#454545] mt-1.5 whitespace-nowrap">{s.label}</span>
           </motion.div>
-        );
-      })}
+        ))}
+      </div>
 
-      {/* Converging lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 320 400">
-        {captureSourceIcons.map((s, i) => {
-          const angle = -60 + (i * 120) / (captureSourceIcons.length - 1);
-          const rad = (angle * Math.PI) / 180;
-          const sx = 160 + Math.cos(rad) * 130;
-          const sy = 80 + Math.sin(rad) * 60 + 36;
-          return (
-            <motion.line
-              key={i}
-              x1={sx} y1={sy} x2={160} y2={280}
-              stroke={s.color}
-              strokeWidth={1.5}
-              strokeDasharray="4 4"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.4 }}
-              transition={{ delay: 0.8 + i * 0.1, duration: 0.8 }}
-            />
-          );
-        })}
-      </svg>
+      {/* Converging lines: 6 lines flowing down to funnel */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="w-full flex justify-center my-2"
+      >
+        <svg width="280" height="60" viewBox="0 0 280 60" fill="none" className="overflow-visible">
+          {[0, 1, 2, 3, 4, 5].map((i) => {
+            const startX = 46.67 * i + 23.33;
+            return (
+              <motion.line
+                key={i}
+                x1={startX} y1={0}
+                x2={140} y2={55}
+                stroke={captureSources[i].color}
+                strokeWidth={1.5}
+                strokeDasharray="4 3"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 0.35 }}
+                transition={{ delay: 0.9 + i * 0.08, duration: 0.6 }}
+              />
+            );
+          })}
+        </svg>
+      </motion.div>
 
       {/* Funnel icon */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-[80px] flex flex-col items-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 18, delay: 1.4 }}
+        className="flex flex-col items-center relative"
       >
-        <div className="h-16 w-16 rounded-2xl flex items-center justify-center shadow-xl" style={gradientBgStyle}>
-          <Funnel size={30} weight="duotone" className="text-white" />
+        {/* Pulse rings */}
+        {[0, 1].map((ring) => (
+          <motion.div
+            key={ring}
+            className="absolute rounded-2xl"
+            style={{ width: 64, height: 64, border: "2px solid #0052D4" }}
+            animate={{ scale: [1, 1.6], opacity: [0.4, 0] }}
+            transition={{ repeat: Infinity, duration: 2, delay: ring * 0.8, ease: "easeOut" }}
+          />
+        ))}
+        <div className="h-14 w-14 rounded-2xl flex items-center justify-center shadow-xl relative z-10" style={gradientBgStyle}>
+          <Funnel size={26} weight="duotone" className="text-white" />
         </div>
-        <p className="text-xs font-semibold text-(--color-body) mt-2">Your Pipeline</p>
+        <span className="text-xs font-semibold text-[#1F2323] mt-2">Your Pipeline</span>
       </motion.div>
 
-      {/* Pulse ring */}
+      {/* Output: CRM badge */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-[80px] h-16 w-16 rounded-2xl"
-        style={{ border: "2px solid #0052D4" }}
-        animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
-      />
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.8, duration: 0.5 }}
+        className="mt-3 flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 shadow-sm"
+      >
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="w-2 h-2 rounded-full bg-green-500"
+        />
+        <span className="text-xs font-semibold text-green-700">Synced to CRM</span>
+      </motion.div>
     </div>
   );
 }
@@ -386,7 +403,7 @@ function CaptureChannelTabs() {
    ================================================================ */
 
 const bentoItems = [
-  { icon: <Radar className="h-6 w-6" />, title: "Source Tracking", desc: "Know exactly where each lead came from \u2014 NFC tap, QR scan, badge swipe, email click, or link share. Allocate marketing rands based on real data, not guesses.", wide: true },
+  { icon: <Radar className="h-6 w-6" />, title: "Source Tracking", desc: "Know exactly where each lead came from — NFC tap, QR scan, badge swipe, email click, or link share. Allocate marketing rands based on real data, not guesses.", wide: true },
   { icon: <Copy className="h-6 w-6" />, title: "Duplicate Detection", desc: "LINKey intelligently detects when the same contact is captured more than once and merges records so your database stays clean and accurate.", wide: false },
   { icon: <Bell className="h-6 w-6" />, title: "Real-Time Alerts", desc: "Get instant push notifications the moment a new lead is captured. Follow up while the conversation is still fresh.", wide: false },
   { icon: <Trophy className="h-6 w-6" />, title: "Team Leaderboard", desc: "See which team members are generating the most leads at events. Friendly competition drives results, and managers get visibility into team performance.", wide: true },
@@ -425,7 +442,7 @@ function BentoSection() {
    ================================================================ */
 
 const steps = [
-  { num: "01", title: "Interact", desc: "Your team member swops a card, gets their badge scanned, or shares their link. The interaction happens naturally \u2014 no extra steps.", icon: <ScanLine className="h-6 w-6" /> },
+  { num: "01", title: "Interact", desc: "Your team member swops a card, gets their badge scanned, or shares their link. The interaction happens naturally — no extra steps.", icon: <ScanLine className="h-6 w-6" /> },
   { num: "02", title: "Capture", desc: "LINKey automatically records the lead's contact details, the interaction method, and a precise timestamp. Zero manual data entry.", icon: <Zap className="h-6 w-6" /> },
   { num: "03", title: "Attribute", desc: "The lead is linked to the specific team member who made the connection. Managers see who generated what.", icon: <UserCheck className="h-6 w-6" /> },
   { num: "04", title: "Sync", desc: "Captured leads flow into your Lead Inbox and can be pushed to your existing CRM. No copy-pasting, no end-of-event data scramble.", icon: <ArrowRight className="h-6 w-6" /> },
@@ -443,18 +460,42 @@ function HowItWorksSection() {
           <h2 className="heading-2 text-(--color-body) mb-4">From Handshake to Pipeline in Seconds</h2>
           <p className="lead text-(--color-lead)">Four simple steps. Zero manual data entry. Every lead accounted for.</p>
         </motion.div>
-        <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-4 md:gap-8 relative">
-          {/* Timeline line */}
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -600,12 +641,12 @@ function TestimonialSection() {
    ================================================================ */
 
 const faqs = [
-  { q: "How does auto-capture work? Do leads need to do anything?", a: "When someone swops cards, scans your QR code, taps your NFC product, or clicks your shared link, LINKey captures their details automatically. The lead simply interacts with your card as they normally would \u2014 no extra forms, no app downloads. Completely seamless for both parties." },
+  { q: "How does auto-capture work? Do leads need to do anything?", a: "When someone swops cards, scans your QR code, taps your NFC product, or clicks your shared link, LINKey captures their details automatically. The lead simply interacts with your card as they normally would — no extra forms, no app downloads. Completely seamless for both parties." },
   { q: "What information is captured for each lead?", a: "LINKey captures the contact's name, email, phone number, company, job title, and any other details they've shared. Every lead record includes the team member who made the interaction, the source channel, and a precise timestamp." },
   { q: "How does staff attribution work for teams?", a: "Each team member has their own LINKey card or profile. When they make a connection, the lead is automatically tagged with their name. Managers can view leads by team member, see leaderboard rankings, and track individual performance." },
   { q: "Can I export leads to my existing CRM?", a: "Absolutely. Export leads as CSV files, connect to popular CRMs via integrations, or use our API. Leads flow into Salesforce, HubSpot, Pipedrive, and other platforms automatically." },
   { q: "What happens if the same person is captured twice?", a: "LINKey's duplicate detection matches on email, phone number, and name. When a duplicate is found, records are merged and interaction history is consolidated so your database stays clean." },
-  { q: "Do real-time notifications work for the whole team?", a: "Yes. Team members receive notifications for their own captures, and managers can opt in to all team leads. Customise by channel \u2014 push, email, or in-app." },
+  { q: "Do real-time notifications work for the whole team?", a: "Yes. Team members receive notifications for their own captures, and managers can opt in to all team leads. Customise by channel — push, email, or in-app." },
   { q: "Is lead data secure and POPIA/GDPR compliant?", a: "All data is encrypted at rest and in transit. We provide consent management, data deletion requests, and audit trails for POPIA, GDPR, and CCPA compliance." },
   { q: "How quickly can my team start using auto-capture?", a: "Up and running in under 10 minutes. Create your workspace, invite members, assign cards. Your first leads will be in the pipeline before the day is over." },
 ];

@@ -5,6 +5,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  useInView,
   AnimatePresence,
   LayoutGroup,
 } from "framer-motion";
@@ -331,83 +332,68 @@ function SocialProofSection() {
    SECTION 3 — PROBLEM: "The Event Lead Graveyard"
    ═══════════════════════════════════════════════════════════════════ */
 
-function MessyStack() {
-  const items = [
-    { rotate: -8, bg: "#f9fafb", label: "John S. — Acme?", type: "card" },
-    { rotate: 5, bg: "#fef3c7", label: "Call re: pricing!!", type: "napkin" },
-    { rotate: -3, bg: "#f3f4f6", label: "badge_photo_042.jpg", type: "badge" },
-    { rotate: 12, bg: "#ede9fe", label: "M. Patel — ???", type: "card" },
-    { rotate: -6, bg: "#fef9c3", label: "Follow up Mon?", type: "napkin" },
+function ProblemSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  const messyItems = [
+    { rotate: -8, bg: "#f9fafb", border: "#e5e7eb", label: "John S. — Acme Corp?", type: "📇 business card", x: -20, y: 0 },
+    { rotate: 6, bg: "#fef3c7", border: "#fde68a", label: "Call re: pricing — URGENT!!", type: "📝 napkin note", x: 15, y: 30 },
+    { rotate: -4, bg: "#f3f4f6", border: "#d1d5db", label: "badge_photo_042.jpg", type: "🏷️ badge photo", x: -30, y: 65 },
+    { rotate: 10, bg: "#ede9fe", border: "#c4b5fd", label: "M. Patel — ??? Which company?", type: "📇 business card", x: 20, y: 95 },
+    { rotate: -7, bg: "#fef9c3", border: "#fde047", label: "Follow up Monday? Or Tuesday?", type: "📝 napkin note", x: -10, y: 130 },
   ];
 
   return (
-    <div className="relative mx-auto h-72 w-72">
-      {items.map((item, i) => (
-        <div
-          key={i}
-          className="absolute rounded-lg border border-gray-200 px-4 py-3 shadow-sm"
-          style={{
-            background: item.bg,
-            transform: `rotate(${item.rotate}deg)`,
-            top: `${15 + i * 12}px`,
-            left: `${10 + i * 18}px`,
-            zIndex: i,
-          }}
-        >
-          <p className="text-xs text-gray-600 font-medium">{item.label}</p>
-          <p className="mt-0.5 text-[10px] text-gray-400 uppercase">
-            {item.type}
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ProblemSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const stackRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let ctx: ReturnType<typeof import("gsap")["gsap"]["context"]> | null = null;
-
-    (async () => {
-      if (!gsapModule) {
-        const g = await import("gsap");
-        const s = await import("gsap/ScrollTrigger");
-        gsapModule = g;
-        ScrollTriggerModule = s.ScrollTrigger;
-        g.gsap.registerPlugin(s.ScrollTrigger);
-      }
-      const { gsap } = gsapModule;
-
-      if (!sectionRef.current || !stackRef.current) return;
-
-      ctx = gsap.context(() => {
-        gsap.to(stackRef.current, {
-          filter: "grayscale(1) blur(4px)",
-          opacity: 0.4,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-            end: "bottom 40%",
-            scrub: 1,
-          },
-        });
-      }, sectionRef);
-    })();
-
-    return () => {
-      ctx?.revert();
-    };
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="px-4 py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-        <div ref={stackRef}>
-          <MessyStack />
+        {/* Left: Animated messy stack */}
+        <div className="relative mx-auto h-[320px] w-full max-w-[320px] flex items-center justify-center">
+          {messyItems.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 60, rotate: 0, scale: 0.8 }}
+              animate={isInView ? {
+                opacity: 1,
+                y: item.y,
+                x: item.x,
+                rotate: item.rotate,
+                scale: 1,
+              } : {}}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 20,
+                delay: 0.2 + i * 0.15,
+              }}
+              whileHover={{
+                rotate: 0,
+                scale: 1.08,
+                zIndex: 50,
+                boxShadow: "0 15px 40px rgba(0,0,0,0.12)",
+              }}
+              className="absolute rounded-xl border-2 px-5 py-3.5 shadow-md cursor-default"
+              style={{
+                background: item.bg,
+                borderColor: item.border,
+                zIndex: i + 1,
+              }}
+            >
+              <p className="text-sm text-gray-700 font-semibold">{item.label}</p>
+              <p className="mt-1 text-[10px] text-gray-400">{item.type}</p>
+            </motion.div>
+          ))}
+          {/* Red "LOST" stamp */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0, rotate: -20 }}
+            animate={isInView ? { opacity: 0.7, scale: 1, rotate: -12 } : {}}
+            transition={{ type: "spring", stiffness: 300, damping: 15, delay: 1.2 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none"
+          >
+            <div className="border-4 border-red-500 rounded-lg px-6 py-2">
+              <span className="text-red-500 text-2xl font-black tracking-widest">LOST</span>
+            </div>
+          </motion.div>
         </div>
         <div>
           <p className="eyebrow mb-4 text-[#16B8C3]">The Problem</p>

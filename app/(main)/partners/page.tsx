@@ -360,77 +360,50 @@ function DashboardSection() {
 /*  5. BENEFITS — Bento grid                                           */
 /* ------------------------------------------------------------------ */
 const benefitItems = [
-  {
-    icon: <Star className="h-6 w-6" />,
-    title: "Tiered Commissions",
-    description:
-      "Start at 30% and unlock higher tiers as you refer more customers. Top partners earn up to 40% recurring commission.",
-    wide: true,
-  },
-  {
-    icon: <Megaphone className="h-6 w-6" />,
-    title: "Co-Marketing",
-    description:
-      "Get featured in our newsletter, social media, and website. Joint webinars and case studies amplify your brand.",
-  },
-  {
-    icon: <Rocket className="h-6 w-6" />,
-    title: "Early Access",
-    description:
-      "Be the first to try new LINKey features before public launch. Your feedback helps shape the product.",
-  },
-  {
-    icon: <Award className="h-6 w-6" />,
-    title: "Partner Badge",
-    description:
-      "Display the official LINKey Partner badge on your website to build trust and show your audience you recommend the best.",
-  },
-  {
-    icon: <HeadphonesIcon className="h-6 w-6" />,
-    title: "Priority Support",
-    description:
-      "Skip the queue. Partners get priority support with response times under 2 hours, plus a direct line to the team.",
-    wide: true,
-  },
+  { icon: <Star className="h-6 w-6" />, title: "Tiered Commissions", description: "Start at 30% and unlock higher tiers as you refer more. Top partners earn up to 40% recurring commission.", stat: "40%", statLabel: "max recurring" },
+  { icon: <Megaphone className="h-6 w-6" />, title: "Co-Marketing", description: "Get featured in our newsletter, social media, and website. Joint webinars and case studies amplify your brand.", stat: "Featured", statLabel: "brand exposure" },
+  { icon: <Rocket className="h-6 w-6" />, title: "Early Access", description: "Be the first to try new LINKey features before public launch. Your feedback helps shape the product.", stat: "First", statLabel: "to try" },
+  { icon: <Award className="h-6 w-6" />, title: "Partner Badge", description: "Display the official LINKey Partner badge on your website to build trust with your audience.", stat: "Official", statLabel: "certification" },
+  { icon: <HeadphonesIcon className="h-6 w-6" />, title: "Priority Support", description: "Skip the queue. Partners get priority support with response times under 2 hours, plus a direct line to the team.", stat: "<2hrs", statLabel: "response time" },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Real-Time Dashboard", description: "Track every referral, conversion, and payout in real time. Export reports and forecast your earnings.", stat: "Live", statLabel: "tracking" },
 ];
 
 function BenefitsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section className="px-[5%] py-16 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-14 text-center">
-          <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">PARTNER PERKS</span>
-          <h2 className="heading-2 text-(--color-body) mb-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-14 text-center">
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">PARTNER PERKS</span>
+          <h2 className="heading-2 text-[#1F2323] mb-4">
             More Than Just <span style={gradientTextStyle}>Commissions</span>
           </h2>
-          <p className="para text-(--color-card-para) mx-auto max-w-2xl">
-            Being a LINKey partner comes with exclusive perks designed to help you grow your own
-            brand while earning.
+          <p className="para text-[#454545] mx-auto max-w-2xl">
+            Being a LINKey partner comes with exclusive perks designed to help you grow your own brand while earning.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(180px,auto)]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {benefitItems.map((item, i) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              className={`group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-primary/20 ${
-                item.wide ? "sm:col-span-2" : ""
-              }`}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+              className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
             >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary-light/0 to-primary/0 transition-all duration-500 group-hover:from-primary-light/5 group-hover:to-primary/5" />
-              <div className="relative">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-light/15 to-primary/15 text-primary">
+              <div className="flex items-start justify-between mb-4">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
                   {item.icon}
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-(--color-body)">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-(--color-card-para)">{item.description}</p>
+                <div className="text-right">
+                  <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                </div>
               </div>
+              <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#454545] leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>

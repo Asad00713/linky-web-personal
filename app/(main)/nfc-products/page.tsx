@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -317,113 +317,161 @@ function TrustStrip() {
 /* ================================================================== */
 
 function ProductShowcase() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
 
+  // Auto-cycle products every 4 seconds
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % showcaseProducts.length);
+    }, 4000);
+    return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (isMobile || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: `+=${showcaseProducts.length * 100}%`,
-        pin: true,
-        scrub: 0.8,
-        onUpdate: (self) => {
-          const idx = Math.min(
-            Math.floor(self.progress * showcaseProducts.length),
-            showcaseProducts.length - 1
-          );
-          setActiveIndex(idx);
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isMobile]);
-
-  // Mobile: stacked cards
-  if (isMobile) {
-    return (
-      <section id="showcase" className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-12">
-            <p className="eyebrow text-[#16B8C3] mb-3">OUR PRODUCTS</p>
-            <h2 className="heading-2">The NFC Product Range</h2>
-          </div>
-          <div className="space-y-8">
-            {showcaseProducts.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <ShowcaseCard product={product} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const active = showcaseProducts[activeIndex];
 
   return (
-    <section
-      ref={sectionRef}
-      id="showcase"
-      className="relative h-screen bg-white flex items-center"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex items-center gap-12">
-        {/* Product display */}
-        <div className="flex-1 flex items-center justify-center">
-          <AnimatePresence mode="wait">
+    <section ref={ref} id="showcase" className="px-[5%] py-20 md:py-28 bg-[#F8FBFF]">
+      <div className="mx-auto max-w-7xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">OUR PRODUCTS</span>
+          <h2 className="heading-2 text-[#1F2323]">The NFC Product Range</h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Left: Product Visual */}
+          <div className="relative flex items-center justify-center">
+            {/* Background glow */}
+            <div className="absolute w-[300px] h-[300px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(0,82,212,0.08) 0%, transparent 70%)" }} />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, y: 30, scale: 0.9, rotateY: -10 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotateY: 0 }}
+                exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 250, damping: 22 }}
+                className="relative z-10 w-full max-w-sm"
+              >
+                {/* Product card */}
+                <div className="rounded-2xl bg-white border border-gray-100 shadow-xl overflow-hidden">
+                  {/* Product image area */}
+                  <div className="h-56 flex flex-col items-center justify-center relative" style={{ background: "linear-gradient(135deg, #f0f9ff 0%, #e0f0ff 50%, #dbeafe 100%)" }}>
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      className="text-[#0052D4]"
+                    >
+                      {React.cloneElement(active.icon as React.ReactElement<{size: number}>, { size: 72 })}
+                    </motion.div>
+                    {/* Price tag */}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 15, delay: 0.2 }}
+                      className="absolute top-4 right-4 rounded-full px-4 py-1.5 text-white text-sm font-bold shadow-lg"
+                      style={gradientBgStyle}
+                    >
+                      R{active.price}
+                    </motion.div>
+                  </div>
+
+                  {/* Product details */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-[#1F2323] mb-2">{active.name}</h3>
+                    <p className="text-sm text-[#454545] leading-relaxed mb-4">{active.description}</p>
+                    <ul className="space-y-2">
+                      {active.features.map((f, fi) => (
+                        <motion.li
+                          key={f}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: 0.3 + fi * 0.08 }}
+                          className="flex items-center gap-2 text-sm text-[#454545]"
+                        >
+                          <Check size={14} className="text-[#16B8C3] shrink-0" />
+                          {f}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right: Product selector tabs */}
+          <div>
+            <div className="space-y-3">
+              {showcaseProducts.map((product, i) => (
+                <motion.button
+                  key={product.id}
+                  onClick={() => setActiveIndex(i)}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  whileHover={{ x: 4 }}
+                  className={`w-full text-left rounded-xl p-5 transition-all duration-300 border cursor-pointer ${
+                    i === activeIndex
+                      ? "bg-white border-[#0052D4]/20 shadow-lg shadow-primary/5"
+                      : "bg-white/50 border-gray-100 hover:bg-white hover:shadow-md"
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                      i === activeIndex ? "bg-primary/10 text-[#0052D4]" : "bg-gray-50 text-gray-400"
+                    }`}>
+                      {React.cloneElement(product.icon as React.ReactElement<{size: number}>, { size: 24 })}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <h3 className={`font-semibold transition-colors ${i === activeIndex ? "text-[#1F2323]" : "text-gray-500"}`}>
+                          {product.name}
+                        </h3>
+                        <span className={`text-sm font-bold shrink-0 ml-3 ${i === activeIndex ? "text-[#0052D4]" : "text-gray-400"}`}>
+                          R{product.price}
+                        </span>
+                      </div>
+                      <p className={`text-xs mt-0.5 transition-colors truncate ${i === activeIndex ? "text-[#454545]" : "text-gray-400"}`}>
+                        {product.features[0]}
+                      </p>
+                    </div>
+                    {/* Active indicator */}
+                    {i === activeIndex && (
+                      <motion.div
+                        layoutId="nfc-active-indicator"
+                        className="w-1.5 h-10 rounded-full shrink-0"
+                        style={gradientBgStyle}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* CTA under tabs */}
             <motion.div
-              key={showcaseProducts[activeIndex].id}
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.7 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="w-full max-w-lg"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-6 flex gap-3"
             >
-              <ShowcaseCard product={showcaseProducts[activeIndex]} />
+              <a href="/shop" className="flex-1">
+                <button className="w-full px-6 py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all hover:scale-[1.02]" style={gradientBgStyle}>
+                  Shop All Products →
+                </button>
+              </a>
             </motion.div>
-          </AnimatePresence>
+          </div>
         </div>
-
-        {/* Progress dots */}
-        <div className="flex flex-col gap-4 items-center">
-          {showcaseProducts.map((p, i) => (
-            <div
-              key={p.id}
-              className="w-3 h-3 rounded-full transition-all duration-500"
-              style={{
-                background:
-                  i === activeIndex
-                    ? "linear-gradient(to right, #9CECFB, #0052D4)"
-                    : "#d1d5db",
-                transform: i === activeIndex ? "scale(1.5)" : "scale(1)",
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Section header top-left */}
-      <div className="absolute top-8 left-8">
-        <p className="eyebrow text-[#16B8C3] mb-1">OUR PRODUCTS</p>
-        <h2 className="heading-3">The NFC Product Range</h2>
       </div>
     </section>
   );
@@ -513,147 +561,250 @@ function ShowcaseCard({ product }: { product: Product }) {
 /* ================================================================== */
 
 function HowItWorksSection() {
-  const pathRef = useRef<SVGPathElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [activeStep, setActiveStep] = useState(0);
 
+  // Auto-advance steps
   useEffect(() => {
-    if (!pathRef.current || !sectionRef.current) return;
-
-    const path = pathRef.current;
-    const length = path.getTotalLength();
-    path.style.strokeDasharray = `${length}`;
-    path.style.strokeDashoffset = `${length}`;
-
-    const ctx = gsap.context(() => {
-      gsap.to(path, {
-        strokeDashoffset: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 50%",
-          scrub: 1,
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    if (!isInView) return;
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 3);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [isInView]);
 
   const steps = [
     {
-      icon: <ShoppingCart size={36} weight="duotone" />,
+      icon: <ShoppingCart size={28} weight="duotone" />,
       title: "Order Online",
-      desc: "Browse the NFC store, pick your product, customise if needed, and check out. We accept all major cards and EFT.",
+      desc: "Browse the NFC store, pick your product, customise if needed, and check out. We accept all major SA payment methods.",
+      detail: "3 products added to cart",
+      color: "#9CECFB",
     },
     {
-      icon: <Package size={36} weight="duotone" />,
+      icon: <Package size={28} weight="duotone" />,
       title: "Receive Your Product",
-      desc: "Your NFC product arrives in branded packaging with a quick-start guide. SA orders: 3-5 business days.",
+      desc: "Your NFC product arrives in branded LINKey packaging with a quick-start guide. SA delivery: 3–5 business days.",
+      detail: "Shipped via CourierGuy",
+      color: "#65C7F7",
     },
     {
-      icon: <Lightning size={36} weight="duotone" />,
-      title: "Activate in 30 Seconds",
-      desc: "Open the LINKey app, tap 'Activate', hold the product to your phone, and you are live.",
+      icon: <Lightning size={28} weight="duotone" />,
+      title: "Activate & Share",
+      desc: "Open the LINKey app, tap 'Activate', hold the product to your phone — you're live and sharing in 30 seconds flat.",
+      detail: "NFC card linked to profile",
+      color: "#0052D4",
     },
   ];
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="py-20 md:py-28 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="eyebrow text-[#16B8C3] mb-3">HOW IT WORKS</p>
-          <h2 className="heading-2 mb-4">
+    <section ref={ref} id="how-it-works" className="px-[5%] py-20 md:py-28 bg-white">
+      <div className="mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">HOW IT WORKS</span>
+          <h2 className="heading-2 text-[#1F2323] mb-4">
             From Unboxing to Sharing in{" "}
             <span style={gradientTextStyle}>30 Seconds</span>
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="relative">
-          {/* SVG connecting path (desktop only) */}
-          <svg
-            className="absolute top-0 left-0 w-full h-full pointer-events-none hidden md:block"
-            viewBox="0 0 1200 200"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-            <path
-              ref={pathRef}
-              d="M 150 100 C 300 100, 350 30, 500 100 C 650 170, 700 30, 900 100"
-              stroke="url(#grad-path)"
-              strokeWidth="3"
-              strokeDasharray="8 8"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <defs>
-              <linearGradient id="grad-path" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#9CECFB" />
-                <stop offset="50%" stopColor="#65C7F7" />
-                <stop offset="100%" stopColor="#0052D4" />
-              </linearGradient>
-            </defs>
-          </svg>
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Left: Interactive phone mockup */}
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ type: "spring", stiffness: 200, damping: 22, delay: 0.3 }}
+            >
+              <div className="w-[260px] rounded-[32px] bg-[#0A0A0A] p-[5px] shadow-2xl">
+                <div className="w-full rounded-[27px] bg-white overflow-hidden">
+                  {/* Status bar */}
+                  <div className="flex items-center justify-between px-5 pt-2.5 pb-1 relative">
+                    <span className="text-[9px] font-semibold text-gray-800">9:41</span>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[22px] bg-black rounded-b-xl" />
+                  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                custom={i}
-                className="text-center"
-              >
-                <div className="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#f0f9ff] to-[#dbeafe] text-[#0052D4]">
-                  {step.icon}
-                </div>
-                <div className="w-8 h-8 mx-auto mb-4 rounded-full flex items-center justify-center text-white text-sm font-bold" style={gradientBgStyle}>
-                  {i + 1}
-                </div>
-                <h3 className="text-lg font-semibold text-[#1F2323] mb-2">{step.title}</h3>
-                <p className="text-sm text-[#454545] leading-relaxed max-w-xs mx-auto">
-                  {step.desc}
-                </p>
-
-                {/* Step 3: mini phone demo */}
-                {i === 2 && (
-                  <div className="mt-6 mx-auto w-44 h-72 rounded-[24px] border-4 border-gray-800 bg-gray-900 p-3 flex flex-col items-center justify-center relative overflow-hidden">
-                    <div className="w-16 h-1 bg-gray-700 rounded-full absolute top-2" />
-                    <div className="text-center relative z-10">
-                      <div className="relative w-16 h-16 mx-auto mb-3">
-                        {/* NFC pulse animation */}
-                        {[0, 1, 2].map((ring) => (
-                          <div
-                            key={ring}
-                            className="absolute inset-0 rounded-full border-2 border-[#65C7F7]"
-                            style={{
-                              animation: `phone-pulse 2s ease-out ${ring * 0.4}s infinite`,
-                              opacity: 0,
-                            }}
-                          />
-                        ))}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <WifiHigh size={28} weight="bold" className="text-[#65C7F7]" />
+                  {/* Screen content — changes per step */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeStep}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      transition={{ duration: 0.4 }}
+                      className="px-5 py-6"
+                    >
+                      {activeStep === 0 && (
+                        <div>
+                          <p className="text-[10px] text-gray-400 font-medium mb-3">LINKey Store</p>
+                          {["NFC Business Card", "NFC Wristband", "NFC Key Tag"].map((item, i) => (
+                            <div key={item} className="flex items-center justify-between py-2.5 border-b border-gray-50">
+                              <div className="flex items-center gap-2.5">
+                                <div className="w-9 h-9 rounded-lg bg-[#F0F6FF] flex items-center justify-center">
+                                  <ShoppingCart size={14} className="text-[#0052D4]" />
+                                </div>
+                                <div>
+                                  <p className="text-[10px] font-semibold text-gray-800">{item}</p>
+                                  <p className="text-[8px] text-gray-400">R{[299, 349, 199][i]}</p>
+                                </div>
+                              </div>
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: "spring", delay: 0.3 + i * 0.15, stiffness: 400, damping: 15 }}
+                                className="w-5 h-5 rounded-full flex items-center justify-center"
+                                style={gradientBgStyle}
+                              >
+                                <Check size={10} className="text-white" />
+                              </motion.div>
+                            </div>
+                          ))}
+                          <div className="mt-4 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-semibold" style={gradientBgStyle}>
+                            Checkout — R847
+                          </div>
                         </div>
+                      )}
+
+                      {activeStep === 1 && (
+                        <div className="text-center py-4">
+                          <motion.div
+                            animate={{ y: [0, -6, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          >
+                            <Package size={48} weight="duotone" className="text-[#0052D4] mx-auto" />
+                          </motion.div>
+                          <p className="text-[12px] font-bold text-gray-800 mt-4">Order Shipped!</p>
+                          <p className="text-[9px] text-gray-400 mt-1">Tracking: CG-48291-SA</p>
+                          <div className="mt-4 bg-gray-50 rounded-xl p-3">
+                            <div className="flex justify-between text-[8px] text-gray-400 mb-2">
+                              <span>Processing</span>
+                              <span>Shipped</span>
+                              <span>Delivered</span>
+                            </div>
+                            <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                              <motion.div
+                                initial={{ width: "0%" }}
+                                animate={{ width: "66%" }}
+                                transition={{ duration: 1.5, delay: 0.3 }}
+                                className="h-full rounded-full"
+                                style={gradientBgStyle}
+                              />
+                            </div>
+                          </div>
+                          <p className="text-[9px] text-gray-500 mt-3">Est. delivery: 3–5 days</p>
+                        </div>
+                      )}
+
+                      {activeStep === 2 && (
+                        <div className="text-center py-4">
+                          <div className="relative w-16 h-16 mx-auto mb-4">
+                            {[0, 1, 2].map((ring) => (
+                              <motion.div
+                                key={ring}
+                                className="absolute inset-0 rounded-full border-2 border-[#65C7F7]"
+                                animate={{ scale: [0.5, 2], opacity: [0.6, 0] }}
+                                transition={{ duration: 1.5, delay: ring * 0.4, repeat: Infinity, ease: "easeOut" }}
+                              />
+                            ))}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <WifiHigh size={28} weight="bold" className="text-[#0052D4]" />
+                            </div>
+                          </div>
+                          <p className="text-[12px] font-bold text-gray-800">NFC Activated!</p>
+                          <p className="text-[9px] text-gray-400 mt-1">Card linked to your profile</p>
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.5, type: "spring" }}
+                            className="mt-4 flex items-center justify-center gap-1.5"
+                          >
+                            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-green-100">
+                              <Check size={12} className="text-green-600" />
+                            </div>
+                            <span className="text-[10px] font-semibold text-green-600">Ready to share!</span>
+                          </motion.div>
+                        </div>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right: Step selector */}
+          <div className="space-y-4">
+            {steps.map((step, i) => (
+              <motion.button
+                key={step.title}
+                onClick={() => setActiveStep(i)}
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.12 }}
+                className={`w-full text-left rounded-2xl p-6 transition-all duration-300 border cursor-pointer ${
+                  i === activeStep
+                    ? "bg-white border-[#0052D4]/15 shadow-lg shadow-primary/5"
+                    : "bg-gray-50/50 border-transparent hover:bg-white hover:shadow-md hover:border-gray-100"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  {/* Step number + icon */}
+                  <div className="shrink-0">
+                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                      i === activeStep ? "shadow-md" : ""
+                    }`} style={i === activeStep ? gradientBgStyle : { background: "#F0F6FF" }}>
+                      <div className={i === activeStep ? "text-white" : "text-[#0052D4]"}>
+                        {step.icon}
                       </div>
-                      <p className="text-[#65C7F7] text-xs font-medium">Tap to Activate</p>
                     </div>
                   </div>
-                )}
-              </motion.div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-[10px] font-bold tracking-wider" style={{ color: step.color }}>
+                        STEP {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {i === activeStep && (
+                        <motion.div
+                          layoutId="nfc-step-active"
+                          className="h-0.5 flex-1 rounded-full"
+                          style={gradientBgStyle}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      )}
+                    </div>
+                    <h3 className={`text-lg font-semibold mb-1 transition-colors ${
+                      i === activeStep ? "text-[#1F2323]" : "text-gray-400"
+                    }`}>
+                      {step.title}
+                    </h3>
+                    <AnimatePresence>
+                      {i === activeStep && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-sm text-[#454545] leading-relaxed overflow-hidden"
+                        >
+                          {step.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.button>
             ))}
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes phone-pulse {
-          0% { transform: scale(0.5); opacity: 0.6; }
-          100% { transform: scale(2); opacity: 0; }
-        }
-      `}</style>
     </section>
   );
 }

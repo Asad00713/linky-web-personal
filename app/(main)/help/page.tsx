@@ -46,13 +46,13 @@ const popularArticles = [
 ];
 
 const helpFaqs = [
-  { q: "How do I activate my NFC card?", a: "Open the LINKey app, tap \u2018Add NFC Card\u2019, and hold your card against the back of your phone. The app pairs it automatically." },
+  { q: "How do I activate my NFC card?", a: "Open the LINKey app, tap \u2018Add NFC Card\', and hold your card against the back of your phone. The app pairs it automatically." },
   { q: "Can I use LINKey without an NFC card?", a: "Absolutely. LINKey works with QR codes, direct links, email signatures, and more. NFC is optional." },
   { q: "How do I change my plan?", a: "Go to Settings > Subscription and choose your new plan. Upgrades take effect immediately; downgrades apply at the next billing cycle." },
   { q: "What CRMs does LINKey integrate with?", a: "Salesforce, HubSpot, Zoho CRM, Pipedrive natively, plus 5,000+ apps via Zapier." },
   { q: "Is my data secure?", a: "Yes. AES-256 encryption, SOC 2-certified infrastructure, and full control over privacy settings and data export." },
   { q: "Can I manage cards for my whole team?", a: "On the Business plan you can invite unlimited team members, assign branded templates, and manage all cards centrally." },
-  { q: "What if my NFC card isn\u2019t detected?", a: "Ensure NFC is enabled in phone settings, remove thick cases, and hold the card flat against the NFC reader area." },
+  { q: "What if my NFC card isn\'t detected?", a: "Ensure NFC is enabled in phone settings, remove thick cases, and hold the card flat against the NFC reader area." },
   { q: "How do I export contacts?", a: "Open Contact Wallet, tap export, and choose CSV, vCard, or direct CRM sync. You own your data." },
 ];
 

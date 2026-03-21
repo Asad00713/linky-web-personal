@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -248,9 +248,9 @@ function SolutionBridge() {
    ================================================================ */
 
 const showcaseFeatures = [
-  { icon: <Sparkles className="h-8 w-8" />, title: "AI Polishes Your Writing", desc: "Clunky bullet points become crisp, achievement-driven statements. Our AI rewrites for clarity, impact, and the right professional tone \u2014 without changing your voice." },
-  { icon: <LayoutTemplate className="h-8 w-8" />, title: "Professionally Formatted", desc: "Choose from recruiter-approved templates that balance readability with visual appeal. Consistent spacing, clean typography, and perfect alignment \u2014 every time." },
-  { icon: <Share2 className="h-8 w-8" />, title: "Attached to Every Card Share", desc: "When someone taps your NFC card, scans your QR code, or clicks your link, your polished CV is right there \u2014 downloadable with a single tap." },
+  { icon: <Sparkles className="h-8 w-8" />, title: "AI Polishes Your Writing", desc: "Clunky bullet points become crisp, achievement-driven statements. Our AI rewrites for clarity, impact, and the right professional tone — without changing your voice." },
+  { icon: <LayoutTemplate className="h-8 w-8" />, title: "Professionally Formatted", desc: "Choose from recruiter-approved templates that balance readability with visual appeal. Consistent spacing, clean typography, and perfect alignment — every time." },
+  { icon: <Share2 className="h-8 w-8" />, title: "Attached to Every Card Share", desc: "When someone taps your NFC card, scans your QR code, or clicks your link, your polished CV is right there — downloadable with a single tap." },
 ];
 
 function AlternatingShowcaseRow({ f, i }: { f: typeof showcaseFeatures[number]; i: number }) {
@@ -290,7 +290,7 @@ function AlternatingShowcase() {
 const gridFeatures = [
   { icon: <PenTool className="h-6 w-6" />, title: "AI Writing Enhancement", desc: "From vague duties to quantified achievements. Strong verbs, metrics, zero filler." },
   { icon: <LayoutTemplate className="h-6 w-6" />, title: "Professional Formatting", desc: "Recruiter-friendly layout. AI handles margins, fonts, sections, and page breaks." },
-  { icon: <Star className="h-6 w-6" />, title: "Skills Highlighting", desc: "Key skills surfaced and categorised \u2014 technical, interpersonal, tools." },
+  { icon: <Star className="h-6 w-6" />, title: "Skills Highlighting", desc: "Key skills surfaced and categorised — technical, interpersonal, tools." },
   { icon: <Award className="h-6 w-6" />, title: "Experience Optimisation", desc: "AI reorders and emphasises your most relevant experience for your target role." },
   { icon: <Download className="h-6 w-6" />, title: "Downloadable PDF", desc: "Recipients download your CV as a beautifully typeset PDF. No apps needed." },
   { icon: <RefreshCw className="h-6 w-6" />, title: "Always Up to Date", desc: "Edit once in LINKey and every shared card serves the latest version. No outdated PDFs." },
@@ -326,7 +326,7 @@ function FeatureGridSection() {
 
 const bentoItems = [
   { icon: <Linkedin className="h-6 w-6" />, title: "LinkedIn Import", desc: "Connect LinkedIn and import headline, experience, education, and skills. AI enhances and formats into a polished CV.", wide: true },
-  { icon: <Layers className="h-6 w-6" />, title: "Multiple CV Versions", desc: "Maintain separate versions for different roles \u2014 consulting, in-house, advisory \u2014 and attach the right one to each card.", wide: false },
+  { icon: <Layers className="h-6 w-6" />, title: "Multiple CV Versions", desc: "Maintain separate versions for different roles — consulting, in-house, advisory — and attach the right one to each card.", wide: false },
   { icon: <BarChart3 className="h-6 w-6" />, title: "Download Analytics", desc: "See who viewed and downloaded your CV, when they did it, and from which card share.", wide: false },
 ];
 
@@ -375,17 +375,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">STEP BY STEP</span>
           <h2 className="heading-2 text-(--color-body) mb-4">From Upload to Sharing in Under a Minute</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -430,7 +455,7 @@ function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const before = ["Sent once, never updated, quickly outdated", "Bland formatting that blends with every other CV", "Vague bullet points like 'responsible for various tasks'", "No way to know if anyone actually read it", "One version for every opportunity", "Requires a designer or hours of manual formatting"];
-  const after = ["Always up to date \u2014 edit once, every link reflects the change", "Recruiter-approved templates with clean, professional typography", "AI-written bullets with strong verbs and quantified achievements", "Real-time analytics on who viewed and downloaded your CV", "Multiple versions attached to different cards for different roles", "AI handles writing, formatting, and layout \u2014 ready in seconds"];
+  const after = ["Always up to date — edit once, every link reflects the change", "Recruiter-approved templates with clean, professional typography", "AI-written bullets with strong verbs and quantified achievements", "Real-time analytics on who viewed and downloaded your CV", "Multiple versions attached to different cards for different roles", "AI handles writing, formatting, and layout — ready in seconds"];
 
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28">
@@ -461,7 +486,7 @@ function ComparisonSection() {
 const testimonials = [
   { name: "David Kruger", role: "Senior Consultant", company: "Deloitte", quote: "I uploaded a three-page CV that hadn't been touched in two years. The AI trimmed it to two pages, rewrote every bullet with metrics, and made it look like a professional writer spent a weekend on it. Took about fifteen seconds.", rating: 5 },
   { name: "Fatima Al-Rashid", role: "Product Designer", company: "Figma", quote: "The LinkedIn import saved me hours. It pulled my entire profile, restructured it for a traditional CV format, and the PDF looked beautiful. I just attached it to my card and started sharing.", rating: 5 },
-  { name: "Thabo Mokoena", role: "Business Development Manager", company: "Naspers", quote: "I keep two CV versions \u2014 one for tech partnerships and one for media deals. Being able to attach the right version to the right card means I always put my best foot forward.", rating: 5 },
+  { name: "Thabo Mokoena", role: "Business Development Manager", company: "Naspers", quote: "I keep two CV versions — one for tech partnerships and one for media deals. Being able to attach the right version to the right card means I always put my best foot forward.", rating: 5 },
 ];
 
 function TestimonialSection() {

@@ -241,76 +241,223 @@ function DataArc() {
 /* ------------------------------------------------------------------ */
 
 function ScrollSwopDemo() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const leftPhoneRef = useRef<HTMLDivElement>(null);
-  const rightPhoneRef = useRef<HTMLDivElement>(null);
-  const arcRef = useRef<HTMLDivElement>(null);
-  const savedLeftRef = useRef<HTMLDivElement>(null);
-  const savedRightRef = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-          end: "bottom 20%",
-          scrub: 1,
-        },
+    if (!isInView) return;
+    // Auto-cycle: 0=apart, 1=approach, 2=exchange, 3=saved, 4=separate
+    const delays = [800, 1200, 1400, 1800, 2000];
+    let timers: NodeJS.Timeout[] = [];
+    let elapsed = 0;
+
+    const run = () => {
+      setPhase(0);
+      elapsed = 0;
+      timers = delays.map((d, i) => {
+        elapsed += d;
+        return setTimeout(() => setPhase(i + 1), elapsed);
       });
+      // Restart loop
+      timers.push(setTimeout(run, elapsed + 1500));
+    };
+    run();
+    return () => timers.forEach(clearTimeout);
+  }, [isInView]);
 
-      // Phones come together
-      tl.fromTo(leftPhoneRef.current, { x: -200, opacity: 0 }, { x: 0, opacity: 1, duration: 1 })
-        .fromTo(rightPhoneRef.current, { x: 200, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, "<")
-        // Data arc appears
-        .fromTo(arcRef.current, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.8 })
-        // Saved checkmarks
-        .fromTo(savedLeftRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 })
-        .fromTo(savedRightRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5 }, "<0.2")
-        // Phones separate
-        .to(leftPhoneRef.current, { x: -60, duration: 1 }, "+=0.3")
-        .to(rightPhoneRef.current, { x: 60, duration: 1 }, "<");
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const phoneSpr = { type: "spring" as const, stiffness: 120, damping: 18 };
 
   return (
-    <div ref={sectionRef} className="relative h-[500px] flex items-center justify-center overflow-hidden">
-      <div className="relative flex items-center gap-8">
-        <div ref={leftPhoneRef} className="relative">
-          <div className="w-[100px] h-[200px] md:w-[120px] md:h-[240px] rounded-[22px] border-2 border-[#0052D4]/30 bg-gradient-to-br from-white to-blue-50 shadow-lg flex flex-col items-center justify-center p-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#9CECFB] to-[#0052D4] mb-2" />
-            <div className="w-14 h-1.5 bg-gray-200 rounded mb-1" />
-            <div className="w-10 h-1.5 bg-gray-100 rounded mb-2" />
-            <div ref={savedLeftRef} className="opacity-0 flex items-center gap-0.5 text-[10px] text-green-600 font-semibold">
-              <CheckCircle size={12} weight="fill" /> Saved
-            </div>
-          </div>
-        </div>
-
-        <div ref={arcRef} className="opacity-0 absolute left-1/2 -translate-x-1/2">
-          <svg width="120" height="60" viewBox="0 0 120 60">
-            <path d="M 10 50 Q 60 -10 110 50" fill="none" stroke="url(#scrollArc)" strokeWidth="2.5" strokeLinecap="round" />
-            <path d="M 110 50 Q 60 110 10 50" fill="none" stroke="url(#scrollArc2)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" />
-            <defs>
-              <linearGradient id="scrollArc"><stop offset="0%" stopColor="#9CECFB" /><stop offset="100%" stopColor="#0052D4" /></linearGradient>
-              <linearGradient id="scrollArc2"><stop offset="0%" stopColor="#0052D4" /><stop offset="100%" stopColor="#9CECFB" /></linearGradient>
-            </defs>
-          </svg>
-        </div>
-
-        <div ref={rightPhoneRef} className="relative">
-          <div className="w-[100px] h-[200px] md:w-[120px] md:h-[240px] rounded-[22px] border-2 border-[#65C7F7]/30 bg-gradient-to-br from-white to-cyan-50 shadow-lg flex flex-col items-center justify-center p-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#65C7F7] to-[#9CECFB] mb-2" />
-            <div className="w-14 h-1.5 bg-gray-200 rounded mb-1" />
-            <div className="w-10 h-1.5 bg-gray-100 rounded mb-2" />
-            <div ref={savedRightRef} className="opacity-0 flex items-center gap-0.5 text-[10px] text-green-600 font-semibold">
-              <CheckCircle size={12} weight="fill" /> Saved
-            </div>
-          </div>
-        </div>
+    <div ref={containerRef} className="relative flex items-center justify-center py-8 md:py-16 overflow-hidden" style={{ minHeight: 420 }}>
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <motion.div
+          animate={{ scale: phase >= 2 ? 1.3 : 1, opacity: phase >= 2 ? 0.15 : 0.05 }}
+          transition={{ duration: 0.8 }}
+          className="w-[400px] h-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(0,82,212,0.2) 0%, transparent 70%)" }}
+        />
       </div>
+
+      <div className="relative flex items-center">
+        {/* LEFT PHONE */}
+        <motion.div
+          animate={{
+            x: phase === 0 ? -120 : phase >= 4 ? -80 : 0,
+            opacity: phase === 0 ? 0 : 1,
+          }}
+          transition={phoneSpr}
+          className="relative z-10"
+        >
+          <div className="w-[130px] h-[260px] md:w-[150px] md:h-[300px] rounded-[28px] bg-[#0A0A0A] p-[4px] shadow-2xl">
+            <div className="w-full h-full rounded-[24px] bg-white overflow-hidden relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-4 bg-black rounded-b-xl" />
+              {/* Card content */}
+              <div className="h-[50px] md:h-[60px]" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7)" }} />
+              <div className="flex justify-center -mt-5 relative z-10">
+                <div className="w-10 h-10 rounded-full border-2 border-white shadow-sm flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7)" }}>
+                  <span className="text-[10px] font-bold text-white">YOU</span>
+                </div>
+              </div>
+              <div className="text-center mt-1.5 px-2">
+                <p className="text-[10px] font-bold text-gray-900">Your Name</p>
+                <p className="text-[7px] text-gray-500">Your Company</p>
+              </div>
+              <div className="flex justify-center gap-1.5 mt-2 px-3">
+                {["📞","✉️","💬"].map(e => <div key={e} className="w-6 h-6 rounded-md bg-blue-50 flex items-center justify-center text-[8px]">{e}</div>)}
+              </div>
+              <div className="px-3 mt-2 space-y-1">
+                {[1,2].map(n => <div key={n} className="h-1.5 rounded-full bg-gray-100" style={{ width: `${70 + n * 10}%` }} />)}
+              </div>
+              {/* Saved overlay */}
+              <AnimatePresence>
+                {phase >= 3 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 20 }}
+                    className="absolute inset-0 bg-green-50/90 backdrop-blur-sm flex flex-col items-center justify-center rounded-[24px]"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 12, delay: 0.15 }}
+                    >
+                      <CheckCircle size={48} weight="fill" className="text-green-500" />
+                    </motion.div>
+                    <p className="text-green-700 font-bold text-sm mt-2">Contact Saved</p>
+                    <p className="text-green-600 text-[9px]">Their card → your wallet</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CENTER — Exchange Visual */}
+        <div className="relative mx-2 md:mx-4 w-[80px] md:w-[120px] flex items-center justify-center">
+          {/* Pulse rings during exchange */}
+          <AnimatePresence>
+            {phase === 2 && (
+              <>
+                {[0, 1, 2].map(ring => (
+                  <motion.div
+                    key={ring}
+                    initial={{ scale: 0.3, opacity: 0.6 }}
+                    animate={{ scale: 2.5, opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.2, delay: ring * 0.3, repeat: Infinity, ease: "easeOut" }}
+                    className="absolute w-8 h-8 rounded-full border-2 border-[#0052D4]/40"
+                  />
+                ))}
+              </>
+            )}
+          </AnimatePresence>
+
+          {/* Swap icon */}
+          <motion.div
+            animate={{
+              scale: phase === 2 ? 1.2 : 1,
+              rotate: phase === 2 ? 180 : 0,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="relative z-10 w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+            style={phase >= 2 ? gradientBgStyle : { background: "#E8F0FE" }}
+          >
+            <Swap size={24} weight="bold" className={phase >= 2 ? "text-white" : "text-[#0052D4]"} />
+          </motion.div>
+
+          {/* Flying card icons during exchange */}
+          <AnimatePresence>
+            {phase === 2 && (
+              <>
+                <motion.div
+                  initial={{ x: -40, y: 0, opacity: 0, scale: 0.5 }}
+                  animate={{ x: 40, y: -15, opacity: [0, 1, 1, 0], scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className="absolute w-5 h-3 rounded-sm shadow-sm"
+                  style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7)" }}
+                />
+                <motion.div
+                  initial={{ x: 40, y: 0, opacity: 0, scale: 0.5 }}
+                  animate={{ x: -40, y: 15, opacity: [0, 1, 1, 0], scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeInOut", delay: 0.15 }}
+                  className="absolute w-5 h-3 rounded-sm shadow-sm"
+                  style={{ background: "linear-gradient(135deg, #65C7F7, #9CECFB)" }}
+                />
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* RIGHT PHONE */}
+        <motion.div
+          animate={{
+            x: phase === 0 ? 120 : phase >= 4 ? 80 : 0,
+            opacity: phase === 0 ? 0 : 1,
+          }}
+          transition={phoneSpr}
+          className="relative z-10"
+        >
+          <div className="w-[130px] h-[260px] md:w-[150px] md:h-[300px] rounded-[28px] bg-[#0A0A0A] p-[4px] shadow-2xl">
+            <div className="w-full h-full rounded-[24px] bg-white overflow-hidden relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-4 bg-black rounded-b-xl" />
+              <div className="h-[50px] md:h-[60px]" style={{ background: "linear-gradient(135deg, #65C7F7, #9CECFB)" }} />
+              <div className="flex justify-center -mt-5 relative z-10">
+                <div className="w-10 h-10 rounded-full border-2 border-white shadow-sm flex items-center justify-center" style={{ background: "linear-gradient(135deg, #65C7F7, #9CECFB)" }}>
+                  <span className="text-[10px] font-bold text-white">THEM</span>
+                </div>
+              </div>
+              <div className="text-center mt-1.5 px-2">
+                <p className="text-[10px] font-bold text-gray-900">Their Name</p>
+                <p className="text-[7px] text-gray-500">Their Company</p>
+              </div>
+              <div className="flex justify-center gap-1.5 mt-2 px-3">
+                {["📞","✉️","🌐"].map(e => <div key={e} className="w-6 h-6 rounded-md bg-cyan-50 flex items-center justify-center text-[8px]">{e}</div>)}
+              </div>
+              <div className="px-3 mt-2 space-y-1">
+                {[1,2].map(n => <div key={n} className="h-1.5 rounded-full bg-gray-100" style={{ width: `${65 + n * 12}%` }} />)}
+              </div>
+              {/* Saved overlay */}
+              <AnimatePresence>
+                {phase >= 3 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 20, delay: 0.2 }}
+                    className="absolute inset-0 bg-green-50/90 backdrop-blur-sm flex flex-col items-center justify-center rounded-[24px]"
+                  >
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 12, delay: 0.35 }}
+                    >
+                      <CheckCircle size={48} weight="fill" className="text-green-500" />
+                    </motion.div>
+                    <p className="text-green-700 font-bold text-sm mt-2">Contact Saved</p>
+                    <p className="text-green-600 text-[9px]">Your card → their wallet</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Phase label */}
+      <motion.div
+        className="absolute bottom-4 left-1/2 -translate-x-1/2"
+        animate={{ opacity: phase >= 1 && phase <= 3 ? 1 : 0 }}
+      >
+        <span className="text-xs font-medium text-gray-400 tracking-wider uppercase">
+          {phase === 1 && "Approaching..."}
+          {phase === 2 && "Exchanging data..."}
+          {phase === 3 && "Both saved ✓"}
+        </span>
+      </motion.div>
     </div>
   );
 }

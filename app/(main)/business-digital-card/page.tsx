@@ -409,66 +409,243 @@ const stickyFeatures = [
 ];
 
 function StickyFeatureScroll() {
-  return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          eyebrow="CORE FEATURES"
-          title="Everything Your Business Card Should Have Had Years Ago"
-          description="Six features that turn a simple contact card into a lead-generating, deal-closing machine."
-        />
+  const [activeIdx, setActiveIdx] = useState(0);
+  const { ref, inView: isInView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
-        <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
-          {/* Left sticky */}
-          <div className="hidden lg:block sticky top-32 mb-16">
-            <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-100 shadow-lg">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl" style={gradientBgStyle}>
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Sparkles className="w-7 h-7 text-white" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-[#1F2323]">LINKey Business Card</h3>
-                  <p className="text-sm text-[#454545]">Fully loaded. Always current.</p>
-                </div>
-              </div>
-              <div className="space-y-3">
-                {stickyFeatures.map(({ icon: Icon, title }) => (
-                  <div key={title} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-50">
-                    <Icon className="w-5 h-5 text-[#0052D4]" />
-                    <span className="text-sm font-medium text-[#1F2323]">{title}</span>
-                  </div>
-                ))}
-              </div>
+  // Auto-cycle
+  useEffect(() => {
+    if (!isInView) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % stickyFeatures.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [isInView]);
+
+  const active = stickyFeatures[activeIdx];
+  const ActiveIcon = active.icon;
+
+  // Phone screen content per feature
+  const phoneScreens: Record<number, React.ReactNode> = {
+    0: (
+      <div className="px-4 py-3">
+        <div className="h-14 rounded-xl mb-3" style={gradientBgStyle} />
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 rounded-lg" style={gradientBgStyle} />
+          <div>
+            <div className="h-2.5 w-20 rounded bg-gray-200 mb-1" />
+            <div className="h-2 w-14 rounded bg-gray-100" />
+          </div>
+        </div>
+        <p className="text-[8px] text-gray-400 text-center">Your brand, everywhere</p>
+      </div>
+    ),
+    1: (
+      <div className="px-4 py-3">
+        <div className="h-24 rounded-xl bg-gray-100 flex items-center justify-center mb-2">
+          <div className="w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[18px] border-t-[#0052D4] rotate-90" />
+        </div>
+        <div className="h-1.5 w-full rounded bg-gray-200 mb-1" />
+        <div className="flex items-center gap-1">
+          <div className="h-1 w-8 rounded bg-[#0052D4]/30" />
+          <div className="h-1 flex-1 rounded bg-gray-100" />
+        </div>
+        <p className="text-[8px] text-gray-400 text-center mt-2">60s product video</p>
+      </div>
+    ),
+    2: (
+      <div className="px-4 py-3">
+        {["20% OFF All Services", "Free Consultation", "Refer & Earn R100"].map((d, i) => (
+          <div key={d} className="flex items-center gap-2 py-2 border-b border-gray-50">
+            <div className="w-6 h-6 rounded-md flex items-center justify-center text-[8px]" style={i === 0 ? gradientBgStyle : { background: "#F0F6FF" }}>
+              <span className={i === 0 ? "text-white" : "text-[#0052D4]"}>%</span>
+            </div>
+            <span className="text-[9px] text-gray-700">{d}</span>
+          </div>
+        ))}
+        <p className="text-[8px] text-gray-400 text-center mt-2">Live deals on your card</p>
+      </div>
+    ),
+    3: (
+      <div className="px-4 py-3 flex flex-col items-center justify-center h-full">
+        <div className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center mb-2">
+          <MessageCircle className="w-6 h-6 text-white" />
+        </div>
+        <p className="text-[10px] font-semibold text-gray-800">Chat on WhatsApp</p>
+        <p className="text-[8px] text-gray-400 mt-1">Avg response: 45 seconds</p>
+      </div>
+    ),
+    4: (
+      <div className="px-4 py-3">
+        {["Sarah M. — Sales", "James K. — Support", "Priya N. — CEO"].map((person) => (
+          <div key={person} className="flex items-center gap-2 py-2 border-b border-gray-50">
+            <div className="w-6 h-6 rounded-full bg-[#F0F6FF] flex items-center justify-center">
+              <Users className="w-3 h-3 text-[#0052D4]" />
+            </div>
+            <span className="text-[9px] text-gray-700">{person}</span>
+          </div>
+        ))}
+        <p className="text-[8px] text-gray-400 text-center mt-2">Pick the right person</p>
+      </div>
+    ),
+    5: (
+      <div className="px-4 py-3">
+        {["Book a Demo", "Download Brochure", "Get a Quote"].map((cta, i) => (
+          <div key={cta} className="mb-2">
+            <div className={`h-8 rounded-full flex items-center justify-center text-[9px] font-semibold ${
+              i === 0 ? "text-white" : "border border-[#0052D4]/20 text-[#0052D4]"
+            }`} style={i === 0 ? gradientBgStyle : undefined}>
+              {cta} →
             </div>
           </div>
+        ))}
+        <p className="text-[8px] text-gray-400 text-center mt-1">Drive action from your card</p>
+      </div>
+    ),
+  };
 
-          {/* Right scrolling features */}
-          <div className="space-y-8">
-            {stickyFeatures.map(({ icon: Icon, title, description }, i) => (
-              <motion.div
-                key={title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                custom={0}
-                variants={fadeUp}
-                className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-[#9CECFB] to-[#0052D4] flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">{String(i + 1).padStart(2, "0")}</span>
+  return (
+    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-[#F8FBFF]">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">CORE FEATURES</span>
+          <h2 className="heading-2 text-[#1F2323]">Everything Your Business Card Should Have Had Years Ago</h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Left: Phone preview that changes per feature */}
+          <div className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ type: "spring", stiffness: 200, damping: 22, delay: 0.3 }}
+              className="relative"
+            >
+              {/* Glow */}
+              <div className="absolute -inset-6 rounded-[48px] pointer-events-none" style={{ boxShadow: "0 0 60px rgba(0,82,212,0.08)" }} />
+
+              <div className="w-[240px] rounded-[32px] bg-[#0A0A0A] p-[5px] shadow-2xl">
+                <div className="w-full rounded-[27px] bg-white overflow-hidden">
+                  {/* Status bar */}
+                  <div className="flex items-center justify-between px-5 pt-2.5 pb-1 relative">
+                    <span className="text-[9px] font-semibold text-gray-800">9:41</span>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[22px] bg-black rounded-b-xl" />
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <Icon className="w-5 h-5 text-[#0052D4]" />
-                      <h3 className="font-semibold text-lg text-[#1F2323]">{title}</h3>
+
+                  {/* Cover */}
+                  <div className="h-[55px]" style={gradientBgStyle}>
+                    <div className="h-full flex items-end px-4 pb-2">
+                      <span className="text-[8px] text-white/70 font-medium">TechBridge Solutions</span>
                     </div>
-                    <p className="text-[#454545] text-sm leading-relaxed">{description}</p>
+                  </div>
+
+                  {/* Active feature label */}
+                  <div className="px-4 pt-3 pb-1">
+                    <motion.div
+                      key={activeIdx}
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="flex items-center gap-1.5 mb-1"
+                    >
+                      <div className="w-5 h-5 rounded-md flex items-center justify-center" style={gradientBgStyle}>
+                        <ActiveIcon className="w-3 h-3 text-white" />
+                      </div>
+                      <span className="text-[10px] font-bold text-[#1F2323]">{active.title}</span>
+                    </motion.div>
+                  </div>
+
+                  {/* Dynamic phone content */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIdx}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="min-h-[140px]"
+                    >
+                      {phoneScreens[activeIdx]}
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Bottom bar */}
+                  <div className="px-4 pb-3">
+                    <div className="h-8 rounded-full flex items-center justify-center text-white text-[9px] font-semibold relative overflow-hidden" style={gradientBgStyle}>
+                      Save Contact ↓
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Feature counter badge */}
+              <motion.div
+                key={activeIdx}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-2 -right-2 w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg z-10"
+                style={gradientBgStyle}
+              >
+                {activeIdx + 1}/{stickyFeatures.length}
               </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Right: Feature selector list */}
+          <div className="space-y-3">
+            {stickyFeatures.map(({ icon: Icon, title, description }, i) => (
+              <motion.button
+                key={title}
+                onClick={() => setActiveIdx(i)}
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+                whileHover={{ x: 4 }}
+                className={`w-full text-left rounded-xl p-5 transition-all duration-300 border cursor-pointer ${
+                  i === activeIdx
+                    ? "bg-white border-[#0052D4]/15 shadow-lg shadow-primary/5"
+                    : "bg-white/50 border-transparent hover:bg-white hover:shadow-md hover:border-gray-100"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    i === activeIdx ? "shadow-md" : ""
+                  }`} style={i === activeIdx ? gradientBgStyle : { background: "#F0F6FF" }}>
+                    <Icon className={`w-5 h-5 ${i === activeIdx ? "text-white" : "text-[#0052D4]"}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className={`font-semibold transition-colors ${i === activeIdx ? "text-[#1F2323]" : "text-gray-400"}`}>
+                        {title}
+                      </h3>
+                      {i === activeIdx && (
+                        <motion.div
+                          layoutId="bdc-feature-indicator"
+                          className="h-0.5 flex-1 rounded-full"
+                          style={gradientBgStyle}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      )}
+                    </div>
+                    <AnimatePresence>
+                      {i === activeIdx && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-sm text-[#454545] leading-relaxed overflow-hidden"
+                        >
+                          {description}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -482,46 +659,62 @@ function StickyFeatureScroll() {
 /* ------------------------------------------------------------------ */
 
 const bentoItems = [
-  { icon: MapPin, title: "Multi-Location Support", description: "Running offices in three cities? List every location with its own address, phone number, and hours. One card, all branches.", wide: true },
-  { icon: QrCode, title: "Branded QR Codes", description: "Generate QR codes styled with your logo and colours. Print them on packaging, receipts, storefronts, or event badges." },
-  { icon: Star, title: "Social Proof Display", description: "Show Google ratings, review counts, and trust badges. Let your reputation do the selling before you say a word." },
-  { icon: Clock, title: "Working Hours", description: "Display your business hours with real-time open/closed status. Customers know exactly when to reach you - no guessing." },
-  { icon: Map, title: "Google Maps Integration", description: "An embedded map with directions baked in. Visitors tap and navigate straight to your door - zero friction.", wide: true },
-  { icon: CalendarCheck, title: "Appointment Booking", description: "Connect Calendly, Cal.com, or any booking tool. Prospects schedule meetings without leaving your card." },
+  { icon: MapPin, title: "Multi-Location Support", description: "Running offices in three cities? List every location with its own address, phone, and hours. One card, all branches.", stat: "Unlimited", statLabel: "locations" },
+  { icon: QrCode, title: "Branded QR Codes", description: "Generate QR codes styled with your logo and colours. Print on packaging, receipts, storefronts, or event badges.", stat: "100%", statLabel: "branded" },
+  { icon: Star, title: "Social Proof Display", description: "Show Google ratings, review counts, and trust badges. Let your reputation do the selling before you say a word.", stat: "4.9★", statLabel: "avg display" },
+  { icon: Clock, title: "Working Hours", description: "Display your business hours with real-time open/closed status. Customers know exactly when to reach you.", stat: "Live", statLabel: "status updates" },
+  { icon: Map, title: "Google Maps Integration", description: "An embedded map with directions baked in. Visitors tap and navigate straight to your door — zero friction.", stat: "1-tap", statLabel: "navigation" },
+  { icon: CalendarCheck, title: "Appointment Booking", description: "Connect Calendly, Cal.com, or any booking tool. Prospects schedule meetings without leaving your card.", stat: "24/7", statLabel: "self-service" },
 ];
+
+function BentoCapItem({ item, index }: { item: typeof bentoItems[0]; index: number }) {
+  const ref = useRef(null);
+  const isVis = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+      className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+          <item.icon className="w-6 h-6" />
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+          <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+        </div>
+      </div>
+      <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+      <p className="text-sm text-[#454545] leading-relaxed">{item.description}</p>
+    </motion.div>
+  );
+}
 
 function BentoCapabilities() {
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader
-          eyebrow="CAPABILITIES"
-          title="Built for Businesses That Don't Stand Still"
-          description="Advanced capabilities that make your card work harder than your best salesperson."
-        />
+    <section className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={staggerContainer}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
         >
-          {bentoItems.map(({ icon: Icon, title, description, wide }) => (
-            <motion.div
-              key={title}
-              variants={fadeUp}
-              className={`group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#65C7F7]/50 transition-all duration-300 hover:shadow-lg ${
-                wide ? "md:col-span-2 lg:col-span-2" : ""
-              }`}
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#9CECFB]/20 to-[#0052D4]/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Icon className="w-6 h-6 text-[#0052D4]" />
-              </div>
-              <h3 className="font-semibold text-lg text-[#1F2323] mb-2">{title}</h3>
-              <p className="text-sm text-[#454545] leading-relaxed">{description}</p>
-            </motion.div>
-          ))}
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">CAPABILITIES</span>
+          <h2 className="heading-2 text-[#1F2323]">Built for Businesses That Don&apos;t Stand Still</h2>
+          <p className="lead text-[#454545] mt-4 max-w-2xl mx-auto">Advanced capabilities that make your card work harder than your best salesperson.</p>
         </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {bentoItems.map((item, i) => (
+            <BentoCapItem key={item.title} item={item} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -192,6 +192,224 @@ const bentoFeatures = [
   { icon: <Mail className="h-6 w-6" />, title: "Email Signature Integration", desc: "Add your LINKey card to your email signature with one click. Every email becomes a networking opportunity.", size: "large" },
 ];
 
+/* ──────────────────────────── FREELANCER FEATURES SECTION ──────────────────────────── */
+
+const freelancerFeatureData = [
+  {
+    icon: <Layers className="h-6 w-6" />,
+    title: "Multiple Cards (Up to 5)",
+    desc: "Maintain separate identities for consulting, coaching, design work, or any other hat you wear — all under one account.",
+    stat: "5",
+    statLabel: "cards included",
+    preview: (
+      <div className="space-y-2">
+        {["UX Designer", "Brand Consultant", "Workshop Speaker"].map((role, i) => (
+          <motion.div
+            key={role}
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 + i * 0.12 }}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 border border-gray-100"
+          >
+            <div className="w-6 h-6 rounded-md flex items-center justify-center text-[8px] font-bold text-white" style={gradientBgStyle}>{i + 1}</div>
+            <span className="text-[11px] font-medium text-[#1F2323]">{role}</span>
+          </motion.div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <Sparkles className="h-6 w-6" />,
+    title: "AI-Enhanced CV",
+    desc: "Upload your CV and let AI refine it for clarity, impact, and formatting. Always attached to your card, always current.",
+    stat: "AI",
+    statLabel: "powered",
+    preview: (
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style={gradientBgStyle}>TM</div>
+          <div>
+            <div className="h-2 w-20 rounded bg-gray-200" />
+            <div className="h-1.5 w-14 rounded bg-gray-100 mt-1" />
+          </div>
+        </div>
+        {[85, 70, 92].map((w, i) => (
+          <motion.div key={i} className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${w}%` }}
+              transition={{ duration: 0.8, delay: 0.5 + i * 0.15 }}
+              className="h-full rounded-full"
+              style={gradientBgStyle}
+            />
+          </motion.div>
+        ))}
+        <p className="text-[8px] text-gray-400 text-center mt-1">Skills • Experience • Impact</p>
+      </div>
+    ),
+  },
+  {
+    icon: <Link2 className="h-6 w-6" />,
+    title: "Custom Vanity URL",
+    desc: "Claim linkey.to/yourname — share a memorable, professional link on proposals, invoices, and social bios.",
+    stat: "Your",
+    statLabel: "own URL",
+    preview: (
+      <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-gray-50 border border-gray-100">
+        <div className="w-5 h-5 rounded-md flex items-center justify-center" style={gradientBgStyle}>
+          <Link2 className="w-3 h-3 text-white" />
+        </div>
+        <span className="text-[11px] font-mono text-[#0052D4]">linkey.to/yourname</span>
+      </div>
+    ),
+  },
+  {
+    icon: <BarChart3 className="h-6 w-6" />,
+    title: "Networking Analytics",
+    desc: "Track card views, link clicks, and engagement over time. Know which connections are warming up and ready for follow-up.",
+    stat: "Real-time",
+    statLabel: "insights",
+    preview: (
+      <div className="flex items-end gap-1 h-12 px-2">
+        {[35, 55, 42, 70, 60, 85, 75].map((h, i) => (
+          <motion.div
+            key={i}
+            initial={{ height: 0 }}
+            animate={{ height: `${h}%` }}
+            transition={{ duration: 0.5, delay: 0.3 + i * 0.06 }}
+            className="flex-1 rounded-t-sm"
+            style={gradientBgStyle}
+          />
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <ShieldCheck className="h-6 w-6" />,
+    title: "Privacy Controls",
+    desc: "Choose what each contact sees. Hide personal details, restrict certain links, or set visibility per card.",
+    stat: "Full",
+    statLabel: "control",
+    preview: (
+      <div className="space-y-2">
+        {["Phone Number", "Home Address", "Personal Email"].map((field, i) => (
+          <div key={field} className="flex items-center justify-between">
+            <span className="text-[10px] text-gray-500">{field}</span>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 + i * 0.1 }}
+              className={`w-8 h-4 rounded-full flex items-center ${i === 1 ? "bg-gray-200 justify-start" : "justify-end"}`}
+              style={i !== 1 ? gradientBgStyle : undefined}
+            >
+              <div className="w-3 h-3 rounded-full bg-white shadow-sm mx-0.5" />
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <Mail className="h-6 w-6" />,
+    title: "Email Signature",
+    desc: "Add your LINKey card to your email signature with one click. Every email becomes a networking opportunity.",
+    stat: "1-click",
+    statLabel: "setup",
+    preview: (
+      <div className="rounded-lg border border-gray-100 p-2 bg-gray-50">
+        <div className="border-t-2 border-[#0052D4]/30 pt-2 mt-1">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full" style={gradientBgStyle} />
+            <div>
+              <div className="h-1.5 w-16 rounded bg-gray-300" />
+              <div className="h-1 w-12 rounded bg-gray-200 mt-0.5" />
+            </div>
+          </div>
+          <div className="flex gap-1 mt-1.5">
+            {[1, 2, 3].map(n => <div key={n} className="w-4 h-4 rounded-sm bg-[#0052D4]/10" />)}
+          </div>
+        </div>
+      </div>
+    ),
+  },
+];
+
+function FreelancerFeatureCard({ feature, index }: { feature: typeof freelancerFeatureData[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-2xl border border-gray-100 bg-white shadow-sm cursor-default transition-all duration-300 hover:border-[#0052D4]/15 hover:shadow-xl overflow-hidden"
+    >
+      {/* Main content */}
+      <div className="p-7">
+        <div className="flex items-start justify-between mb-4">
+          <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+            {feature.icon}
+          </div>
+          <div className="text-right">
+            <p className="text-xl font-bold" style={gradientTextStyle}>{feature.stat}</p>
+            <p className="text-[10px] text-gray-400 uppercase tracking-wider">{feature.statLabel}</p>
+          </div>
+        </div>
+        <h3 className="text-base font-semibold text-[#1F2323] mb-2">{feature.title}</h3>
+        <p className="text-sm text-[#454545] leading-relaxed">{feature.desc}</p>
+      </div>
+
+      {/* Animated preview — slides up on hover */}
+      <motion.div
+        initial={false}
+        animate={{ height: hovered ? "auto" : 0, opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden border-t border-gray-50"
+      >
+        <div className="p-5 bg-[#FAFCFF]">
+          {feature.preview}
+        </div>
+      </motion.div>
+
+      {/* Hover indicator */}
+      <motion.div
+        animate={{ width: hovered ? "100%" : "0%" }}
+        transition={{ duration: 0.3 }}
+        className="absolute bottom-0 left-0 h-0.5"
+        style={gradientBgStyle}
+      />
+    </motion.div>
+  );
+}
+
+function FreelancerFeaturesSection() {
+  return (
+    <Section className="bg-gray-50/40">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <span className="text-sm font-semibold uppercase tracking-widest mb-3 block" style={{ color: "#16B8C3" }}>Everything You Need</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">Built for the Way <span style={gradientTextStyle}>Freelancers Actually Work</span></h2>
+          <p className="text-[#454545] max-w-2xl mx-auto">Hover any feature to see it in action. Every tool designed to help you win more clients and save hours every week.</p>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {freelancerFeatureData.map((f, i) => (
+            <FreelancerFeatureCard key={f.title} feature={f} index={i} />
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 /* ──────────────────────────── MAIN PAGE ──────────────────────────── */
 export default function FreelancersPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -306,30 +524,8 @@ export default function FreelancersPage() {
         </div>
       </Section>
 
-      {/* ═══════════ 4. BENTO GRID FEATURES ═══════════ */}
-      <Section className="bg-gray-50/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <motion.span variants={fadeUp} className="text-sm font-semibold uppercase tracking-widest mb-3 block" style={{ color: "#16B8C3" }}>Everything You Need</motion.span>
-            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">Built for the Way <span style={gradientTextStyle}>Freelancers Actually Work</span></motion.h2>
-            <motion.p variants={fadeUp} className="text-[#454545] max-w-2xl mx-auto">Every feature is designed to help independent professionals win more clients, look more polished, and save hours every week.</motion.p>
-          </div>
-          <motion.div variants={stagger} className="grid md:grid-cols-3 gap-6">
-            {bentoFeatures.map((f, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                whileHover={{ y: -6, transition: spring }}
-                className={`bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300 ${f.size === "large" ? "md:col-span-2" : ""}`}
-              >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style={gradientBgStyle}>{f.icon}</div>
-                <h3 className="text-lg font-bold text-[#1F2323] mb-2">{f.title}</h3>
-                <p className="text-sm text-[#454545] leading-relaxed">{f.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </Section>
+      {/* ═══════════ 4. INTERACTIVE FEATURES — $1M SECTION ═══════════ */}
+      <FreelancerFeaturesSection />
 
       {/* ═══════════ 5. HOW IT WORKS ═══════════ */}
       <Section id="how-it-works">

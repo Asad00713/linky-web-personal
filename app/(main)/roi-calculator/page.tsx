@@ -317,17 +317,17 @@ function ComparisonSection() {
 
   const before = [
     "Average R1\u2013R5 per card, reprinted every time info changes",
-    "No analytics \u2014 you never know if the card was kept or tossed",
-    "Static info that\u2019s outdated the moment your role changes",
+    "No analytics — you never know if the card was kept or tossed",
+    "Static info that\'s outdated the moment your role changes",
     "Contributes to 10 billion+ cards trashed globally every year",
     "Separate design, printing, and shipping logistics",
-    "No way to capture the recipient\u2019s contact info back",
+    "No way to capture the recipient\'s contact info back",
   ];
   const after = [
-    "One-time purchase, unlimited shares \u2014 update your profile any time",
+    "One-time purchase, unlimited shares — update your profile any time",
     "Real-time analytics on views, taps, and link clicks",
     "Dynamic profiles that update instantly across every card",
-    "Zero paper waste \u2014 one card replaces thousands",
+    "Zero paper waste — one card replaces thousands",
     "Managed from a single dashboard with team controls",
     "Built-in lead capture turns every tap into a contact",
   ];
@@ -396,7 +396,7 @@ function ComparisonSection() {
 
 const hiddenCosts = [
   { icon: <Printer className="h-6 w-6" />, title: "Printing Costs", desc: "Initial runs plus rush orders before events add up to thousands of rands per year." },
-  { icon: <RefreshCw className="h-6 w-6" />, title: "Reprinting on Info Change", desc: "New title, new number \u2014 every change means throwing away leftover cards and ordering fresh." },
+  { icon: <RefreshCw className="h-6 w-6" />, title: "Reprinting on Info Change", desc: "New title, new number — every change means throwing away leftover cards and ordering fresh." },
   { icon: <PenTool className="h-6 w-6" />, title: "Design Fees", desc: "Hiring a designer for each update adds R500\u2013R2,000 per revision to your total cost." },
   { icon: <Truck className="h-6 w-6" />, title: "Shipping & Handling", desc: "Expedited shipping before a conference can cost more than the cards themselves." },
   { icon: <Archive className="h-6 w-6" />, title: "Storage & Waste", desc: "Boxes of outdated cards gathering dust. 88% of paper cards are discarded within a week." },
@@ -499,7 +499,7 @@ function StatsSection() {
 
 const bentoItems = [
   { icon: <Target className="h-6 w-6" />, title: "Lead Capture Value", desc: "Every tap is a two-way exchange. Capture recipient info automatically and feed it straight into your CRM.", wide: true },
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Analytics Value", desc: "Know exactly who viewed your profile, which links they clicked, and how often \u2014 data paper cards can never provide.", wide: false },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Analytics Value", desc: "Know exactly who viewed your profile, which links they clicked, and how often — data paper cards can never provide.", wide: false },
   { icon: <Palette className="h-6 w-6" />, title: "Brand Consistency", desc: "Ensure every team member shares on-brand profiles with centrally managed templates.", wide: false },
   { icon: <Clock className="h-6 w-6" />, title: "Time Saved", desc: "No ordering, no waiting, no distribution. Update once and every card reflects the change instantly.", wide: false },
   { icon: <Leaf className="h-6 w-6" />, title: "Environmental Impact", desc: "Show clients you care about sustainability. One LINKey card replaces thousands of paper cards over its lifetime.", wide: true },
@@ -606,7 +606,7 @@ const testimonials = [
     name: "Sipho Ndlovu",
     role: "VP of Sales",
     company: "Meridian Group SA",
-    quote: "We were spending over R80,000 a year on business cards across our 30-person sales team. LINKey cut that to under R27,000 and we\u2019re capturing 3x more leads at events.",
+    quote: "We were spending over R80,000 a year on business cards across our 30-person sales team. LINKey cut that to under R27,000 and we\'re capturing 3x more leads at events.",
     rating: 5,
   },
   {
@@ -678,8 +678,8 @@ function TestimonialsSection() {
 
 const faqs = [
   { q: "How much does LINKey cost compared to paper cards?", a: "LINKey plans start from R49/month per user. The average SA business spends R1,500\u2013R5,000 per employee per year on paper cards. Most teams see 50\u201380% savings in year one." },
-  { q: "What\u2019s included in the LINKey cost?", a: "Unlimited digital card shares, real-time analytics, lead capture, CRM integrations, team management, custom branding, and priority support \u2014 no hidden fees." },
-  { q: "How do you calculate extra leads?", a: "LINKey\u2019s built-in lead capture turns every tap into a two-way exchange. On average, teams capture 4x more contacts than paper cards at events." },
+  { q: "What\'s included in the LINKey cost?", a: "Unlimited digital card shares, real-time analytics, lead capture, CRM integrations, team management, custom branding, and priority support — no hidden fees." },
+  { q: "How do you calculate extra leads?", a: "LINKey\'s built-in lead capture turns every tap into a two-way exchange. On average, teams capture 4x more contacts than paper cards at events." },
   { q: "Is there a free plan?", a: "Yes. LINKey offers a free tier with core features so you can experience the platform before committing." },
   { q: "How quickly will I see ROI?", a: "Most businesses report positive ROI within 30\u201360 days. The more employees and events, the faster savings compound." },
   { q: "What about physical NFC cards?", a: "NFC cards are a one-time purchase included with Business plans. A single NFC card replaces thousands of paper cards over its lifetime." },

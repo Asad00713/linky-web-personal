@@ -250,7 +250,7 @@ function ComparisonSection() {
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">COMPARE PLANS</span>
-          <h2 className="heading-2 text-(--color-body) mb-4">Free vs Pro \u2014 <span style={gradientTextStyle}>Choose What Fits</span></h2>
+          <h2 className="heading-2 text-(--color-body) mb-4">Free vs Pro — <span style={gradientTextStyle}>Choose What Fits</span></h2>
         </motion.div>
         <div className="grid gap-6 md:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.5 }} className="rounded-2xl border border-gray-200 bg-white p-7">
@@ -355,7 +355,7 @@ function TestimonialsSection() {
 /* ------------------------------------------------------------------ */
 
 const faqs = [
-  { q: "Is the free plan really free?", a: "Yes, completely free \u2014 no credit card required, no hidden fees, no time limit." },
+  { q: "Is the free plan really free?", a: "Yes, completely free — no credit card required, no hidden fees, no time limit." },
   { q: "What do I need to sign up?", a: "Just your name, email, and a password. You can also sign up with Google or Apple." },
   { q: "How many cards on the free plan?", a: "One digital card. Need more? Upgrade to Pro any time for unlimited cards." },
   { q: "Can I upgrade later?", a: "Absolutely. Upgrade from Free to Pro or Business at any time. All data carries over." },

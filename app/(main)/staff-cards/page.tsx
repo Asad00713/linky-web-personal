@@ -112,139 +112,166 @@ function CounterStat({
 /*  ANIMATED ORG CHART                                                 */
 /* ------------------------------------------------------------------ */
 
-interface OrgNode {
-  id: string;
+/* Org chart node component */
+function OrgNode({
+  icon: Icon,
+  label,
+  role,
+  variant,
+  delay,
+}: {
+  icon: React.ElementType;
   label: string;
   role: string;
-  icon: React.ElementType;
-  x: number;
-  y: number;
-  children?: string[];
+  variant: "admin" | "dept" | "staff";
+  delay: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", stiffness: 300, damping: 20, delay }}
+      className="flex flex-col items-center"
+    >
+      <div
+        className={`rounded-2xl flex items-center justify-center shadow-lg ${
+          variant === "admin"
+            ? "w-14 h-14 md:w-16 md:h-16"
+            : variant === "dept"
+            ? "w-11 h-11 md:w-13 md:h-13"
+            : "w-9 h-9 md:w-11 md:h-11"
+        }`}
+        style={
+          variant === "admin"
+            ? { background: "linear-gradient(135deg, #0052D4, #65C7F7)" }
+            : variant === "dept"
+            ? { background: "linear-gradient(135deg, #65C7F7, #9CECFB)" }
+            : { background: "white", border: "2px solid #e5e7eb" }
+        }
+      >
+        <Icon className={`${variant !== "staff" ? "text-white" : "text-[#0052D4]"} ${variant === "admin" ? "w-7 h-7" : variant === "dept" ? "w-5 h-5" : "w-4 h-4"}`} />
+      </div>
+      <span className={`mt-1.5 font-semibold whitespace-nowrap ${variant === "admin" ? "text-sm" : "text-xs"} text-[#1F2323]`}>
+        {label}
+      </span>
+      <span className="text-[10px] text-[#454545]">{role}</span>
+    </motion.div>
+  );
 }
 
-const orgNodes: OrgNode[] = [
-  { id: "admin", label: "Admin", role: "HR Director", icon: Settings, x: 50, y: 8, children: ["sales", "eng", "mktg"] },
-  { id: "sales", label: "Sales", role: "Department", icon: BarChart3, x: 18, y: 40, children: ["s1", "s2"] },
-  { id: "eng", label: "Engineering", role: "Department", icon: Database, x: 50, y: 40, children: ["e1", "e2"] },
-  { id: "mktg", label: "Marketing", role: "Department", icon: Bell, x: 82, y: 40, children: ["m1", "m2"] },
-  { id: "s1", label: "Sipho M.", role: "Rep", icon: User, x: 10, y: 72 },
-  { id: "s2", label: "Lerato K.", role: "Rep", icon: User, x: 26, y: 72 },
-  { id: "e1", label: "James P.", role: "Dev", icon: User, x: 42, y: 72 },
-  { id: "e2", label: "Fatima A.", role: "Dev", icon: User, x: 58, y: 72 },
-  { id: "m1", label: "Neo T.", role: "Designer", icon: User, x: 74, y: 72 },
-  { id: "m2", label: "Zara B.", role: "Content", icon: User, x: 90, y: 72 },
-];
+/* Vertical connector line */
+function VLine({ height = 32, delay = 0 }: { height?: number; delay?: number }) {
+  return (
+    <motion.div
+      initial={{ scaleY: 0 }}
+      whileInView={{ scaleY: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay }}
+      className="mx-auto"
+      style={{ width: 2, height, background: "linear-gradient(to bottom, #9CECFB, #0052D4)", borderRadius: 1, transformOrigin: "top" }}
+    />
+  );
+}
 
-const orgConnections: [string, string][] = [
-  ["admin", "sales"], ["admin", "eng"], ["admin", "mktg"],
-  ["sales", "s1"], ["sales", "s2"],
-  ["eng", "e1"], ["eng", "e2"],
-  ["mktg", "m1"], ["mktg", "m2"],
-];
+/* Horizontal connector bracket — connects parent to children row */
+function HBracket({ delay = 0 }: { delay?: number }) {
+  return (
+    <motion.div
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      className="mx-auto"
+      style={{ height: 2, background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)", borderRadius: 1 }}
+    />
+  );
+}
 
 function AnimatedOrgChart() {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [linesDrawn, setLinesDrawn] = useState(false);
-  const { ref: containerRef, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-
-  useEffect(() => {
-    if (inView && !linesDrawn) {
-      const timer = setTimeout(() => setLinesDrawn(true), 400);
-      return () => clearTimeout(timer);
-    }
-  }, [inView, linesDrawn]);
-
-  const getNodePos = (id: string) => {
-    const node = orgNodes.find((n) => n.id === id);
-    return node ? { x: node.x, y: node.y } : { x: 50, y: 50 };
-  };
-
   return (
-    <div ref={containerRef} className="relative w-full max-w-lg mx-auto" style={{ aspectRatio: "4/3" }}>
-      {/* SVG connection lines */}
-      <svg
-        ref={svgRef}
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 100 85"
-        fill="none"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#9CECFB" />
-            <stop offset="50%" stopColor="#65C7F7" />
-            <stop offset="100%" stopColor="#0052D4" />
-          </linearGradient>
-        </defs>
-        {orgConnections.map(([from, to], i) => {
-          const start = getNodePos(from);
-          const end = getNodePos(to);
-          const midY = (start.y + end.y) / 2 + 2;
-          const pathD = `M ${start.x} ${start.y + 5} C ${start.x} ${midY}, ${end.x} ${midY}, ${end.x} ${end.y - 3}`;
-          return (
-            <motion.path
-              key={`${from}-${to}`}
-              d={pathD}
-              stroke="url(#lineGrad)"
-              strokeWidth="0.5"
-              fill="none"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={linesDrawn ? { pathLength: 1, opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
-            />
-          );
-        })}
-      </svg>
+    <div className="w-full max-w-lg mx-auto">
+      {/* Level 1: Admin */}
+      <OrgNode icon={Settings} label="Admin" role="HR Director" variant="admin" delay={0} />
 
-      {/* Org nodes */}
-      {orgNodes.map((node, i) => {
-        const Icon = node.icon;
-        const isAdmin = node.id === "admin";
-        const isDept = ["sales", "eng", "mktg"].includes(node.id);
-        return (
-          <motion.div
-            key={node.id}
-            className="absolute"
-            style={{
-              left: `${node.x}%`,
-              top: `${node.y}%`,
-              transform: "translate(-50%, -50%)",
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: i * 0.08, type: "spring", stiffness: 200 }}
-          >
-            <div
-              className={`flex flex-col items-center ${
-                isAdmin ? "scale-110" : isDept ? "scale-100" : "scale-90"
-              }`}
-            >
-              <div
-                className={`rounded-xl flex items-center justify-center shadow-lg border border-white/50 ${
-                  isAdmin
-                    ? "w-12 h-12 md:w-14 md:h-14"
-                    : isDept
-                    ? "w-10 h-10 md:w-12 md:h-12"
-                    : "w-8 h-8 md:w-10 md:h-10"
-                }`}
-                style={
-                  isAdmin
-                    ? { background: "linear-gradient(135deg, #0052D4, #65C7F7)" }
-                    : isDept
-                    ? { background: "linear-gradient(135deg, #65C7F7, #9CECFB)" }
-                    : { background: "white", border: "2px solid #e5e7eb" }
-                }
-              >
-                <Icon className={`${isAdmin || isDept ? "text-white" : "text-[#0052D4]"} ${isAdmin ? "w-6 h-6" : "w-4 h-4"}`} />
-              </div>
-              <span className={`mt-1 font-medium whitespace-nowrap ${isAdmin ? "text-xs md:text-sm" : "text-[10px] md:text-xs"} text-[#1F2323]`}>
-                {node.label}
-              </span>
-              <span className="text-[8px] md:text-[10px] text-[#454545]">{node.role}</span>
+      {/* Connector: Admin → Departments */}
+      <VLine height={24} delay={0.2} />
+      <div className="px-[16.67%]">
+        <HBracket delay={0.25} />
+      </div>
+
+      {/* Level 2: Departments row */}
+      <div className="grid grid-cols-3 gap-4 md:gap-8">
+        {/* Each department column: bracket top + node + bracket bottom + children */}
+
+        {/* Sales column */}
+        <div className="flex flex-col items-center">
+          <VLine height={20} delay={0.28} />
+          <OrgNode icon={BarChart3} label="Sales" role="Department" variant="dept" delay={0.3} />
+          <VLine height={20} delay={0.5} />
+          <div className="w-full">
+            <HBracket delay={0.6} />
+          </div>
+          <div className="grid grid-cols-2 gap-3 md:gap-6 w-full mt-0">
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.65} />
+              <OrgNode icon={User} label="Sipho M." role="Rep" variant="staff" delay={0.7} />
             </div>
-          </motion.div>
-        );
-      })}
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.7} />
+              <OrgNode icon={User} label="Lerato K." role="Rep" variant="staff" delay={0.75} />
+            </div>
+          </div>
+        </div>
+
+        {/* Engineering column */}
+        <div className="flex flex-col items-center">
+          <VLine height={20} delay={0.28} />
+          <OrgNode icon={Database} label="Engineering" role="Department" variant="dept" delay={0.35} />
+          <VLine height={20} delay={0.55} />
+          <div className="w-full">
+            <HBracket delay={0.65} />
+          </div>
+          <div className="grid grid-cols-2 gap-3 md:gap-6 w-full mt-0">
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.7} />
+              <OrgNode icon={User} label="James P." role="Dev" variant="staff" delay={0.75} />
+            </div>
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.75} />
+              <OrgNode icon={User} label="Fatima A." role="Dev" variant="staff" delay={0.8} />
+            </div>
+          </div>
+        </div>
+
+        {/* Marketing column */}
+        <div className="flex flex-col items-center">
+          <VLine height={20} delay={0.28} />
+          <OrgNode icon={Bell} label="Marketing" role="Department" variant="dept" delay={0.4} />
+          <VLine height={20} delay={0.6} />
+          <div className="w-full">
+            <HBracket delay={0.7} />
+          </div>
+          <div className="grid grid-cols-2 gap-3 md:gap-6 w-full mt-0">
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.75} />
+              <OrgNode icon={User} label="Neo T." role="Designer" variant="staff" delay={0.8} />
+            </div>
+            <div className="flex flex-col items-center">
+              <VLine height={16} delay={0.8} />
+              <OrgNode icon={User} label="Zara B." role="Content" variant="staff" delay={0.85} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Top-level horizontal bracket connecting 3 departments */}
+      <style>{`
+        .grid-cols-3 > div:first-child::before,
+        .grid-cols-3 > div:last-child::before {
+          content: none;
+        }
+      `}</style>
     </div>
   );
 }

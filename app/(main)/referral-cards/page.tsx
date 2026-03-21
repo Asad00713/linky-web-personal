@@ -195,7 +195,7 @@ function FeatureGridSection() {
 /* ------------------------------------------------------------------ */
 
 const bentoItems = [
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Real-Time Conversion Dashboard", desc: "Watch signups roll in. Scans, signups, and conversions per card, per batch, per location \u2014 updated every 60 seconds.", wide: true },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Real-Time Conversion Dashboard", desc: "Watch signups roll in. Scans, signups, and conversions per card, per batch, per location — updated every 60 seconds.", wide: true },
   { icon: <TrendingUp className="h-6 w-6" />, title: "Per-Card ROI", desc: "Know what each card costs and earns. Printing, distribution, and customer lifetime value factored in.", wide: false },
   { icon: <MapPin className="h-6 w-6" />, title: "Geographic Tracking", desc: "See where cards are scanned on a live map. Identify highest-converting areas.", wide: false },
   { icon: <RefreshCw className="h-6 w-6" />, title: "Reorder Automation", desc: "Set a low-stock threshold and LINKey automatically triggers reorders. Never run out.", wide: true },
@@ -301,8 +301,8 @@ function StatsSection() {
 function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const before = ["No tracking \u2014 you never know ROI", "Same generic message for everyone", "End up in the bin within minutes", "Impossible to reward top distributors", "Reprint entire batch on branding changes", "Gut-feel marketing with no data"];
-  const after = ["Every card tracked \u2014 exact scans, signups, and revenue", "Unique codes create personal connection", "QR gives customers a reason to keep the card", "Staff attribution shows who drives conversions", "Reorder automation ensures you never run out", "Data-driven decisions backed by real-time dashboards"];
+  const before = ["No tracking — you never know ROI", "Same generic message for everyone", "End up in the bin within minutes", "Impossible to reward top distributors", "Reprint entire batch on branding changes", "Gut-feel marketing with no data"];
+  const after = ["Every card tracked — exact scans, signups, and revenue", "Unique codes create personal connection", "QR gives customers a reason to keep the card", "Staff attribution shows who drives conversions", "Reorder automation ensures you never run out", "Data-driven decisions backed by real-time dashboards"];
 
   return (
     <section ref={ref} className="px-[5%] py-16 md:py-24">
@@ -368,13 +368,13 @@ function TestimonialsSection() {
 
 const faqs = [
   { q: "What is a Hello LINKey referral card?", a: "A physical card with a unique HEL-XXXXXX code and QR code. Hand it out, customers scan to sign up, every conversion is tracked." },
-  { q: "What\u2019s the minimum order?", a: "100 cards. Volume discounts at 500, 1,000, 5,000, and 10,000 units. Every card gets its own tracking code." },
+  { q: "What\'s the minimum order?", a: "100 cards. Volume discounts at 500, 1,000, 5,000, and 10,000 units. Every card gets its own tracking code." },
   { q: "Can I customise the design?", a: "Yes. Upload your logo, choose brand colours, select matte or gloss. Digital proof for approval before printing. Custom designs available from 500 units." },
   { q: "How does staff attribution work?", a: "Assign code ranges to individual staff. Every scan and signup from those codes shows up under that staff member in your dashboard." },
   { q: "What data do I see?", a: "Total scans, unique signups, conversion rate, revenue, per-card ROI, geographic locations, staff attribution. Filter by date, campaign, location, or individual card." },
   { q: "How fast is shipping?", a: "Print and ship in 48 hours. SA delivery 3\u20135 business days. International 7\u201312 business days." },
-  { q: "Can I reorder the same design?", a: "Yes. Design is saved in your account \u2014 one-click reorder. Set up automatic reorders when stock drops below your threshold." },
-  { q: "Do customers need an app?", a: "No. They scan the QR with their phone\u2019s camera. Branded signup page opens in browser. Under 30 seconds from scan to signup." },
+  { q: "Can I reorder the same design?", a: "Yes. Design is saved in your account — one-click reorder. Set up automatic reorders when stock drops below your threshold." },
+  { q: "Do customers need an app?", a: "No. They scan the QR with their phone\'s camera. Branded signup page opens in browser. Under 30 seconds from scan to signup." },
 ];
 
 function FAQSection() {

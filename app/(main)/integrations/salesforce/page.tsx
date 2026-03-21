@@ -29,7 +29,54 @@ import {
   Quote,
   Cloud,
   Link2,
+  FileText,
 } from "lucide-react";
+
+/* ─── SF FEATURE CARD WITH HOVER REVEAL ────────────────────────── */
+
+function SFFeatureCard({ feature, index }: { feature: typeof advancedFeatures[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-2xl border border-gray-100 bg-white shadow-sm cursor-default transition-all duration-300 hover:border-[#0052D4]/15 hover:shadow-xl overflow-hidden"
+    >
+      <div className="p-7">
+        <div className="flex items-start justify-between mb-4">
+          <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+            {feature.icon}
+          </div>
+          <div className="text-right">
+            <p className="text-xl font-bold" style={gradientTextStyle}>{feature.stat}</p>
+            <p className="text-[10px] text-gray-400 uppercase tracking-wider">{feature.statLabel}</p>
+          </div>
+        </div>
+        <h3 className="text-base font-semibold text-[#1F2323] mb-2">{feature.title}</h3>
+        <p className="text-sm text-[#454545] leading-relaxed">{feature.description}</p>
+      </div>
+      <motion.div
+        initial={false}
+        animate={{ height: hovered ? "auto" : 0, opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="overflow-hidden border-t border-gray-50"
+      >
+        <div className="p-5 bg-[#FAFCFF]">{feature.preview}</div>
+      </motion.div>
+      <motion.div
+        animate={{ width: hovered ? "100%" : "0%" }}
+        transition={{ duration: 0.3 }}
+        className="absolute bottom-0 left-0 h-0.5"
+        style={gradientBgStyle}
+      />
+    </motion.div>
+  );
+}
 
 /* ─── CONSTANTS ────────────────────────────────────────────────── */
 
@@ -79,11 +126,96 @@ const howItWorks = [
 ];
 
 const advancedFeatures = [
-  { icon: <ArrowLeftRight className="h-7 w-7" />, title: "Bi-Directional Sync", description: "Changes in Salesforce flow back to LINKey and vice versa. Conflict resolution rules let you decide which system wins.", wide: true },
-  { icon: <Copy className="h-7 w-7" />, title: "Duplicate Management", description: "LINKey checks for existing records before creating new ones. Match on email, phone, or custom external ID." },
-  { icon: <Zap className="h-7 w-7" />, title: "Flow Triggers", description: "Fire Salesforce Flows and Process Builder automations when LINKey syncs a record." },
-  { icon: <FlaskConical className="h-7 w-7" />, title: "Sandbox Testing", description: "Connect to Sandbox first and validate your field mappings before going live in production." },
-  { icon: <Lock className="h-7 w-7" />, title: "Admin Controls", description: "Manage sync access per user, set field-level permissions, and view audit logs for every sync event.", wide: true },
+  {
+    icon: <ArrowLeftRight className="h-6 w-6" />, title: "Bi-Directional Sync",
+    description: "Changes in Salesforce flow back to LINKey and vice versa. Conflict resolution rules let you decide which system wins.",
+    stat: "2-way", statLabel: "real-time sync",
+    preview: (
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex-1 text-center py-2 rounded-lg bg-[#F0F6FF] border border-[#0052D4]/10">
+          <p className="text-[9px] font-bold text-[#0052D4]">LINKey</p>
+        </div>
+        <motion.div animate={{ x: [0, 4, 0, -4, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+          <ArrowLeftRight className="w-4 h-4 text-[#65C7F7]" />
+        </motion.div>
+        <div className="flex-1 text-center py-2 rounded-lg bg-[#EBF5FF] border border-[#00A1E0]/10">
+          <p className="text-[9px] font-bold text-[#00A1E0]">Salesforce</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: <Copy className="h-6 w-6" />, title: "Duplicate Management",
+    description: "LINKey checks for existing records before creating new ones. Match on email, phone, or custom external ID.",
+    stat: "Smart", statLabel: "de-duplication",
+    preview: (
+      <div className="space-y-1.5">
+        {["email@match.com", "+27 82 *** ****"].map((m, i) => (
+          <div key={m} className="flex items-center justify-between px-2 py-1.5 rounded-md bg-green-50 border border-green-100">
+            <span className="text-[9px] text-green-700 font-mono">{m}</span>
+            <Check className="w-3 h-3 text-green-500" />
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <Zap className="h-6 w-6" />, title: "Salesforce Flow Triggers",
+    description: "Fire Salesforce Flows and Process Builder automations when LINKey syncs a record.",
+    stat: "Auto", statLabel: "flow triggers",
+    preview: (
+      <div className="flex items-center gap-1.5">
+        {["Sync", "→", "Flow", "→", "Action"].map((s, i) => (
+          <motion.span key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 + i * 0.12 }} className={s === "→" ? "text-[10px] text-gray-300" : "text-[9px] font-medium px-2 py-1 rounded-md bg-gray-50 border border-gray-100 text-[#1F2323]"}>
+            {s}
+          </motion.span>
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <FlaskConical className="h-6 w-6" />, title: "Sandbox Testing",
+    description: "Connect to Sandbox first and validate your field mappings before going live in production.",
+    stat: "Safe", statLabel: "test first",
+    preview: (
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-50 border border-amber-200">
+        <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+        <span className="text-[10px] font-semibold text-amber-700">Sandbox Mode Active</span>
+      </div>
+    ),
+  },
+  {
+    icon: <Lock className="h-6 w-6" />, title: "Admin Controls",
+    description: "Manage sync access per user, set field-level permissions, and view audit logs for every sync event.",
+    stat: "Granular", statLabel: "permissions",
+    preview: (
+      <div className="space-y-1.5">
+        {[{ r: "Admin", a: true }, { r: "Sales Rep", a: true }, { r: "Viewer", a: false }].map((u) => (
+          <div key={u.r} className="flex items-center justify-between">
+            <span className="text-[10px] text-gray-600">{u.r}</span>
+            <div className={`w-7 h-3.5 rounded-full flex items-center ${u.a ? "justify-end" : "justify-start bg-gray-200"}`} style={u.a ? gradientBgStyle : undefined}>
+              <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm mx-0.5" />
+            </div>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    icon: <FileText className="h-6 w-6" />, title: "Sync Audit Logs",
+    description: "Every record synced is logged with timestamp, user, and field-level detail. Compliance-ready and fully exportable.",
+    stat: "100%", statLabel: "audit trail",
+    preview: (
+      <div className="space-y-1">
+        {["Lead created 09:14", "Contact updated 09:15", "Campaign linked 09:16"].map((log, i) => (
+          <motion.div key={log} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.1 }} className="flex items-center gap-1.5 text-[9px] text-gray-500">
+            <div className="w-1 h-1 rounded-full bg-green-400" />
+            {log}
+          </motion.div>
+        ))}
+      </div>
+    ),
+  },
 ];
 
 const stats = [
@@ -412,17 +544,11 @@ export default function SalesforceIntegrationPage() {
             <SectionHeading gradient="Salesforce Sync">Enterprise-Grade</SectionHeading>
           </div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {advancedFeatures.map((f, i) => (
-              <motion.div key={f.title} variants={fadeUp} custom={i} whileHover={{ y: -6, transition: spring }} className={`bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-shadow ${f.wide ? "md:col-span-2 lg:col-span-2" : ""}`}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: `${BRAND.primary}10`, color: BRAND.primary }}>
-                  {f.icon}
-                </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: BRAND.body }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: BRAND.cardPara }}>{f.description}</p>
-              </motion.div>
+              <SFFeatureCard key={f.title} feature={f} index={i} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

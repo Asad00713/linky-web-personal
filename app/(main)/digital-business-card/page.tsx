@@ -446,11 +446,8 @@ function ProblemSection() {
    ═══════════════════════════════════════════════════════════════════ */
 
 function SolutionBridge() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <section ref={ref} className="relative px-[5%] py-24 md:py-40 overflow-hidden">
+    <section className="relative px-[5%] py-24 md:py-40 overflow-hidden">
       {/* Pulsing radial glow */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
@@ -461,7 +458,8 @@ function SolutionBridge() {
 
       <motion.div
         initial={{ opacity: 0, y: 40, scale: 0.96 }}
-        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-20px" }}
         transition={{ duration: 0.8 }}
         className="mx-auto max-w-4xl text-center"
       >
@@ -875,47 +873,166 @@ function HowItWorksTimeline() {
 
   return (
     <section ref={sectionRef} id="how-it-works" className="px-[5%] py-20 md:py-32">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-7xl">
         <div className="text-center mb-20">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
           <h2 className="heading-2 text-(--color-body)">Up and Running in Four Simple Steps</h2>
         </div>
 
-        <div className="relative">
-          {/* SVG vertical line */}
-          <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px">
-            <svg
-              className="absolute inset-0 h-full w-[3px] -translate-x-[1px]"
-              viewBox="0 0 3 100"
-              preserveAspectRatio="none"
-            >
-              {/* Background track */}
-              <line x1="1.5" y1="0" x2="1.5" y2="100" stroke="#e5e7eb" strokeWidth="3" />
-              {/* Animated fill */}
-              <motion.line
-                x1="1.5"
-                y1="0"
-                x2="1.5"
-                y2="100"
-                stroke="url(#timeline-gradient)"
-                strokeWidth="3"
-                style={{ pathLength }}
-              />
-              <defs>
-                <linearGradient id="timeline-gradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#9CECFB" />
-                  <stop offset="50%" stopColor="#65C7F7" />
-                  <stop offset="100%" stopColor="#0052D4" />
-                </linearGradient>
-              </defs>
-            </svg>
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+          {/* Left: Timeline */}
+          <div className="relative">
+            {/* SVG vertical line */}
+            <div className="absolute left-6 md:left-8 top-0 bottom-0 w-px">
+              <svg
+                className="absolute inset-0 h-full w-[3px] -translate-x-[1px]"
+                viewBox="0 0 3 100"
+                preserveAspectRatio="none"
+              >
+                <line x1="1.5" y1="0" x2="1.5" y2="100" stroke="#e5e7eb" strokeWidth="3" />
+                <motion.line
+                  x1="1.5"
+                  y1="0"
+                  x2="1.5"
+                  y2="100"
+                  stroke="url(#timeline-gradient)"
+                  strokeWidth="3"
+                  style={{ pathLength }}
+                />
+                <defs>
+                  <linearGradient id="timeline-gradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#9CECFB" />
+                    <stop offset="50%" stopColor="#65C7F7" />
+                    <stop offset="100%" stopColor="#0052D4" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <div className="space-y-16 md:space-y-20">
+              {timelineSteps.map((step, i) => (
+                <TimelineStep key={step.num} step={step} index={i} />
+              ))}
+            </div>
           </div>
 
-          {/* Steps */}
-          <div className="space-y-16 md:space-y-20">
-            {timelineSteps.map((step, i) => (
-              <TimelineStep key={step.num} step={step} index={i} />
-            ))}
+          {/* Right: Professional card mockup with scroll-linked build */}
+          <div className="hidden md:flex justify-center sticky top-32">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 180, damping: 22, delay: 0.3 }}
+              className="relative"
+            >
+              {/* Ambient glow behind phone */}
+              <div className="absolute -inset-8 rounded-[50px] pointer-events-none animate-[dbc-glow-pulse_3s_ease-in-out_infinite]" />
+
+              {/* Phone frame */}
+              <div className="w-[280px] rounded-[36px] bg-[#0A0A0A] p-[6px] shadow-[0_25px_60px_rgba(0,82,212,0.15),0_10px_30px_rgba(0,0,0,0.12)]">
+                <div className="w-full rounded-[30px] bg-white overflow-hidden relative">
+                  {/* Status bar */}
+                  <div className="flex items-center justify-between px-6 pt-3 pb-1 relative">
+                    <span className="text-[10px] font-semibold text-gray-800">9:41</span>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[26px] bg-black rounded-b-2xl" />
+                    <div className="flex items-center gap-1">
+                      <div className="w-3.5 h-2.5 border border-gray-800 rounded-sm relative"><div className="absolute inset-[1px] rounded-xs bg-gray-800" /></div>
+                    </div>
+                  </div>
+
+                  {/* Cover with gradient */}
+                  <div className="h-[85px] relative" style={gradientBgStyle}>
+                    <div className="absolute inset-0 opacity-15" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23fff' stroke-width='0.4'/%3E%3C/svg%3E\")" }} />
+                    <div className="absolute top-2.5 right-3 bg-white/25 backdrop-blur-sm rounded-full px-2.5 py-0.5 flex items-center gap-1">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                      <span className="text-[7px] text-white font-bold tracking-wider">LIVE</span>
+                    </div>
+                  </div>
+
+                  {/* Avatar */}
+                  <div className="flex justify-center -mt-9 relative z-10">
+                    <div className="w-16 h-16 rounded-full p-[2.5px] animate-[dbc-border-spin_4s_linear_infinite]" style={{ background: "conic-gradient(#9CECFB, #65C7F7, #0052D4, #65C7F7, #9CECFB)" }}>
+                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center shadow-inner">
+                        <span className="text-lg font-bold" style={gradientTextStyle}>TM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Name */}
+                  <div className="text-center mt-2 px-5">
+                    <p className="text-[14px] font-bold text-gray-900 tracking-tight">Thabo Molefe</p>
+                    <p className="text-[10px] text-gray-500 mt-0.5">Sales Director • TechBridge Solutions</p>
+                    <p className="text-[9px] text-gray-400 mt-0.5">📍 Johannesburg, South Africa</p>
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex justify-center gap-2.5 mt-3 px-5">
+                    {[
+                      { emoji: "📞", bg: "#EBF5FF" },
+                      { emoji: "✉️", bg: "#F0FFF4" },
+                      { emoji: "💬", bg: "#F0FFF0" },
+                      { emoji: "🌐", bg: "#FFF5EB" },
+                    ].map((a, i) => (
+                      <div key={i} className="w-10 h-10 rounded-xl flex items-center justify-center text-sm border border-gray-100 shadow-sm" style={{ background: a.bg }}>
+                        {a.emoji}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Contact info */}
+                  <div className="mt-3 px-5 space-y-0.5">
+                    {[
+                      { icon: "🏢", text: "TechBridge Solutions (Pty) Ltd" },
+                      { icon: "📱", text: "+27 82 445 1920" },
+                      { icon: "✉️", text: "thabo@techbridge.co.za" },
+                      { icon: "🔗", text: "linkedin.com/in/thabomolefe" },
+                    ].map((row) => (
+                      <div key={row.text} className="flex items-center gap-2.5 py-1.5 border-b border-gray-50/80">
+                        <span className="text-[11px]">{row.icon}</span>
+                        <span className="text-[10px] text-gray-600">{row.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Save button */}
+                  <div className="px-5 mt-3 mb-4">
+                    <div className="h-10 rounded-full flex items-center justify-center text-white text-[11px] font-semibold tracking-wide relative overflow-hidden" style={gradientBgStyle}>
+                      Save Contact ↓
+                      <div className="absolute inset-0 animate-[dbc-shimmer_2.5s_ease-in-out_infinite]" style={{ background: "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%)", backgroundSize: "200% 100%" }} />
+                    </div>
+                  </div>
+
+                  {/* Powered by */}
+                  <div className="text-center mb-2">
+                    <span className="text-[8px] text-gray-300">Powered by </span>
+                    <span className="text-[8px] font-bold" style={gradientTextStyle}>LINKey</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating NFC indicator */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 300, damping: 15, delay: 1 }}
+                className="absolute -top-3 -right-4 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center"
+              >
+                <span className="text-lg">📡</span>
+              </motion.div>
+
+              {/* Floating analytics indicator */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", stiffness: 300, damping: 15, delay: 1.2 }}
+                className="absolute -bottom-2 -left-5 bg-white shadow-lg rounded-xl px-3 py-2 border border-gray-100"
+              >
+                <p className="text-[9px] text-gray-400 font-medium">This week</p>
+                <p className="text-[15px] font-bold" style={gradientTextStyle}>247 views</p>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -1046,6 +1163,144 @@ function FloatingCapabilities() {
 
         {/* Floating cards — desktop: absolute positioned, mobile: grid */}
         <div className="hidden md:block relative" style={{ minHeight: 700 }}>
+          {/* Central LINKey Card Preview — Premium Animated */}
+          <motion.div
+            initial={{ opacity: 0, y: 60, scale: 0.85, rotateY: -15 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, rotateY: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200, damping: 22, delay: 0.2 }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
+            style={{ perspective: 1200 }}
+          >
+            {/* Outer glow pulse */}
+            <div className="absolute -inset-6 rounded-[48px] pointer-events-none animate-[dbc-glow-pulse_3s_ease-in-out_infinite]" />
+
+            {/* Phone frame */}
+            <div className="w-[270px] h-[520px] rounded-[36px] bg-[#0A0A0A] p-[6px] shadow-2xl relative">
+              {/* Screen */}
+              <div className="w-full h-full rounded-[30px] bg-white overflow-hidden relative">
+                {/* Status bar */}
+                <div className="flex items-center justify-between px-6 pt-3 pb-1">
+                  <span className="text-[10px] font-semibold text-gray-800">9:41</span>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[26px] bg-black rounded-b-2xl" />
+                  <div className="flex items-center gap-1">
+                    <div className="w-3.5 h-2.5 border border-gray-800 rounded-sm relative"><div className="absolute inset-[1px] rounded-xs bg-gray-800" /><div className="absolute -right-[2px] top-1/2 -translate-y-1/2 w-[2px] h-1.5 bg-gray-800 rounded-r-full" /></div>
+                  </div>
+                </div>
+
+                {/* Cover photo area */}
+                <div className="h-[80px] relative" style={gradientBgStyle}>
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23fff' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E\")" }} />
+                  {/* LINKey badge */}
+                  <div className="absolute top-2 right-3 bg-white/20 backdrop-blur-sm rounded-full px-2 py-0.5 flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    <span className="text-[8px] text-white font-semibold tracking-wide">LIVE</span>
+                  </div>
+                </div>
+
+                {/* Profile photo overlapping cover */}
+                <div className="flex justify-center -mt-10 relative z-10">
+                  <div className="w-[72px] h-[72px] rounded-full p-[3px] animate-[dbc-border-spin_4s_linear_infinite]" style={{ background: "conic-gradient(#9CECFB, #65C7F7, #0052D4, #65C7F7, #9CECFB)" }}>
+                    <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+                      <span className="text-xl font-bold" style={gradientTextStyle}>TM</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Name & title */}
+                <div className="text-center mt-2 px-4">
+                  <p className="text-[13px] font-bold text-gray-900">Thabo Molefe</p>
+                  <p className="text-[10px] text-gray-500">Sales Director • TechBridge Solutions</p>
+                  <p className="text-[9px] text-gray-400 mt-0.5">📍 Johannesburg, SA</p>
+                </div>
+
+                {/* Quick action buttons */}
+                <div className="flex justify-center gap-2 mt-3 px-4">
+                  {[
+                    { label: "Call", icon: "📞" },
+                    { label: "Email", icon: "✉️" },
+                    { label: "WhatsApp", icon: "💬" },
+                    { label: "Web", icon: "🌐" },
+                  ].map((a, i) => (
+                    <motion.div
+                      key={a.label}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", stiffness: 500, damping: 20, delay: 0.6 + i * 0.08 }}
+                      className="flex flex-col items-center"
+                    >
+                      <div className="w-9 h-9 rounded-xl bg-[#F0F6FF] border border-primary/10 flex items-center justify-center text-sm">
+                        {a.icon}
+                      </div>
+                      <span className="text-[7px] text-gray-500 mt-0.5">{a.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Info rows */}
+                <div className="mt-3 px-4 space-y-1.5">
+                  {[
+                    { icon: "🏢", label: "TechBridge Solutions (Pty) Ltd" },
+                    { icon: "📱", label: "+27 82 445 1920" },
+                    { icon: "✉️", label: "thabo@techbridge.co.za" },
+                    { icon: "🔗", label: "linkedin.com/in/thabomolefe" },
+                  ].map((row, i) => (
+                    <motion.div
+                      key={row.label}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.9 + i * 0.06 }}
+                      className="flex items-center gap-2 py-1.5 border-b border-gray-50"
+                    >
+                      <span className="text-[11px]">{row.icon}</span>
+                      <span className="text-[10px] text-gray-600">{row.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Save contact button */}
+                <div className="px-4 mt-3">
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 1.2 }}
+                    className="h-9 rounded-full flex items-center justify-center text-white text-[11px] font-semibold tracking-wide relative overflow-hidden"
+                    style={gradientBgStyle}
+                  >
+                    Save Contact ↓
+                    {/* Shimmer sweep */}
+                    <div className="absolute inset-0 animate-[dbc-shimmer_2.5s_ease-in-out_infinite]" style={{ background: "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%)", backgroundSize: "200% 100%" }} />
+                  </motion.div>
+                </div>
+
+                {/* Powered by LINKey */}
+                <div className="text-center mt-2 mb-2">
+                  <span className="text-[8px] text-gray-300">Powered by </span>
+                  <span className="text-[8px] font-bold" style={gradientTextStyle}>LINKey</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Custom keyframes for this card */}
+            <style>{`
+              @keyframes dbc-glow-pulse {
+                0%, 100% { box-shadow: 0 0 40px rgba(0,82,212,0.06), 0 0 80px rgba(156,236,251,0.04); }
+                50% { box-shadow: 0 0 60px rgba(0,82,212,0.12), 0 0 120px rgba(156,236,251,0.08); }
+              }
+              @keyframes dbc-border-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              @keyframes dbc-shimmer {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+              }
+            `}</style>
+          </motion.div>
+
           {capabilities.map((cap, i) => (
             <motion.div
               key={cap.title}

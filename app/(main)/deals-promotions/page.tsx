@@ -298,11 +298,12 @@ const howSteps = [
 ];
 
 const capabilities = [
-  { icon: <Bell className="h-6 w-6" />, title: "Real-Time Push", desc: "Deals arrive on members' phones the moment you hit publish. Instant visibility, instant action.", wide: true },
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Redemption Tracking", desc: "Every redemption logged with timestamp, location, and basket value. Live dashboards and exports." },
-  { icon: <FlaskConical className="h-6 w-6" />, title: "A/B Testing", desc: "Run two versions of the same deal to different segments. Let the data pick the winner." },
-  { icon: <CalendarClock className="h-6 w-6" />, title: "Scheduling", desc: "Queue deals days or weeks ahead. Plan your promo calendar and let LINKey handle delivery." },
-  { icon: <Building2 className="h-6 w-6" />, title: "Multi-Location", desc: "Run deals across all branches or limit to a single store. Granular control for franchises.", wide: true },
+  { icon: <Bell className="h-6 w-6" />, title: "Real-Time Push", desc: "Deals arrive on members' phones the moment you hit publish. Instant visibility, instant action.", stat: "Instant", statLabel: "delivery" },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Redemption Tracking", desc: "Every redemption logged with timestamp, location, and basket value. Live dashboards and exports.", stat: "100%", statLabel: "tracked" },
+  { icon: <FlaskConical className="h-6 w-6" />, title: "A/B Testing", desc: "Run two versions of the same deal to different segments. Let the data pick the winner.", stat: "2x", statLabel: "conversion lift" },
+  { icon: <CalendarClock className="h-6 w-6" />, title: "Deal Scheduling", desc: "Queue deals days or weeks ahead. Plan your promo calendar and let LINKey handle delivery.", stat: "Set & forget", statLabel: "automation" },
+  { icon: <Building2 className="h-6 w-6" />, title: "Multi-Location", desc: "Run deals across all branches or limit to a single store. Granular control for franchises.", stat: "∞", statLabel: "locations" },
+  { icon: <Target className="h-6 w-6" />, title: "Audience Targeting", desc: "Segment by visit frequency, spend history, or location. The right deal reaches the right customer.", stat: "Smart", statLabel: "segmentation" },
 ];
 
 const comparisonPaper = [
@@ -467,14 +468,28 @@ export default function DealsPromotionsPage() {
               </h2>
             </div>
           </SectionFade>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {capabilities.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className={`p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all ${item.wide ? "md:col-span-2" : ""}`}>
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 text-white" style={gradientBgStyle}>
-                  {item.icon}
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {item.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-[#1F2323] mb-2">{item.title}</h3>
-                <p className="text-[#454545] text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>

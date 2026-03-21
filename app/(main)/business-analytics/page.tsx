@@ -9,7 +9,7 @@ import {
   BarChart3, Users, TrendingUp, FileSpreadsheet, FileDown,
   Mail, LayoutDashboard, Activity, ScanLine, Funnel,
   CalendarRange, Trophy, Plug, Eye, Zap, LineChart,
-  Target, ChevronDown, Check, X, ArrowRight, Star,
+  Target, ChevronDown, Check, X, ArrowRight, Star, Share2,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
 
@@ -290,11 +290,12 @@ const howSteps = [
 ];
 
 const capabilities = [
-  { icon: <FileSpreadsheet className="h-6 w-6" />, title: "Export to Excel & PDF", desc: "Pull any report in one click. Raw Excel for analysis, polished PDFs for presentations.", wide: true },
-  { icon: <Mail className="h-6 w-6" />, title: "Scheduled Reports", desc: "Daily, weekly, or monthly digests delivered straight to your inbox. Wake up to the numbers that matter." },
-  { icon: <LayoutDashboard className="h-6 w-6" />, title: "Custom Dashboards", desc: "Drag, drop, and arrange widgets. Build a view for the GM, another for marketing, one for the franchise owner." },
-  { icon: <Activity className="h-6 w-6" />, title: "Real-Time Data", desc: "No overnight batch jobs. Data updates as it happens, so decisions are based on right now." },
-  { icon: <Plug className="h-6 w-6" />, title: "API Access", desc: "Push LINKey data into Power BI, Tableau, Looker, or any BI tool. Full REST API with clear docs.", wide: true },
+  { icon: <FileSpreadsheet className="h-6 w-6" />, title: "Export to Excel & PDF", desc: "Pull any report in one click. Raw Excel for analysis, polished PDFs for presentations.", stat: "1-click", statLabel: "export" },
+  { icon: <Mail className="h-6 w-6" />, title: "Scheduled Reports", desc: "Daily, weekly, or monthly digests delivered straight to your inbox. Wake up to the numbers that matter.", stat: "Auto", statLabel: "delivery" },
+  { icon: <LayoutDashboard className="h-6 w-6" />, title: "Custom Dashboards", desc: "Drag, drop, and arrange widgets. Build a view for the GM, another for marketing, one for the franchise owner.", stat: "∞", statLabel: "layouts" },
+  { icon: <Activity className="h-6 w-6" />, title: "Real-Time Data", desc: "No overnight batch jobs. Data updates as it happens, so decisions are based on right now.", stat: "Live", statLabel: "updates" },
+  { icon: <Plug className="h-6 w-6" />, title: "API Access", desc: "Push LINKey data into Power BI, Tableau, Looker, or any BI tool. Full REST API with clear docs.", stat: "REST", statLabel: "API ready" },
+  { icon: <Share2 className="h-6 w-6" />, title: "Team Sharing", desc: "Share dashboards with colleagues or clients. Set view-only or edit permissions per user.", stat: "Secure", statLabel: "role-based" },
 ];
 
 const comparisonGuess = [
@@ -538,14 +539,28 @@ export default function BusinessAnalyticsPage() {
               </h2>
             </div>
           </SectionFade>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {capabilities.map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className={`p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all ${item.wide ? "md:col-span-2" : ""}`}>
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 text-white" style={gradientBgStyle}>
-                  {item.icon}
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {item.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-[#1F2323] mb-2">{item.title}</h3>
-                <p className="text-[#454545] text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>

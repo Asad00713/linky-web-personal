@@ -150,7 +150,7 @@ function PackContentsGrid() {
 
 const unboxFeatures = [
   { icon: <Package className="h-5 w-5" />, title: "Premium Packaging", desc: "Arrives in a branded magnetic-close box designed to impress from the moment it lands on your desk." },
-  { icon: <Sparkles className="h-5 w-5" />, title: "Instant Activation", desc: "Each NFC card is pre-linked to your team accounts. Tap your phone to activate \u2014 no app required." },
+  { icon: <Sparkles className="h-5 w-5" />, title: "Instant Activation", desc: "Each NFC card is pre-linked to your team accounts. Tap your phone to activate — no app required." },
   { icon: <Gift className="h-5 w-5" />, title: "Digital Companion Kit", desc: "Access your onboarding portal, video walkthroughs, and brand template editor the same day." },
 ];
 
@@ -169,7 +169,7 @@ function UnboxingSection() {
               <span style={gradientTextStyle}>Digital Onboarding</span>
             </h2>
             <p className="para text-(--color-card-para) mb-8 max-w-lg">
-              Your welcome pack is not just a box of cards \u2014 it is a curated
+              Your welcome pack is not just a box of cards — it is a curated
               launch experience. Every physical item is paired with a digital
               counterpart to get your team connected faster.
             </p>
@@ -215,7 +215,7 @@ function UnboxingSection() {
 /* ------------------------------------------------------------------ */
 
 const steps = [
-  { step: "1", title: "Subscribe to the Business Plan", desc: "Choose the Business Plan and complete checkout. You\u2019ll receive an instant confirmation with your onboarding portal link.", icon: <CheckCircle className="h-5 w-5" /> },
+  { step: "1", title: "Subscribe to the Business Plan", desc: "Choose the Business Plan and complete checkout. You\'ll receive an instant confirmation with your onboarding portal link.", icon: <CheckCircle className="h-5 w-5" /> },
   { step: "2", title: "Receive Your Welcome Pack", desc: "Your premium pack ships within 2 business days. Track it in real time from your dashboard.", icon: <Package className="h-5 w-5" /> },
   { step: "3", title: "Set Up Your Team", desc: "Follow the onboarding guide or hop on your priority setup call. We configure profiles, templates, and integrations together.", icon: <Users className="h-5 w-5" /> },
   { step: "4", title: "Launch & Start Connecting", desc: "Hand out cards, place your QR stand, and start capturing leads. Your 30-day plan keeps momentum going.", icon: <Sparkles className="h-5 w-5" /> },
@@ -320,7 +320,7 @@ function BentoSection() {
 
 const testimonials = [
   { name: "Sarah Nkosi", role: "Head of Sales", company: "BrightPath Consulting", quote: "The welcome pack made our team feel like VIPs. The QR stand lives on our reception desk and captures leads we never would have gotten with paper cards.", rating: 5 },
-  { name: "James Okonkwo", role: "Co-Founder", company: "NovaBridge Studio", quote: "Onboarding was seamless \u2014 the priority setup call alone saved us hours. Plus the cards look absolutely stunning.", rating: 5 },
+  { name: "James Okonkwo", role: "Co-Founder", company: "NovaBridge Studio", quote: "Onboarding was seamless — the priority setup call alone saved us hours. Plus the cards look absolutely stunning.", rating: 5 },
   { name: "Priya Pillay", role: "Marketing Director", company: "Elevate Digital SA", quote: "We handed out all five NFC cards at a single conference and captured 3x more leads than the previous event. The 30-day success plan kept us on track.", rating: 5 },
 ];
 
@@ -373,7 +373,7 @@ const faqs = [
   { q: "What exactly is included in the welcome pack?", a: "5 Hello LINKey NFC Cards, 1 Branded QR Stand, an Onboarding Guide PDF, a Priority Setup Call, a Custom Brand Template, and a 30-Day Success Plan." },
   { q: "How long does shipping take?", a: "Welcome packs ship within 2 business days. Standard delivery takes 3\u20135 business days within SA and 5\u201310 days internationally. Expedited shipping is available." },
   { q: "Can I customise the NFC card design?", a: "Absolutely. Your success manager works with you to create a branded template matching your colours, logo, and typography before cards are printed." },
-  { q: "Do I need an app to use the NFC cards?", a: "No app required. LINKey NFC cards work with any modern smartphone\u2019s built-in NFC reader. Recipients tap the card and your profile opens in their browser." },
+  { q: "Do I need an app to use the NFC cards?", a: "No app required. LINKey NFC cards work with any modern smartphone\'s built-in NFC reader. Recipients tap the card and your profile opens in their browser." },
   { q: "Can I order additional cards later?", a: "Yes. Business Plan subscribers can order additional NFC cards at a discounted rate from their dashboard. Bulk orders of 20+ get free shipping." },
   { q: "What happens during the Priority Setup Call?", a: "A 30-minute call where a specialist configures team profiles, sets up your QR stand landing page, connects your CRM, and walks through analytics." },
   { q: "Is the QR stand customisable?", a: "Yes. The stand features your logo and links to a customisable landing page. Update the destination URL, design, and CTA any time from your dashboard." },

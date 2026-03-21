@@ -77,11 +77,12 @@ const enrichmentFeatures = [
 ];
 
 const bentoItems = [
-  { icon: <Layers className="h-7 w-7" />, title: "Batch Enrichment", description: "Upload a CSV of 10 000 contacts. Our engine processes them in parallel and returns enriched profiles in minutes.", wide: true },
-  { icon: <Zap className="h-7 w-7" />, title: "Real-Time on Capture", description: "Every new lead captured through LINKey is enriched the moment it lands. Full profile ready before you open it." },
-  { icon: <Activity className="h-7 w-7" />, title: "Confidence Scoring", description: "Each field carries a confidence score from 0 to 100. Filter by high-confidence data or review lower scores." },
-  { icon: <RefreshCw className="h-7 w-7" />, title: "Data Freshness Monitoring", description: "People change jobs. Our system re-verifies enriched data on a rolling basis and flags anything stale.", wide: true },
-  { icon: <ShieldCheck className="h-7 w-7" />, title: "GDPR-Compliant Sourcing", description: "All data from publicly available, opt-in, and licensed databases. No scraping, no grey areas. Audit-ready." },
+  { icon: <Layers className="h-7 w-7" />, title: "Batch Enrichment", description: "Upload a CSV of 10 000 contacts. Our engine processes them in parallel and returns enriched profiles in minutes.", stat: "10K+", statLabel: "per batch" },
+  { icon: <Zap className="h-7 w-7" />, title: "Real-Time on Capture", description: "Every new lead captured through LINKey is enriched the moment it lands. Full profile ready before you open it.", stat: "<3s", statLabel: "enrichment" },
+  { icon: <Activity className="h-7 w-7" />, title: "Confidence Scoring", description: "Each field carries a confidence score from 0 to 100. Filter by high-confidence data or review lower scores.", stat: "95%", statLabel: "accuracy" },
+  { icon: <RefreshCw className="h-7 w-7" />, title: "Data Freshness Monitoring", description: "People change jobs. Our system re-verifies enriched data on a rolling basis and flags anything stale.", stat: "Auto", statLabel: "re-verify" },
+  { icon: <ShieldCheck className="h-7 w-7" />, title: "GDPR-Compliant Sourcing", description: "All data from publicly available, opt-in, and licensed databases. No scraping, no grey areas. Audit-ready.", stat: "100%", statLabel: "compliant" },
+  { icon: <Upload className="h-7 w-7" />, title: "CRM Auto-Push", description: "Enriched data flows directly into HubSpot, Salesforce, Pipedrive, or Zoho. No manual export or copy-paste required.", stat: "4+", statLabel: "CRMs" },
 ];
 
 const howItWorks = [
@@ -520,17 +521,31 @@ export default function AIEnrichmentPage() {
             <SectionHeading gradient="the Way You Do">Enrichment That Works</SectionHeading>
           </div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {bentoItems.map((f, i) => (
-              <motion.div key={f.title} variants={fadeUp} custom={i} whileHover={{ y: -6, transition: spring }} className={`bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-shadow ${f.wide ? "md:col-span-2 lg:col-span-2" : ""}`}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: `${BRAND.primary}10`, color: BRAND.primary }}>
-                  {f.icon}
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {f.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{f.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{f.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: BRAND.body }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: BRAND.cardPara }}>{f.description}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{f.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

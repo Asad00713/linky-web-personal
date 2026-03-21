@@ -144,7 +144,7 @@ const securityFeatures = [
   {
     icon: <CheckCircle className="h-6 w-6" />,
     title: "POPIA Compliance",
-    desc: "Fully compliant with South Africa\u2019s Protection of Personal Information Act. Your data rights are respected, enforced, and auditable.",
+    desc: "Fully compliant with South Africa\'s Protection of Personal Information Act. Your data rights are respected, enforced, and auditable.",
   },
   {
     icon: <Shield className="h-6 w-6" />,

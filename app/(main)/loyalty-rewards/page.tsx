@@ -285,11 +285,12 @@ const howSteps = [
 ];
 
 const bentoItems = [
-  { icon: <PieChart className="h-6 w-6" />, title: "Customer Insights", desc: "See visit frequency, average spend, favourite products, and churn risk for every member.", wide: true },
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Reward Analytics", desc: "Track which rewards are redeemed most and how loyalty members compare to non-members." },
-  { icon: <Building2 className="h-6 w-6" />, title: "Multi-Location", desc: "Members earn and redeem across all your branches. Points sync in real time." },
-  { icon: <Paintbrush className="h-6 w-6" />, title: "White-Label", desc: "Your loyalty card wears your brand — your logo, your colours. Customers see your business, not ours." },
-  { icon: <Plug className="h-6 w-6" />, title: "POS Ready", desc: "Connect LINKey to your existing POS so points are awarded automatically at checkout.", wide: true },
+  { icon: <PieChart className="h-6 w-6" />, title: "Customer Insights", desc: "See visit frequency, average spend, favourite products, and churn risk for every member.", stat: "360°", statLabel: "member view" },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Reward Analytics", desc: "Track which rewards are redeemed most and how loyalty members compare to non-members.", stat: "Real-time", statLabel: "tracking" },
+  { icon: <Building2 className="h-6 w-6" />, title: "Multi-Location", desc: "Members earn and redeem across all your branches. Points sync in real time.", stat: "∞", statLabel: "locations" },
+  { icon: <Paintbrush className="h-6 w-6" />, title: "White-Label", desc: "Your loyalty card wears your brand — your logo, your colours. Customers see your business, not ours.", stat: "100%", statLabel: "your brand" },
+  { icon: <Plug className="h-6 w-6" />, title: "POS Ready", desc: "Connect LINKey to your existing POS so points are awarded automatically at checkout.", stat: "Auto", statLabel: "point award" },
+  { icon: <UserPlus className="h-6 w-6" />, title: "Referral Bonuses", desc: "Reward members who bring friends. Track referral chains and attribute new signups to your best advocates.", stat: "2x", statLabel: "growth rate" },
 ];
 
 const comparisonPaper = [
@@ -507,21 +508,28 @@ export default function LoyaltyRewardsPage() {
             </div>
           </SectionFade>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {bentoItems.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all group ${item.wide ? "md:col-span-2" : ""}`}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(201,168,76,0.1)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#C9A84C]/20"
               >
-                <div className="h-12 w-12 rounded-xl flex items-center justify-center mb-4 transition-colors" style={{ background: GOLD_BG, color: GOLD }}>
-                  {item.icon}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center transition-shadow group-hover:shadow-md" style={{ background: GOLD_BG, color: GOLD }}>
+                    {item.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={{ color: GOLD }}>{item.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-[#1F2323] mb-2">{item.title}</h3>
-                <p className="text-[#454545] text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>

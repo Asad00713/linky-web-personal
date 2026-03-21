@@ -25,7 +25,17 @@
       "Bash(done)",
       "Bash(grep -rn 'ease: \"\"\"\"easeOut\"\"\"\"' app/\\\\\\(main\\\\\\)/)",
       "Bash(grep -rn 'visible:.*ease: \"\"\"\"ease' app/\\\\\\(main\\\\\\)/)",
-      "Bash(ls -la \"c:/Projects/linky-web-personal/app/\\(main\\)/_components/\")"
+      "Bash(ls -la \"c:/Projects/linky-web-personal/app/\\(main\\)/_components/\")",
+      "Bash(ls \"c:/Projects/linky-web-personal/app/\\(main\\)/directory/page.tsx\")",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(''Handshake:'', !!l.Handshake, ''Sparkles:'', !!l.Sparkles, ''Hotel:'', !!l.Hotel, ''Palette:'', !!l.Palette, ''Wrench:'', !!l.Wrench\\)\")",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(typeof l.Handshake\\)\")",
+      "Bash(wc -l \"c:/Projects/linky-web-personal/app/\\(main\\)/directory/page.tsx\")",
+      "Bash(do)",
+      "Bash(sed -i 's/absolute top-\\\\[60px\\\\] left-0 right-0 h-0\\\\.5/absolute top-[60px] left-[60px] right-[60px] h-0.5/g' \"$f\")",
+      "Bash(grep -rl '\\\\\\\\u2014\\\\|\\\\\\\\u2019\\\\|\\\\\\\\u201C\\\\|\\\\\\\\u201D\\\\|\\\\\\\\u2026' \"app/\\(main\\)/\")",
+      "Bash(while read:*)",
+      "Bash(grep -rl '\\\\\\\\—' \"app/\\(main\\)/\")",
+      "Bash(python3 -c \":*)"
     ],
     "additionalDirectories": [
       "c:\\Projects\\linky-web-personal\\components"

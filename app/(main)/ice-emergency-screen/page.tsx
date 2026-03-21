@@ -62,7 +62,7 @@ function HeroSection() {
             <p className="lead text-(--color-lead) mb-8 max-w-xl">
               A lock-screen QR code with your medical conditions, blood type,
               allergies, medications, and emergency contacts. Scannable by
-              anyone \u2014 no phone unlock required. Because in an emergency,
+              anyone — no phone unlock required. Because in an emergency,
               seconds save lives.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -86,7 +86,7 @@ function HeroSection() {
                 >
                   <QrCode className="h-28 w-28 text-gray-800" strokeWidth={1} />
                 </motion.div>
-                <p className="mt-3 text-center text-[10px] font-medium text-red-400">ICE \u2014 Scan for Emergency Info</p>
+                <p className="mt-3 text-center text-[10px] font-medium text-red-400">ICE — Scan for Emergency Info</p>
                 <div className="mt-3 flex justify-center gap-2">
                   <Heart className="h-3.5 w-3.5 text-red-400" />
                   <Droplets className="h-3.5 w-3.5 text-red-400" />
@@ -107,7 +107,7 @@ function HeroSection() {
 
 const showcaseFeatures = [
   { icon: <QrCode className="h-6 w-6" />, title: "Lock-Screen QR Code", desc: "Scannable from your lock screen. First responders access critical info without unlocking your phone." },
-  { icon: <Heart className="h-6 w-6" />, title: "Medical Profile", desc: "Blood type, conditions, allergies, medications, insurance, and doctor contact \u2014 all in one place." },
+  { icon: <Heart className="h-6 w-6" />, title: "Medical Profile", desc: "Blood type, conditions, allergies, medications, insurance, and doctor contact — all in one place." },
   { icon: <Phone className="h-6 w-6" />, title: "Emergency Contacts", desc: "Up to five contacts with tap-to-call. A rescuer can reach your family directly from the ICE screen." },
 ];
 
@@ -121,8 +121,8 @@ function FeatureShowcaseSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
             <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">LIFE-SAFETY FEATURE</span>
-            <h2 className="heading-2 text-(--color-body) mb-4">Critical Info \u2014 Accessible <span style={gradientTextStyle}>When It Matters</span></h2>
-            <p className="para text-(--color-card-para) mb-8 max-w-lg">When you\u2019re unconscious, disoriented, or unable to speak, your phone becomes the only link between you and the people trying to help.</p>
+            <h2 className="heading-2 text-(--color-body) mb-4">Critical Info — Accessible <span style={gradientTextStyle}>When It Matters</span></h2>
+            <p className="para text-(--color-card-para) mb-8 max-w-lg">When you're unconscious, disoriented, or unable to speak, your phone becomes the only link between you and the people trying to help.</p>
             <div className="space-y-5">
               {showcaseFeatures.map((f, i) => (
                 <motion.div key={f.title} initial={{ opacity: 0, x: -20 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.4, delay: i * 0.1 }} className="flex gap-4">
@@ -148,14 +148,14 @@ function FeatureShowcaseSection() {
 /* ------------------------------------------------------------------ */
 
 const gridFeatures = [
-  { icon: <AlertTriangle className="h-6 w-6" />, title: "Medical Conditions", desc: "Diabetes, epilepsy, asthma, heart disease \u2014 first responders see this immediately." },
+  { icon: <AlertTriangle className="h-6 w-6" />, title: "Medical Conditions", desc: "Diabetes, epilepsy, asthma, heart disease — first responders see this immediately." },
   { icon: <Droplets className="h-6 w-6" />, title: "Blood Type", desc: "One of the first things an ER needs. Visible on your lock screen saves critical minutes." },
   { icon: <ShieldCheck className="h-6 w-6" />, title: "Allergies", desc: "Drug, food, and latex allergies. This one field could prevent a life-threatening reaction." },
   { icon: <Phone className="h-6 w-6" />, title: "Emergency Contacts", desc: "Up to five contacts with tap-to-call. Rescuers reach your family without scrolling a locked phone." },
   { icon: <Pill className="h-6 w-6" />, title: "Medications", desc: "Every medication and dosage, helping paramedics avoid interactions." },
   { icon: <ShieldCheck className="h-6 w-6" />, title: "Insurance Info", desc: "Provider, policy number, plan type. Hospital admissions verify cover immediately." },
-  { icon: <Stethoscope className="h-6 w-6" />, title: "Doctor Details", desc: "Primary doctor\u2019s name, practice, and phone. ER staff can consult for medical history." },
-  { icon: <HeartHandshake className="h-6 w-6" />, title: "Organ Donor Status", desc: "If you\u2019re a registered donor, make it visible. In time-critical situations, this saves lives beyond your own." },
+  { icon: <Stethoscope className="h-6 w-6" />, title: "Doctor Details", desc: "Primary doctor's name, practice, and phone. ER staff can consult for medical history." },
+  { icon: <HeartHandshake className="h-6 w-6" />, title: "Organ Donor Status", desc: "If you're a registered donor, make it visible. In time-critical situations, this saves lives beyond your own." },
 ];
 
 function FeatureGridSection() {
@@ -193,7 +193,7 @@ function FeatureGridSection() {
 const bentoItems = [
   { icon: <Lock className="h-6 w-6" />, title: "No Phone Unlock Required", desc: "The QR lives on your lock screen. Anyone can scan it without passcode, Face ID, or fingerprint.", wide: true },
   { icon: <Globe className="h-6 w-6" />, title: "Multilingual Support", desc: "ICE profile displays in multiple languages. A paramedic in Tokyo or Berlin reads your info in their language.", wide: false },
-  { icon: <WifiOff className="h-6 w-6" />, title: "Offline-Ready", desc: "ICE data is cached for low-connectivity environments. Hiking trails, underground parking \u2014 your info is accessible.", wide: false },
+  { icon: <WifiOff className="h-6 w-6" />, title: "Offline-Ready", desc: "ICE data is cached for low-connectivity environments. Hiking trails, underground parking — your info is accessible.", wide: false },
 ];
 
 function BentoSection() {
@@ -228,7 +228,7 @@ function BentoSection() {
 
 const steps = [
   { step: "1", title: "Set Up Your ICE Profile", desc: "Fill in conditions, blood type, allergies, medications, insurance, and doctor details. About three minutes.", icon: <UserCog className="h-5 w-5" /> },
-  { step: "2", title: "Add Emergency Contacts", desc: "Up to five contacts \u2014 spouse, parent, sibling, friend. Name, relationship, and phone number.", icon: <Phone className="h-5 w-5" /> },
+  { step: "2", title: "Add Emergency Contacts", desc: "Up to five contacts — spouse, parent, sibling, friend. Name, relationship, and phone number.", icon: <Phone className="h-5 w-5" /> },
   { step: "3", title: "Generate Your QR Code", desc: "LINKey generates a unique QR code that scans quickly, even on cracked or dimmed screens.", icon: <QrCode className="h-5 w-5" /> },
   { step: "4", title: "Save to Lock Screen", desc: "Save the QR as your lock-screen wallpaper or widget. No unlock required to scan.", icon: <Smartphone className="h-5 w-5" /> },
 ];
@@ -265,7 +265,7 @@ function HowItWorksSection() {
 function StatsSection() {
   const { ref, inView } = useIOView({ triggerOnce: true, threshold: 0.3 });
   const stats = [
-    { end: 60, suffix: "%", label: "Of Emergencies \u2014 Victim Cannot Speak" },
+    { end: 60, suffix: "%", label: "Of Emergencies — Victim Cannot Speak" },
     { end: 40, suffix: "%", label: "Of People Have a Drug Allergy" },
     { end: 3, suffix: " min", label: "To Set Up Your ICE Profile" },
     { end: 0, suffix: "", label: "Phone Unlocks Required" },
@@ -294,8 +294,8 @@ function StatsSection() {
 function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const before = ["No medical history for first responders", "Drug allergies unknown until it\u2019s too late", "Family unreachable \u2014 phone is locked", "Blood type unknown \u2014 transfusion delayed", "Medications are a mystery to ER", "Organ donor wishes not visible"];
-  const after = ["Paramedics scan lock screen, see conditions immediately", "Drug allergies front and centre \u2014 no surprises", "Emergency contacts one tap away for any bystander", "Blood type visible instantly \u2014 faster treatment", "Full medication list avoids interactions", "Organ donor status clearly communicated"];
+  const before = ["No medical history for first responders", "Drug allergies unknown until it's too late", "Family unreachable — phone is locked", "Blood type unknown — transfusion delayed", "Medications are a mystery to ER", "Organ donor wishes not visible"];
+  const after = ["Paramedics scan lock screen, see conditions immediately", "Drug allergies front and centre — no surprises", "Emergency contacts one tap away for any bystander", "Blood type visible instantly — faster treatment", "Full medication list avoids interactions", "Organ donor status clearly communicated"];
 
   return (
     <section ref={ref} className="px-[5%] py-16 md:py-24">
@@ -324,9 +324,9 @@ function ComparisonSection() {
 /* ------------------------------------------------------------------ */
 
 const testimonials = [
-  { name: "Dr. Thandi Nkosi", role: "Emergency Physician", company: "Netcare 911", quote: "When a patient arrives unconscious, the first five minutes define the outcome. Scanning a QR on their lock screen for blood type, allergies, and medications \u2014 that is a life-saving tool.", rating: 5 },
+  { name: "Dr. Thandi Nkosi", role: "Emergency Physician", company: "Netcare 911", quote: "When a patient arrives unconscious, the first five minutes define the outcome. Scanning a QR on their lock screen for blood type, allergies, and medications — that is a life-saving tool.", rating: 5 },
   { name: "Brendan Swart", role: "Ultra-Marathon Runner", company: "Comrades Veteran", quote: "I run remote trails where cell service is patchy. My ICE screen gives me peace of mind that if something goes wrong, whoever finds me knows my medical history.", rating: 5 },
-  { name: "Fatima Al-Rashid", role: "Mother of Two", company: "Cape Town", quote: "I set up ICE profiles for my kids and my elderly mother. Knowing a paramedic can access her medication list and cardiologist\u2019s number lets me sleep at night.", rating: 5 },
+  { name: "Fatima Al-Rashid", role: "Mother of Two", company: "Cape Town", quote: "I set up ICE profiles for my kids and my elderly mother. Knowing a paramedic can access her medication list and cardiologist's number lets me sleep at night.", rating: 5 },
 ];
 
 function TestimonialsSection() {
@@ -360,10 +360,10 @@ function TestimonialsSection() {
 /* ------------------------------------------------------------------ */
 
 const faqs = [
-  { q: "What is an ICE Emergency Screen?", a: "ICE stands for In Case of Emergency. It\u2019s a QR code on your lock screen linking to your medical profile and emergency contacts \u2014 no phone unlock required." },
+  { q: "What is an ICE Emergency Screen?", a: "ICE stands for In Case of Emergency. It's a QR code on your lock screen linking to your medical profile and emergency contacts — no phone unlock required." },
   { q: "Can someone access my full LINKey profile?", a: "No. The ICE QR links only to emergency info. Your business card, social links, and personal data are completely separate." },
-  { q: "Does it work if my phone is dead?", a: "If powered off, the lock screen isn\u2019t visible. We recommend also carrying a physical NFC tag or printed QR card as backup." },
-  { q: "Is my medical info secure?", a: "Yes. AES-256 encrypted at rest and in transit. The ICE profile is deliberately accessible without auth \u2014 that\u2019s the point \u2014 but only contains info you choose to include." },
+  { q: "Does it work if my phone is dead?", a: "If powered off, the lock screen isn't visible. We recommend also carrying a physical NFC tag or printed QR card as backup." },
+  { q: "Is my medical info secure?", a: "Yes. AES-256 encrypted at rest and in transit. The ICE profile is deliberately accessible without auth — that's the point — but only contains info you choose to include." },
   { q: "Can I update my profile later?", a: "Yes, and you should. Changes in the app reflect immediately when scanned. No need to regenerate the QR." },
   { q: "Does it work internationally?", a: "Yes. The QR works anywhere with a camera and data. Multilingual display and offline caching included." },
   { q: "Is there a cost for ICE?", a: "ICE is included in every LINKey plan, including the free tier. Emergency safety should never be behind a paywall." },

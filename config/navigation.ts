@@ -23,6 +23,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { title: "Networking Analytics", href: "/analytics", description: "Track views, scans, taps, and saves in real time." },
       { title: "Privacy Controls", href: "/privacy-controls", description: "Toggle visibility, approve saves — your card, your rules." },
       { title: "ICE Emergency Screen", href: "/ice-emergency-screen", description: "Lock-screen QR with medical & emergency info." },
+      { title: "Multiple Cards", href: "/multiple-cards", description: "Carry up to 5 cards for different roles and brands." },
     ],
   },
   {
@@ -38,6 +39,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { title: "Hello LINKey Referral Cards", href: "/referral-cards", description: "Distribute physical referral cards and track conversions." },
       { title: "Business Analytics", href: "/business-analytics", description: "Leads per staff, deal redemptions — export to Excel." },
       { title: "Badge Scanner", href: "/badge-scanner", description: "Universal scanner for any event badge." },
+      { title: "Business Directory", href: "/directory", description: "Browse and connect with SA businesses by category." },
     ],
   },
   {
@@ -65,6 +67,8 @@ export const NAV_GROUPS: NavGroup[] = [
 export const NAV_LINKS: NavLink[] = [
   { title: "Pricing", href: "/pricing" },
   { title: "Why LINKey", href: "/why-linkey" },
+  { title: "Shop", href: "/shop" },
+  { title: "Directory", href: "/directory" },
 ];
 
 export const RESOURCE_LINKS: NavLink[] = [
@@ -75,4 +79,8 @@ export const RESOURCE_LINKS: NavLink[] = [
   { title: "Partner Program", href: "/partners" },
   { title: "Help Centre", href: "/help" },
   { title: "Book a Demo", href: "/book-demo" },
+  { title: "Get Started", href: "/get-started" },
+  { title: "Welcome Pack", href: "/welcome-pack" },
+  { title: "ROI Calculator", href: "/roi-calculator" },
+  { title: "Security", href: "/security" },
 ];

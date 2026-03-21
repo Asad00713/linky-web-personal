@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -68,7 +68,7 @@ function OCRScanAnimation() {
     { icon: <User size={14} weight="bold" />, label: "Name", value: "James Mthembu" },
     { icon: <Buildings size={14} weight="bold" />, label: "Company", value: "Innovate360" },
     { icon: <Phone size={14} weight="bold" />, label: "Phone", value: "+27 82 555 1234" },
-    { icon: <EnvelopeSimple size={14} weight="bold" />, label: "Email", value: "james@innovate360.co.za" },
+    { icon: <EnvelopeSimple size={14} weight="bold" />, label: "Email", value: "james@innovate360" },
   ];
 
   return (
@@ -297,12 +297,41 @@ function FeatureGridSection() {
    ================================================================ */
 
 const bentoItems = [
-  { icon: <Sparkles className="h-6 w-6" />, title: "AI Verification", desc: "After every scan, AI cross-references extracted data against public directories and LinkedIn to verify accuracy and enrich missing fields.", wide: true },
-  { icon: <WifiOff className="h-6 w-6" />, title: "Offline Scanning", desc: "No Wi-Fi at the venue? Scan offline and sync automatically the moment you reconnect.", wide: false },
-  { icon: <FileStack className="h-6 w-6" />, title: "Bulk Photo Import", desc: "Already photographed cards? Upload images from your gallery and the scanner processes every one.", wide: false },
-  { icon: <Eye className="h-6 w-6" />, title: "Card Image Archive", desc: "Every scanned card image is stored alongside the contact. Flip back to the original any time.", wide: false },
-  { icon: <UploadCloud className="h-6 w-6" />, title: "Team Lead Distribution", desc: "Scan a card at a booth and route the lead to the right rep based on territory, product, or round-robin rules.", wide: true },
+  { icon: <Sparkles className="h-6 w-6" />, title: "AI Verification", desc: "AI cross-references extracted data against public directories and LinkedIn to verify accuracy and enrich missing fields.", stat: "95%", statLabel: "accuracy rate" },
+  { icon: <WifiOff className="h-6 w-6" />, title: "Offline Scanning", desc: "No Wi-Fi at the venue? Scan offline and sync automatically the moment you reconnect.", stat: "100%", statLabel: "offline capable" },
+  { icon: <FileStack className="h-6 w-6" />, title: "Bulk Photo Import", desc: "Already photographed cards? Upload images from your gallery and the scanner processes every one.", stat: "500+", statLabel: "cards per batch" },
+  { icon: <Eye className="h-6 w-6" />, title: "Card Image Archive", desc: "Every scanned card image is stored alongside the contact. Flip back to the original any time.", stat: "Forever", statLabel: "image storage" },
+  { icon: <UploadCloud className="h-6 w-6" />, title: "Team Lead Distribution", desc: "Scan a card at a booth and route the lead to the right rep based on territory or round-robin rules.", stat: "Auto", statLabel: "lead routing" },
+  { icon: <Globe className="h-6 w-6" />, title: "25+ Languages", desc: "OCR engine recognises Latin, CJK, Arabic, Cyrillic, and more. Works with any business card from any country.", stat: "25+", statLabel: "languages supported" },
 ];
+
+function BentoItem({ item, index }: { item: typeof bentoItems[0]; index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 25 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+      className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+          {item.icon}
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+          <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+        </div>
+      </div>
+      <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+      <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
+    </motion.div>
+  );
+}
 
 function BentoSection() {
   const ref = useRef(null);
@@ -310,19 +339,15 @@ function BentoSection() {
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28">
       <div className="mx-auto max-w-7xl">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
-          <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">ADVANCED</span>
-          <h2 className="heading-2 text-(--color-body) mb-4">Scanning, Supercharged</h2>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-14">
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">ADVANCED</span>
+          <h2 className="heading-2 text-[#1F2323] mb-4">Scanning, Supercharged</h2>
         </motion.div>
-        <motion.div variants={stagger} initial="hidden" animate={isInView ? "visible" : "hidden"} className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {bentoItems.map((item, i) => (
-            <motion.div key={i} variants={fadeUp} {...springHover} className={`rounded-2xl border border-gray-100 bg-white p-8 shadow-sm hover:shadow-lg transition-shadow ${item.wide ? "md:col-span-2" : ""}`}>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-primary/5 text-primary mb-5">{item.icon}</div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{item.title}</h3>
-              <p className="para text-(--color-card-para)">{item.desc}</p>
-            </motion.div>
+            <BentoItem key={item.title} item={item} index={i} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -334,7 +359,7 @@ function BentoSection() {
 
 const steps = [
   { num: "01", title: "Point", desc: "Open the LINKey app and aim your camera at any business card. Edge detection is automatic.", icon: <Camera className="h-6 w-6" /> },
-  { num: "02", title: "Scan", desc: "Tap to capture. AI OCR extracts every field \u2014 name, title, company, phone, email, address \u2014 in under two seconds.", icon: <ScanLine className="h-6 w-6" /> },
+  { num: "02", title: "Scan", desc: "Tap to capture. AI OCR extracts every field — name, title, company, phone, email, address — in under two seconds.", icon: <ScanLine className="h-6 w-6" /> },
   { num: "03", title: "Verify", desc: "Review extracted data on a clean summary screen. Edit if needed or let AI auto-correct common OCR mistakes.", icon: <CheckCircle2 className="h-6 w-6" /> },
   { num: "04", title: "Save", desc: "Hit save and the contact lands in your wallet, tagged and ready. Push to CRM or share with a teammate in one more tap.", icon: <ArrowRight className="h-6 w-6" /> },
 ];
@@ -349,17 +374,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
           <h2 className="heading-2 text-(--color-body) mb-4">From Paper to Pipeline in Four Steps</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -403,7 +453,7 @@ function StatsSection() {
 function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const before = ["Typing each card takes 2-3 minutes with frequent typos", "Stacks of unprocessed cards pile up after every event", "No context saved \u2014 you forget where you met the person", "Foreign-language cards require a translator or guesswork", "Contacts sit on paper instead of flowing into your CRM", "Duplicates creep in with no matching system"];
+  const before = ["Typing each card takes 2-3 minutes with frequent typos", "Stacks of unprocessed cards pile up after every event", "No context saved — you forget where you met the person", "Foreign-language cards require a translator or guesswork", "Contacts sit on paper instead of flowing into your CRM", "Duplicates creep in with no matching system"];
   const after = ["Scan any card in under 2 seconds with 99.5% accuracy", "Batch scanning clears a stack of 50 cards in minutes", "Auto-tags capture date, location, and event context", "25+ languages and mixed-script cards handled natively", "One-tap CRM push sends contacts straight to your pipeline", "Built-in duplicate detection prevents messy contact lists"];
 
   return (

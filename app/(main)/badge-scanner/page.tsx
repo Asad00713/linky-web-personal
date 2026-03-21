@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -232,11 +232,11 @@ function SolutionBridge() {
    ================================================================ */
 
 const gridFeatures = [
-  { icon: <Globe className="h-6 w-6" />, title: "Universal Compatibility", desc: "Works with badges from any event platform \u2014 Eventbrite, Hopin, Bizzabo, Swoogo, Cvent. No pre-config needed." },
+  { icon: <Globe className="h-6 w-6" />, title: "Universal Compatibility", desc: "Works with badges from any event platform — Eventbrite, Hopin, Bizzabo, Swoogo, Cvent. No pre-config needed." },
   { icon: <ScanLine className="h-6 w-6" />, title: "Camera + NFC Scanning", desc: "Two modes in one app. Camera for printed badges, NFC for smart badges. Switch with a single tap." },
   { icon: <Zap className="h-6 w-6" />, title: "Instant Data Extraction", desc: "Name, title, company, email, and phone extracted in under two seconds. No manual typing." },
   { icon: <Brain className="h-6 w-6" />, title: "AI Enrichment", desc: "After scanning, AI enriches contacts with LinkedIn profiles, company size, industry, and recent news." },
-  { icon: <Tag className="h-6 w-6" />, title: "Lead Tagging", desc: "Tag leads on the spot \u2014 hot, warm, cold, demo-requested. Add voice notes or quick text notes." },
+  { icon: <Tag className="h-6 w-6" />, title: "Lead Tagging", desc: "Tag leads on the spot — hot, warm, cold, demo-requested. Add voice notes or quick text notes." },
   { icon: <CloudUpload className="h-6 w-6" />, title: "CRM Push", desc: "Leads flow directly into Salesforce, HubSpot, Zoho, or Pipedrive with one tap." },
 ];
 
@@ -269,7 +269,7 @@ function FeatureGridSection() {
    ================================================================ */
 
 const bentoItems = [
-  { icon: <WifiOff className="h-6 w-6" />, title: "Works Offline", desc: "Convention centre Wi-Fi is terrible. LINKey Badge Scanner works fully offline \u2014 scan, tag, and take notes without a connection. Everything syncs when you reconnect.", wide: true },
+  { icon: <WifiOff className="h-6 w-6" />, title: "Works Offline", desc: "Convention centre Wi-Fi is terrible. LINKey Badge Scanner works fully offline — scan, tag, and take notes without a connection. Everything syncs when you reconnect.", wide: true },
   { icon: <Users className="h-6 w-6" />, title: "Team Attribution", desc: "Multiple reps scanning at the same booth? Each scan is attributed to the team member who captured it.", wide: false },
   { icon: <FolderKanban className="h-6 w-6" />, title: "Event Campaigns", desc: "Group all scans under a specific event. Compare lead quality and volume across events side by side.", wide: false },
   { icon: <Copy className="h-6 w-6" />, title: "Duplicate Detection", desc: "Scanned the same person twice? LINKey catches it instantly and prompts you to merge records.", wide: true },
@@ -322,17 +322,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
           <h2 className="heading-2 text-(--color-body) mb-4">From Badge to Pipeline in Four Steps</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -376,8 +401,8 @@ function StatsSection() {
 function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
-  const before = ["Scribbled notes are illegible by the time you get home", "No structured data \u2014 names and emails mixed in a mess", "Manual CRM entry takes hours after every event", "No attribution \u2014 who on the team talked to whom?", "Duplicates pile up with no way to detect them", "Context lost \u2014 you forget what you discussed within days"];
-  const after = ["Clean, structured contact data in under 2 seconds", "Every field mapped correctly \u2014 name, title, email, phone, company", "One-tap CRM push replaces hours of post-event data entry", "Team attribution shows exactly who captured each lead", "Built-in duplicate detection keeps your pipeline spotless", "Voice notes and tags preserve full context from every conversation"];
+  const before = ["Scribbled notes are illegible by the time you get home", "No structured data — names and emails mixed in a mess", "Manual CRM entry takes hours after every event", "No attribution — who on the team talked to whom?", "Duplicates pile up with no way to detect them", "Context lost — you forget what you discussed within days"];
+  const after = ["Clean, structured contact data in under 2 seconds", "Every field mapped correctly — name, title, email, phone, company", "One-tap CRM push replaces hours of post-event data entry", "Team attribution shows exactly who captured each lead", "Built-in duplicate detection keeps your pipeline spotless", "Voice notes and tags preserve full context from every conversation"];
 
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">

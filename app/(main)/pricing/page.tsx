@@ -54,7 +54,7 @@ const plans = [
       "AI Branding Sync",
       "AI-Enhanced CV attachment",
       "Custom email signatures",
-      "Contact Wallet \u2014 unlimited",
+      "Contact Wallet — unlimited",
       "Paper Card Scanner (OCR)",
       "Full networking analytics",
       "Privacy controls",
@@ -165,12 +165,12 @@ const faqs = [
   {
     question: "Can I switch plans anytime?",
     answer:
-      "Absolutely. Upgrade or downgrade whenever you want from your dashboard. When you upgrade, you get immediate access to new features. When you downgrade, your current plan runs until the end of the billing period \u2014 no surprises, no hidden fees.",
+      "Absolutely. Upgrade or downgrade whenever you want from your dashboard. When you upgrade, you get immediate access to new features. When you downgrade, your current plan runs until the end of the billing period — no surprises, no hidden fees.",
   },
   {
     question: "Is there a free trial?",
     answer:
-      "Yes \u2014 both Pro and Business come with a 14-day free trial. No credit card required to start. You get full access to every feature in the plan so you can see exactly what you\u2019re paying for.",
+      "Yes — both Pro and Business come with a 14-day free trial. No credit card required to start. You get full access to every feature in the plan so you can see exactly what you\'re paying for.",
   },
   {
     question: "What happens to my data if I downgrade?",
@@ -180,12 +180,12 @@ const faqs = [
   {
     question: "Do you offer annual discounts?",
     answer:
-      "Yes \u2014 annual billing saves you 20% compared to monthly. Pro drops from R199/mo to R159/mo, and Business goes from R599/mo to R479/mo. The toggle above shows you exactly what you\u2019ll pay.",
+      "Yes — annual billing saves you 20% compared to monthly. Pro drops from R199/mo to R159/mo, and Business goes from R599/mo to R479/mo. The toggle above shows you exactly what you\'ll pay.",
   },
   {
     question: "Can I pay for my whole team on one invoice?",
     answer:
-      "That\u2019s exactly what the Business plan is built for. You get a single invoice in rands, centralised billing, and the ability to add or remove team members from the admin console at any time.",
+      "That\'s exactly what the Business plan is built for. You get a single invoice in rands, centralised billing, and the ability to add or remove team members from the admin console at any time.",
   },
   {
     question: "What payment methods do you accept?",
@@ -195,7 +195,7 @@ const faqs = [
   {
     question: "Is my payment secure?",
     answer:
-      "All payments are processed through Stripe with PCI DSS Level 1 compliance \u2014 the highest security standard in the industry. We never store your card details on our servers. Your data is fully POPIA-compliant.",
+      "All payments are processed through Stripe with PCI DSS Level 1 compliance — the highest security standard in the industry. We never store your card details on our servers. Your data is fully POPIA-compliant.",
   },
   {
     question: "Can I cancel anytime?",

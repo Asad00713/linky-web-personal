@@ -107,10 +107,15 @@ function ScrollProgressBar() {
 }
 
 /* ─────────────────── SECTION 1: HERO ─────────────────── */
+const heroHeadlineWords = "A Professional Identity Platform.".split(" ");
+
 function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
+  // Calculate when headline finishes: subtitle at 0.1s, headline starts at 0.3s, 5 words * 0.06s stagger = 0.3s total
+  // Headline done ~0.9s, after-line at 1.1s, desc at 1.5s, buttons at 1.8s
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden px-[5%] pt-24 pb-20 md:pt-32 md:pb-28 lg:pt-40 lg:pb-36">
@@ -126,56 +131,65 @@ function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left — Text */}
           <div>
+            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.4, delay: 1.6 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary bg-primary/5 border border-primary/10"
             >
               <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
               Why LINKey
             </motion.div>
 
+            {/* Subtitle — fades in first */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-2 text-xl font-medium text-[#6B7280] md:text-2xl"
             >
               Not a digital card app.
             </motion.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="heading-1 mb-3"
-            >
-              <span style={gradientTextStyle}>A Professional Identity Platform.</span>
-            </motion.h1>
+            {/* Headline — single gradient span, animated as one unit */}
+            <h1 className="heading-1 mb-3">
+              <motion.span
+                initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="inline-block"
+                style={gradientTextStyle}
+              >
+                A Professional Identity Platform.
+              </motion.span>
+            </h1>
 
+            {/* After-headline — enters AFTER headline completes */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
               className="mb-6 text-xl font-semibold text-(--color-body) md:text-2xl"
             >
               Built for South Africa. Then the world.
             </motion.p>
 
+            {/* Description */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
               className="lead text-(--color-lead) mb-8 max-w-xl"
             >
               Other apps digitise your business card. LINKey replaces your card, your lead capture tool, your loyalty programme, your CRM connector, and your event scanner — with one platform that actually works together.
             </motion.p>
 
+            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.75 }}
+              transition={{ duration: 0.5, delay: 1.5 }}
               className="flex flex-wrap gap-4"
             >
               <motion.a
@@ -198,53 +212,96 @@ function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right — Visual: 5 tools collapsing into 1 (preview) */}
+          {/* Right — Phone Mockup (desktop only) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative flex items-center justify-center"
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="relative hidden items-center justify-center lg:flex"
           >
-            <div className="relative h-[380px] w-full max-w-[420px]">
-              {/* Scattered tool icons */}
-              {[
-                { icon: <CreditCard className="h-6 w-6" />, label: "Cards", x: -80, y: -60, rot: -12 },
-                { icon: <Contact className="h-6 w-6" />, label: "CRM", x: 90, y: -50, rot: 15 },
-                { icon: <Award className="h-6 w-6" />, label: "Loyalty", x: -70, y: 60, rot: -8 },
-                { icon: <ScanLine className="h-6 w-6" />, label: "Scanner", x: 80, y: 70, rot: 10 },
-                { icon: <BarChart3 className="h-6 w-6" />, label: "Analytics", x: 0, y: -90, rot: -5 },
-              ].map((tool, i) => (
-                <motion.div
-                  key={tool.label}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 0.6, scale: 1, x: tool.x, y: tool.y, rotate: tool.rot }}
-                  transition={{ duration: 0.6, delay: 0.8 + i * 0.1, type: "spring" }}
-                  className="absolute left-1/2 top-1/2 -ml-7 -mt-7 flex flex-col items-center gap-1"
-                >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-lg border border-gray-100 text-gray-400">
-                    {tool.icon}
-                  </div>
-                  <span className="text-[10px] font-medium text-gray-400">{tool.label}</span>
-                </motion.div>
-              ))}
+            {/* Floating phone with gentle oscillation */}
+            <motion.div
+              animate={{ y: [0, -3, 0, 3, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {/* Ambient glow behind phone */}
+              <div className="absolute -inset-8 rounded-[50px] bg-[#0052D4]/5 blur-[40px] pointer-events-none" />
 
-              {/* Center LINKey icon */}
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.4, type: "spring", stiffness: 200 }}
-                className="absolute left-1/2 top-1/2 -ml-12 -mt-12 flex flex-col items-center gap-2"
-              >
-                <div className="flex h-24 w-24 items-center justify-center rounded-3xl text-white shadow-2xl shadow-primary/30" style={gradientBgStyle}>
-                  <Zap className="h-10 w-10" />
+              {/* Phone frame */}
+              <div className="w-[280px] rounded-[36px] bg-[#0A0A0A] p-[6px] shadow-[0_25px_60px_rgba(0,82,212,0.15),0_10px_30px_rgba(0,0,0,0.12)]">
+                <div className="w-full rounded-[30px] bg-white overflow-hidden relative">
+                  {/* Status bar */}
+                  <div className="flex items-center justify-between px-6 pt-3 pb-1 relative">
+                    <span className="text-[10px] font-semibold text-gray-800">9:41</span>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[26px] bg-black rounded-b-2xl" />
+                    <div className="flex items-center gap-1">
+                      <div className="w-3.5 h-2.5 border border-gray-800 rounded-sm relative"><div className="absolute inset-[1px] rounded-xs bg-gray-800" /></div>
+                    </div>
+                  </div>
+
+                  {/* Cover with gradient */}
+                  <div className="h-[85px] relative" style={gradientBgStyle}>
+                    <div className="absolute inset-0 opacity-15" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23fff' stroke-width='0.4'/%3E%3C/svg%3E\")" }} />
+                    <div className="absolute top-2.5 right-3 bg-white/25 backdrop-blur-sm rounded-full px-2.5 py-0.5 flex items-center gap-1">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                      <span className="text-[7px] text-white font-bold tracking-wider">LIVE</span>
+                    </div>
+                  </div>
+
+                  {/* Avatar */}
+                  <div className="flex justify-center -mt-9 relative z-10">
+                    <div className="w-16 h-16 rounded-full p-[2.5px]" style={{ background: "conic-gradient(#9CECFB, #65C7F7, #0052D4, #65C7F7, #9CECFB)" }}>
+                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center shadow-inner">
+                        <span className="text-lg font-bold" style={gradientTextStyle}>TM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Name */}
+                  <div className="text-center mt-2 px-5">
+                    <p className="text-[14px] font-bold text-gray-900 tracking-tight">Thabo M.</p>
+                    <p className="text-[10px] text-gray-500 mt-0.5">Sales Director</p>
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex justify-center gap-2.5 mt-3 px-5">
+                    {[
+                      { label: "Call", bg: "#EBF5FF" },
+                      { label: "Email", bg: "#F0FFF4" },
+                      { label: "Chat", bg: "#F0FFF0" },
+                    ].map((a, i) => (
+                      <div key={i} className="w-10 h-10 rounded-xl flex items-center justify-center text-[9px] font-medium text-gray-500 border border-gray-100 shadow-sm" style={{ background: a.bg }}>
+                        {a.label}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Save button with shimmer */}
+                  <div className="px-5 mt-4 mb-4">
+                    <div className="h-10 rounded-full flex items-center justify-center text-white text-[11px] font-semibold tracking-wide relative overflow-hidden" style={gradientBgStyle}>
+                      Save Contact &darr;
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%)", backgroundSize: "200% 100%", animation: "heroShimmer 2.5s ease-in-out infinite" }} />
+                    </div>
+                  </div>
+
+                  {/* Powered by */}
+                  <div className="text-center mb-2">
+                    <span className="text-[8px] text-gray-300">Powered by </span>
+                    <span className="text-[8px] font-bold" style={gradientTextStyle}>LINKey</span>
+                  </div>
                 </div>
-                <span className="text-sm font-bold text-(--color-body)">LINKey</span>
-                <span className="text-xs text-(--color-card-para)">All-in-one</span>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes heroShimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
     </section>
   );
 }
@@ -305,133 +362,89 @@ function SocialProofSection() {
 
 /* ─────────────────── SECTION 3: PROBLEM ─────────────────── */
 const problemTools = [
-  { icon: <CreditCard className="h-7 w-7" />, label: "Card App", x: -120, y: -80, rot: -15 },
-  { icon: <Contact className="h-7 w-7" />, label: "CRM", x: 100, y: -60, rot: 12 },
-  { icon: <Award className="h-7 w-7" />, label: "Loyalty", x: -80, y: 70, rot: -8 },
-  { icon: <BarChart3 className="h-7 w-7" />, label: "Analytics", x: 110, y: 80, rot: 20 },
-  { icon: <ScanLine className="h-7 w-7" />, label: "Scanner", x: 0, y: -100, rot: -5 },
+  { icon: <CreditCard className="h-6 w-6" />, label: "Card App", price: "R99/mo" },
+  { icon: <Contact className="h-6 w-6" />, label: "CRM", price: "R499/mo" },
+  { icon: <Award className="h-6 w-6" />, label: "Loyalty", price: "R299/mo" },
+  { icon: <BarChart3 className="h-6 w-6" />, label: "Analytics", price: "R199/mo" },
+  { icon: <ScanLine className="h-6 w-6" />, label: "Scanner", price: "R149/mo" },
 ];
 
 function ProblemSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [collapsed, setCollapsed] = useState(false);
+  const { ref: viewRef, inView } = useInViewIO({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
-    let ctx: ReturnType<typeof import("gsap")["gsap"]["context"]> | undefined;
-
-    async function initGsap() {
-      if (typeof window === "undefined") return;
-      if (window.innerWidth < 768) return;
-
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-
-      if (!sectionRef.current) return;
-
-      ctx = gsap.context(() => {
-        const tools = sectionRef.current!.querySelectorAll(".problem-tool");
-        const linkey = sectionRef.current!.querySelector(".problem-linkey");
-
-        // Animate each tool from its current position toward center (0,0) + shrink
-        tools.forEach((tool, i) => {
-          const t = problemTools[i];
-          gsap.fromTo(
-            tool,
-            { x: t.x, y: t.y, rotation: t.rot, scale: 1, opacity: 1 },
-            {
-              x: 0,
-              y: 0,
-              rotation: 0,
-              scale: 0,
-              opacity: 0,
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top 60%",
-                end: "center center",
-                scrub: 1,
-              },
-            }
-          );
-        });
-
-        gsap.fromTo(
-          linkey,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "20% 50%",
-              end: "center center",
-              scrub: 1,
-            },
-          }
-        );
-      }, sectionRef);
-    }
-
-    initGsap();
-    return () => ctx?.revert();
-  }, []);
+    if (!inView) return;
+    const timer = setTimeout(() => setCollapsed(true), 2500);
+    return () => clearTimeout(timer);
+  }, [inView]);
 
   return (
-    <section ref={sectionRef} className="px-[5%] py-20 md:py-32 bg-gray-50/60">
+    <section className="px-[5%] py-20 md:py-32 bg-gray-50/60">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-10 text-center">
-          <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">THE PROBLEM</span>
-          <h2 className="heading-2 text-(--color-body)">The 5-Tool Problem</h2>
-        </div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-14 text-center">
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">THE PROBLEM</span>
+          <h2 className="heading-2 text-[#1F2323]">The 5-Tool Problem</h2>
+        </motion.div>
 
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          {/* Visual */}
-          <div className="relative mx-auto flex h-[350px] w-full max-w-[400px] items-center justify-center">
-            {problemTools.map((tool, i) => (
-              <div
-                key={i}
-                className="problem-tool absolute flex flex-col items-center gap-1"
-                style={{
-                  left: "50%",
-                  top: "50%",
-                  marginLeft: -32,
-                  marginTop: -32,
-                  transform: `translate(${tool.x}px, ${tool.y}px) rotate(${tool.rot}deg)`,
-                }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-lg border border-gray-100 text-gray-500">
-                  {tool.icon}
-                </div>
-                <span className="text-xs font-medium text-gray-400">{tool.label}</span>
-              </div>
-            ))}
-            <div className="problem-linkey flex flex-col items-center gap-2 opacity-0 scale-0">
-              <div
-                className="flex h-20 w-20 items-center justify-center rounded-2xl text-white shadow-xl"
-                style={gradientBgStyle}
-              >
-                <Zap className="h-9 w-9" />
-              </div>
-              <span className="text-sm font-bold text-(--color-body)">LINKey</span>
-            </div>
+        <div ref={viewRef} className="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <AnimatePresence mode="wait">
+              {!collapsed ? (
+                <motion.div key="scattered" exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }} className="space-y-3">
+                  {problemTools.map((tool, i) => (
+                    <motion.div key={tool.label} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: i * 0.1 }} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gray-100 text-gray-500 shrink-0">{tool.icon}</div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-[#1F2323]">{tool.label}</p>
+                        <p className="text-[11px] text-gray-400">Separate subscription</p>
+                      </div>
+                      <span className="text-sm font-bold text-red-500">{tool.price}</span>
+                    </motion.div>
+                  ))}
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center justify-between pt-3 border-t border-dashed border-gray-200 mt-2">
+                    <span className="text-sm font-medium text-gray-500">Total monthly cost:</span>
+                    <span className="text-lg font-bold text-red-500">R1,245/mo</span>
+                  </motion.div>
+                </motion.div>
+              ) : (
+                <motion.div key="linkey" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 250, damping: 20 }} className="text-center py-6">
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: [0, 1.15, 1] }} transition={{ type: "spring", stiffness: 300, damping: 15 }} className="w-20 h-20 rounded-2xl mx-auto flex items-center justify-center text-white shadow-2xl shadow-primary/30 mb-4" style={gradientBgStyle}>
+                    <Zap className="h-9 w-9" />
+                  </motion.div>
+                  <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-lg font-bold text-[#1F2323] mb-1">One platform. Everything connected.</motion.p>
+                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-2xl font-bold mb-4" style={gradientTextStyle}>From R0/mo</motion.p>
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="flex flex-wrap justify-center gap-2">
+                    {["Cards", "CRM", "Loyalty", "Analytics", "Scanner", "NFC", "Swop", "AI"].map((tag, i) => (
+                      <motion.span key={tag} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7 + i * 0.06, type: "spring", stiffness: 400, damping: 20 }} className="px-3 py-1 rounded-full bg-[#0052D4]/8 border border-[#0052D4]/15 text-[11px] font-semibold text-[#0052D4]">{tag}</motion.span>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Text */}
           <div>
-            <p className="lead text-(--color-lead) mb-4">
-              Most businesses stitch together five separate tools for cards, CRM, loyalty, events,
-              and analytics. None of them talk to each other.
-            </p>
-            <p className="para text-(--color-card-para)">
-              Data gets lost. Leads fall through. You pay five subscriptions for a patchwork that
-              barely works. And every time you switch between apps, you lose context — and
-              opportunities.
-            </p>
+            <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="lead text-[#484F56] mb-4">
+              Most businesses stitch together five separate tools for cards, CRM, loyalty, events, and analytics. None of them talk to each other.
+            </motion.p>
+            <motion.p initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="para text-[#454545] mb-6">
+              Data gets lost. Leads fall through. You pay five subscriptions for a patchwork that barely works.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex items-center gap-3 p-4 rounded-xl bg-red-50 border border-red-100">
+              <span className="text-2xl">💸</span>
+              <div>
+                <p className="text-sm font-bold text-red-600">R1,245/month wasted</p>
+                <p className="text-xs text-red-500">on 5 tools that don’t talk to each other</p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ─────────────────── SECTION 4: SOLUTION ─────────────────── */
 const capabilities = [
@@ -833,76 +846,87 @@ const milestones = [
   },
 ];
 
-function StoryTimeline() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-
-  useEffect(() => {
-    let ctx: ReturnType<typeof import("gsap")["gsap"]["context"]> | undefined;
-
-    async function initGsap() {
-      if (typeof window === "undefined") return;
-
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-
-      if (!sectionRef.current || !pathRef.current) return;
-
-      // Wait a tick for SVG to render
-      await new Promise(r => setTimeout(r, 100));
-
-      let pathLength: number;
-      try {
-        pathLength = pathRef.current.getTotalLength();
-      } catch {
-        pathLength = 1200; // fallback
-      }
-
-      gsap.set(pathRef.current, {
-        strokeDasharray: pathLength,
-        strokeDashoffset: pathLength,
-      });
-
-      ctx = gsap.context(() => {
-        gsap.to(pathRef.current, {
-          strokeDashoffset: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            end: "bottom 40%",
-            scrub: 1,
-          },
-        });
-
-        const cards = sectionRef.current!.querySelectorAll(".milestone-card");
-        cards.forEach((card, i) => {
-          gsap.fromTo(
-            card,
-            { opacity: 0, scale: 0.85, y: 30 },
-            {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                end: "top 60%",
-                scrub: 1,
-              },
-            }
-          );
-        });
-      }, sectionRef);
-    }
-
-    initGsap();
-    return () => ctx?.revert();
-  }, []);
+/* Timeline milestone card — extracted so hooks are not called inside .map() */
+function TimelineMilestone({ milestone, index, total }: { milestone: typeof milestones[number]; index: number; total: number }) {
+  const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.3 });
+  const isLeft = index % 2 === 0;
 
   return (
-    <section ref={sectionRef} className="px-[5%] py-20 md:py-32 bg-gray-50/60">
+    <div ref={ref} className="relative grid md:grid-cols-[1fr_auto_1fr] items-center gap-0">
+      {/* Left side content (even items) or spacer (odd items) on desktop */}
+      <div className={`hidden md:block ${isLeft ? "" : ""}`}>
+        {isLeft && (
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, type: "spring", stiffness: 120, damping: 20 }}
+            whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(0,82,212,0.08)" }}
+            className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow mr-8"
+          >
+            <h3 className="mb-2 text-lg font-bold text-[#0052D4]">{milestone.title}</h3>
+            <p className="text-sm leading-relaxed text-(--color-card-para)">{milestone.text}</p>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Center: numbered circle on the timeline line */}
+      <div className="hidden md:flex flex-col items-center relative z-10">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={inView ? { scale: 1 } : {}}
+          transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.15 }}
+          className="flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold text-white shadow-lg"
+          style={gradientBgStyle}
+        >
+          {index + 1}
+        </motion.div>
+      </div>
+
+      {/* Right side content (odd items) or spacer (even items) on desktop */}
+      <div className="hidden md:block">
+        {!isLeft && (
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, type: "spring", stiffness: 120, damping: 20 }}
+            whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(0,82,212,0.08)" }}
+            className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow ml-8"
+          >
+            <h3 className="mb-2 text-lg font-bold text-[#0052D4]">{milestone.title}</h3>
+            <p className="text-sm leading-relaxed text-(--color-card-para)">{milestone.text}</p>
+          </motion.div>
+        )}
+      </div>
+
+      {/* Mobile layout: circle left, card right */}
+      <div className="flex items-start gap-4 md:hidden">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={inView ? { scale: 1 } : {}}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold text-white shadow-lg mt-1"
+          style={gradientBgStyle}
+        >
+          {index + 1}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(0,82,212,0.08)" }}
+          className="flex-1 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-shadow"
+        >
+          <h3 className="mb-2 text-lg font-bold text-[#0052D4]">{milestone.title}</h3>
+          <p className="text-sm leading-relaxed text-(--color-card-para)">{milestone.text}</p>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+function StoryTimeline() {
+  return (
+    <section className="px-[5%] py-20 md:py-32 bg-gray-50/60">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR STORY</span>
@@ -910,45 +934,21 @@ function StoryTimeline() {
         </div>
 
         <div className="relative">
-          {/* SVG curved path — desktop */}
-          <svg
-            className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-            viewBox="0 0 900 500"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-            <path
-              ref={pathRef}
-              d="M 50 80 Q 250 20 350 150 Q 450 280 550 120 Q 650 -30 850 180 Q 900 220 850 400"
-              stroke="url(#pathGrad)"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-            />
-            <defs>
-              <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#9CECFB" />
-                <stop offset="50%" stopColor="#65C7F7" />
-                <stop offset="100%" stopColor="#0052D4" />
-              </linearGradient>
-            </defs>
-          </svg>
+          {/* Vertical gradient line — desktop */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-0 bottom-0 hidden w-[3px] -translate-x-1/2 rounded-full md:block"
+            style={{ background: "linear-gradient(to bottom, #9CECFB, #65C7F7, #0052D4)" }}
+          />
 
-          <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+          {/* Vertical gradient line — mobile (left-aligned) */}
+          <div
+            className="pointer-events-none absolute left-[17px] top-0 bottom-0 w-[3px] rounded-full md:hidden"
+            style={{ background: "linear-gradient(to bottom, #9CECFB, #65C7F7, #0052D4)" }}
+          />
+
+          <div className="flex flex-col gap-10 md:gap-14">
             {milestones.map((m, i) => (
-              <div
-                key={i}
-                className="milestone-card relative rounded-2xl border border-gray-100 bg-white p-6 shadow-sm"
-              >
-                <div
-                  className="mb-3 flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-white"
-                  style={gradientBgStyle}
-                >
-                  {i + 1}
-                </div>
-                <h3 className="mb-2 text-lg font-bold text-[#0052D4]">{m.title}</h3>
-                <p className="text-sm leading-relaxed text-(--color-card-para)">{m.text}</p>
-              </div>
+              <TimelineMilestone key={i} milestone={m} index={i} total={milestones.length} />
             ))}
           </div>
         </div>

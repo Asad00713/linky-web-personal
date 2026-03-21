@@ -54,12 +54,12 @@ const featuredArticle = {
 };
 
 const articles = [
-  { category: "Digital Cards", title: "5 Reasons Your Paper Card Is Costing You Deals", excerpt: "Paper cards get lost, go out of date, and can\u2019t track engagement. Here\u2019s why digital cards convert 3x better.", author: "Sarah Chen", readTime: "5 min", date: "Mar 12, 2026" },
+  { category: "Digital Cards", title: "5 Reasons Your Paper Card Is Costing You Deals", excerpt: "Paper cards get lost, go out of date, and can\'t track engagement. Here\'s why digital cards convert 3x better.", author: "Sarah Chen", readTime: "5 min", date: "Mar 12, 2026" },
   { category: "Events", title: "How to Capture 10x More Leads at Your Next Conference", excerpt: "Stop collecting paper cards in a fishbowl. Learn how NFC badge scanning transforms event ROI.", author: "Marcus Rivera", readTime: "6 min", date: "Mar 10, 2026" },
   { category: "Business Growth", title: "SME Growth Playbook: Networking Strategies That Work", excerpt: "Practical, no-fluff networking tactics for small business owners who want to grow without a massive marketing budget.", author: "Priya Naidoo", readTime: "7 min", date: "Mar 8, 2026" },
-  { category: "Product Updates", title: "What\u2019s New: AI Branding Sync & Card Swop 2.0", excerpt: "Our latest release makes it easier to keep your brand consistent and exchange contacts bilaterally.", author: "LINKey Team", readTime: "3 min", date: "Mar 5, 2026" },
+  { category: "Product Updates", title: "What\'s New: AI Branding Sync & Card Swop 2.0", excerpt: "Our latest release makes it easier to keep your brand consistent and exchange contacts bilaterally.", author: "LINKey Team", readTime: "3 min", date: "Mar 5, 2026" },
   { category: "Tips & Guides", title: "Design a Digital Card That Gets Saved, Not Swiped Away", excerpt: "Your card has 3 seconds to make an impression. These design principles ensure it stands out.", author: "Alex Kim", readTime: "4 min", date: "Mar 3, 2026" },
-  { category: "Networking", title: "The Follow-Up Formula: Turn Contacts Into Warm Leads", excerpt: "Meeting someone is step one. Here\u2019s the proven 3-step system that turns handshakes into revenue.", author: "Jordan Ellis", readTime: "6 min", date: "Feb 28, 2026" },
+  { category: "Networking", title: "The Follow-Up Formula: Turn Contacts Into Warm Leads", excerpt: "Meeting someone is step one. Here\'s the proven 3-step system that turns handshakes into revenue.", author: "Jordan Ellis", readTime: "6 min", date: "Feb 28, 2026" },
 ];
 
 const blogFaqs = [

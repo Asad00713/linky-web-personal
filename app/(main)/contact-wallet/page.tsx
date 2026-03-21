@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -32,6 +32,7 @@ import {
   Bell,
   Share2,
   Layers,
+  Upload,
 } from "lucide-react";
 import {
   MagnifyingGlass,
@@ -251,9 +252,10 @@ function FeatureGridSection() {
 const bentoItems = [
   { icon: <RefreshCw className="h-6 w-6" />, title: "CRM Sync", desc: "Two-way sync with Salesforce, HubSpot, Zoho, and more. New contacts flow straight into your pipeline.", wide: true },
   { icon: <Copy className="h-6 w-6" />, title: "Duplicate Detection", desc: "Smart matching catches duplicates before they clutter your wallet. Merge or dismiss with a single tap.", wide: false },
-  { icon: <Activity className="h-6 w-6" />, title: "Activity Timeline", desc: "See every interaction at a glance \u2014 when you connected, notes you added, follow-ups sent.", wide: false },
+  { icon: <Activity className="h-6 w-6" />, title: "Activity Timeline", desc: "See every interaction at a glance — when you connected, notes you added, follow-ups sent.", wide: false },
   { icon: <Share2 className="h-6 w-6" />, title: "Share Collections", desc: "Bundle contacts into shareable collections for your team. Ideal for event leads or sales territories.", wide: false },
-  { icon: <Layers className="h-6 w-6" />, title: "Multi-Card Support", desc: "Manage contacts from multiple LINKey cards in a single wallet. Switch between personal and business views.", wide: true },
+  { icon: <Layers className="h-6 w-6" />, title: "Multi-Card Support", desc: "Manage contacts from multiple LINKey cards in a single wallet. Switch between personal and business views.", wide: false },
+  { icon: <Upload className="h-6 w-6" />, title: "Bulk Import & Export", desc: "Upload CSV files with hundreds of contacts in seconds. Export anytime — your data is always yours.", wide: true },
 ];
 
 function BentoSection() {
@@ -285,7 +287,7 @@ function BentoSection() {
    ================================================================ */
 
 const steps = [
-  { num: "01", title: "Capture", desc: "Tap, scan, or import \u2014 every new connection lands in your wallet automatically.", icon: <UserPlus className="h-6 w-6" /> },
+  { num: "01", title: "Capture", desc: "Tap, scan, or import — every new connection lands in your wallet automatically.", icon: <UserPlus className="h-6 w-6" /> },
   { num: "02", title: "Organise", desc: "Add tags, notes, and star your favourites. Auto-groups by company and event.", icon: <Tag className="h-6 w-6" /> },
   { num: "03", title: "Find", desc: "Powerful search and filters surface any contact in under two seconds.", icon: <Search className="h-6 w-6" /> },
   { num: "04", title: "Follow Up", desc: "Set reminders, send emails, or push to your CRM. Turn connections into conversations.", icon: <ArrowRight className="h-6 w-6" /> },
@@ -301,17 +303,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
           <h2 className="heading-2 text-(--color-body) mb-4">Four Steps to a Smarter Rolodex</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>

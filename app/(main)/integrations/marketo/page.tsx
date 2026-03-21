@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView as useRIOInView } from "react-intersection-observer";
@@ -47,12 +47,12 @@ const BRAND = {
 const MK_PURPLE = "#5C4C9F";
 
 const coreFeatures = [
-  { icon: <UserPlus className="h-6 w-6" />, title: "Lead Push", description: "Push new leads from networking events directly into Marketo with full enrichment data. No CSV files, no manual imports, no delay." },
-  { icon: <BookOpen className="h-6 w-6" />, title: "Programme Enrollment", description: "Automatically enrol leads into the right Marketo programmes based on event type, lead source, or custom criteria you define." },
-  { icon: <Sparkles className="h-6 w-6" />, title: "Enrichment Sync", description: "Keep Marketo lead records up to date. When LINKey captures new data points, existing records are enriched automatically." },
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Scoring Integration", description: "Feed interaction signals into Marketo lead scoring. Event attendance, QR scans, and profile views all contribute to lead score." },
-  { icon: <ScrollText className="h-6 w-6" />, title: "Activity Logging", description: "Log every LINKey interaction as a Marketo activity. Your marketing team gets full visibility into the networking funnel." },
-  { icon: <SlidersHorizontal className="h-6 w-6" />, title: "Custom Field Mapping", description: "Map any LINKey data field to any Marketo field — standard or custom. Full control over your data schema." },
+  { icon: <UserPlus className="h-6 w-6" />, title: "Lead Push", description: "Push new leads from networking events directly into Marketo with full enrichment data. No CSV files, no manual imports, no delay.", stat: "Instant", statLabel: "push" },
+  { icon: <BookOpen className="h-6 w-6" />, title: "Programme Enrollment", description: "Automatically enrol leads into the right Marketo programmes based on event type, lead source, or custom criteria you define.", stat: "Auto", statLabel: "enrollment" },
+  { icon: <Sparkles className="h-6 w-6" />, title: "Enrichment Sync", description: "Keep Marketo lead records up to date. When LINKey captures new data points, existing records are enriched automatically.", stat: "50+", statLabel: "data points" },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Scoring Integration", description: "Feed interaction signals into Marketo lead scoring. Event attendance, QR scans, and profile views all contribute to lead score.", stat: "4x", statLabel: "faster MQLs" },
+  { icon: <ScrollText className="h-6 w-6" />, title: "Activity Logging", description: "Log every LINKey interaction as a Marketo activity. Your marketing team gets full visibility into the networking funnel.", stat: "100%", statLabel: "visibility" },
+  { icon: <SlidersHorizontal className="h-6 w-6" />, title: "Custom Field Mapping", description: "Map any LINKey data field to any Marketo field — standard or custom. Full control over your data schema.", stat: "Any", statLabel: "field" },
 ];
 
 const pipelineSteps = [
@@ -64,11 +64,12 @@ const pipelineSteps = [
 ];
 
 const advancedFeatures = [
-  { icon: <Zap className="h-7 w-7" />, title: "Smart Campaign Triggers", description: "LINKey interactions fire Marketo smart campaign triggers in real time. Launch nurture sequences, alert sales, or update scoring instantly.", wide: true },
-  { icon: <ShieldCheck className="h-7 w-7" />, title: "Lead Partition Support", description: "Route leads to the correct workspace and lead partition based on region, business unit, or custom logic." },
-  { icon: <Coins className="h-7 w-7" />, title: "Token Personalisation", description: "LINKey populates programme tokens with event-specific data, enabling hyper-personalised follow-up emails." },
-  { icon: <Clock className="h-7 w-7" />, title: "Batch Sync Scheduling", description: "Choose real-time or scheduled batch sync to control API usage. Perfect for high-volume events." },
-  { icon: <Plug2 className="h-7 w-7" />, title: "Marketo Engage Compatibility", description: "Fully compatible with Adobe Marketo Engage, including the latest REST API. Supports legacy and modern instances.", wide: true },
+  { icon: <Zap className="h-7 w-7" />, title: "Smart Campaign Triggers", description: "LINKey interactions fire Marketo smart campaign triggers in real time. Launch nurture sequences, alert sales, or update scoring instantly.", stat: "Real-Time", statLabel: "triggers" },
+  { icon: <ShieldCheck className="h-7 w-7" />, title: "Lead Partition Support", description: "Route leads to the correct workspace and lead partition based on region, business unit, or custom logic.", stat: "Multi", statLabel: "workspace" },
+  { icon: <Coins className="h-7 w-7" />, title: "Token Personalisation", description: "LINKey populates programme tokens with event-specific data, enabling hyper-personalised follow-up emails.", stat: "1:1", statLabel: "personalised" },
+  { icon: <Clock className="h-7 w-7" />, title: "Batch Sync Scheduling", description: "Choose real-time or scheduled batch sync to control API usage. Perfect for high-volume events.", stat: "10K+", statLabel: "per batch" },
+  { icon: <Plug2 className="h-7 w-7" />, title: "Marketo Engage Compatibility", description: "Fully compatible with Adobe Marketo Engage, including the latest REST API. Supports legacy and modern instances.", stat: "100%", statLabel: "compatible" },
+  { icon: <RefreshCw className="h-7 w-7" />, title: "Bi-Directional Sync", description: "Changes in Marketo flow back to LINKey automatically. Keep both systems aligned without manual reconciliation.", stat: "<3s", statLabel: "sync speed" },
 ];
 
 const howItWorks = [
@@ -154,64 +155,111 @@ function Stat({ value, suffix, label, decimals }: { value: number; suffix: strin
 /* ─── DATA PIPELINE VIZ ────────────────────────────────────────── */
 
 function DataPipelineViz() {
+  const [activeStep, setActiveStep] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  // Auto-advance
+  useEffect(() => {
+    if (!inView) return;
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % pipelineSteps.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [inView]);
+
+  const stepScreens = [
+    <div key="0" className="space-y-2">
+      {["NFC Tap — Thabo M.", "QR Scan — Priya N.", "Card Swop — James K."].map((lead, i) => (
+        <motion.div key={lead} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="flex items-center gap-2 py-1.5 border-b border-gray-50">
+          <div className="w-5 h-5 rounded-md flex items-center justify-center text-[8px] text-white" style={gradientBgStyle}>✓</div>
+          <span className="text-[9px] text-gray-700">{lead}</span>
+        </motion.div>
+      ))}
+    </div>,
+    <div key="1" className="space-y-1.5">
+      {[{ l: "Email verified", w: 100 }, { l: "LinkedIn found", w: 85 }, { l: "Company enriched", w: 92 }].map((d, i) => (
+        <div key={d.l}>
+          <div className="flex justify-between text-[8px] mb-0.5"><span className="text-gray-500">{d.l}</span><span className="text-green-600">✓</span></div>
+          <motion.div className="h-1 rounded-full bg-gray-100 overflow-hidden"><motion.div initial={{ width: 0 }} animate={{ width: `${d.w}%` }} transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }} className="h-full rounded-full" style={gradientBgStyle} /></motion.div>
+        </div>
+      ))}
+    </div>,
+    <div key="2" className="text-center py-2">
+      <div className="w-10 h-10 rounded-xl mx-auto flex items-center justify-center mb-2" style={{ background: MK_PURPLE }}><Send className="w-4 h-4 text-white" /></div>
+      <p className="text-[10px] font-bold text-gray-800">Syncing to Marketo...</p>
+      <motion.div className="mt-2 h-1.5 rounded-full bg-gray-100 overflow-hidden mx-4"><motion.div animate={{ width: ["0%", "100%"] }} transition={{ duration: 1.5, repeat: Infinity }} className="h-full rounded-full" style={{ background: MK_PURPLE }} /></motion.div>
+    </div>,
+    <div key="3" className="space-y-2">
+      {["Post-Event Nurture", "Product Interest Track", "VIP Follow-Up"].map((prog, i) => (
+        <motion.div key={prog} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.12 }} className="flex items-center gap-2 px-2 py-1.5 rounded-lg border" style={{ borderColor: `${MK_PURPLE}20`, background: `${MK_PURPLE}05` }}>
+          <BookOpen className="w-3 h-3" style={{ color: MK_PURPLE }} />
+          <span className="text-[9px] font-medium text-gray-700">{prog}</span>
+        </motion.div>
+      ))}
+    </div>,
+    <div key="4" className="text-center py-3">
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 400, damping: 12 }}>
+        <Zap className="w-8 h-8 mx-auto mb-2" style={{ color: MK_PURPLE }} />
+      </motion.div>
+      <p className="text-[10px] font-bold text-gray-800">Campaign Active!</p>
+      <p className="text-[8px] text-gray-400 mt-1">3 leads entering nurture flow</p>
+    </div>,
+  ];
 
   return (
-    <div ref={ref} className="relative">
-      {/* Desktop horizontal flow */}
-      <div className="hidden md:flex items-center justify-between max-w-4xl mx-auto relative">
-        {/* Connecting line */}
-        <div className="absolute top-8 left-0 right-0 h-0.5" style={{ background: `${BRAND.mid}25` }}>
-          <motion.div
-            className="h-full"
-            style={gradientBgStyle}
-            initial={{ width: "0%" }}
-            animate={inView ? { width: "100%" } : {}}
-            transition={{ duration: 2, ease: "easeOut" }}
-          />
+    <div ref={ref} className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
+      {/* Left: Phone mockup */}
+      <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ type: "spring", stiffness: 200, damping: 22, delay: 0.3 }} className="flex justify-center">
+        <div className="w-[230px] rounded-[30px] bg-[#0A0A0A] p-[5px] shadow-2xl">
+          <div className="w-full rounded-[25px] bg-white overflow-hidden">
+            <div className="flex items-center justify-between px-5 pt-2.5 pb-1 relative">
+              <span className="text-[9px] font-semibold text-gray-800">9:41</span>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[22px] bg-black rounded-b-xl" />
+            </div>
+            <div className="px-4 py-3">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-5 h-5 rounded-md" style={{ background: MK_PURPLE }} />
+                <p className="text-[10px] font-bold text-[#1F2323]">{pipelineSteps[activeStep].label}</p>
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.div key={activeStep} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3 }} className="min-h-[120px]">
+                  {stepScreens[activeStep]}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
+      </motion.div>
 
+      {/* Right: Step selector */}
+      <div className="space-y-3">
         {pipelineSteps.map((step, i) => (
-          <motion.div
+          <motion.button
             key={step.label}
-            className="relative z-10 flex flex-col items-center text-center w-36"
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.35, duration: 0.5 }}
-          >
-            <motion.div
-              className="w-16 h-16 rounded-2xl flex items-center justify-center text-white shadow-lg mb-3"
-              style={i === 2 ? { background: MK_PURPLE } : gradientBgStyle}
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={spring}
-            >
-              {step.icon}
-            </motion.div>
-            <p className="text-xs font-bold mb-1" style={{ color: BRAND.body }}>{step.label}</p>
-            <p className="text-[10px] leading-tight" style={{ color: BRAND.cardPara }}>{step.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Mobile vertical flow */}
-      <div className="md:hidden space-y-4">
-        {pipelineSteps.map((step, i) => (
-          <motion.div
-            key={step.label}
-            initial={{ opacity: 0, x: -20 }}
+            onClick={() => setActiveStep(i)}
+            initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: i * 0.2 }}
-            className="flex items-center gap-4"
+            transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+            whileHover={{ x: 4 }}
+            className={`w-full text-left rounded-xl p-4 transition-all duration-300 border cursor-pointer ${i === activeStep ? "bg-white border-[#5C4EBF]/20 shadow-lg" : "bg-white/50 border-transparent hover:bg-white hover:shadow-md hover:border-gray-100"}`}
           >
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg flex-shrink-0" style={i === 2 ? { background: MK_PURPLE } : gradientBgStyle}>
-              {step.icon}
+            <div className="flex items-start gap-3">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all ${i === activeStep ? "shadow-md" : ""}`} style={i === activeStep ? { background: MK_PURPLE } : { background: `${MK_PURPLE}10` }}>
+                <span className={i === activeStep ? "text-white" : ""} style={i !== activeStep ? { color: MK_PURPLE } : undefined}>{step.icon}</span>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-[10px] font-bold tracking-wider" style={{ color: MK_PURPLE }}>STEP {String(i + 1).padStart(2, "0")}</span>
+                  {i === activeStep && <motion.div layoutId="mk-pipe-indicator" className="h-0.5 flex-1 rounded-full" style={{ background: MK_PURPLE }} transition={{ type: "spring", stiffness: 500, damping: 30 }} />}
+                </div>
+                <h3 className={`font-semibold text-sm transition-colors ${i === activeStep ? "text-[#1F2323]" : "text-gray-400"}`}>{step.label}</h3>
+                <AnimatePresence>
+                  {i === activeStep && <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.25 }} className="text-xs text-[#454545] mt-1 overflow-hidden">{step.desc}</motion.p>}
+                </AnimatePresence>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-bold" style={{ color: BRAND.body }}>{step.label}</p>
-              <p className="text-xs" style={{ color: BRAND.cardPara }}>{step.desc}</p>
-            </div>
-          </motion.div>
+          </motion.button>
         ))}
       </div>
     </div>
@@ -323,17 +371,31 @@ export default function MarketoIntegrationPage() {
             <SectionHeading gradient="a Marketo Integration">Everything Marketing Ops Needs from</SectionHeading>
           </div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {coreFeatures.map((f, i) => (
-              <motion.div key={f.title} variants={fadeUp} custom={i} whileHover={{ y: -6, transition: spring }} className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-shadow">
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: `${BRAND.primary}10`, color: BRAND.primary }}>
-                  {f.icon}
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {f.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{f.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{f.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: BRAND.body }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: BRAND.cardPara }}>{f.description}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{f.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -370,17 +432,31 @@ export default function MarketoIntegrationPage() {
             <SectionHeading gradient="Marketo Power Users">Built for</SectionHeading>
           </div>
 
-          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {advancedFeatures.map((f, i) => (
-              <motion.div key={f.title} variants={fadeUp} custom={i} whileHover={{ y: -6, transition: spring }} className={`bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-shadow ${f.wide ? "md:col-span-2 lg:col-span-2" : ""}`}>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={{ background: `${MK_PURPLE}10`, color: MK_PURPLE }}>
-                  {f.icon}
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+                className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                    {f.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold" style={gradientTextStyle}>{f.stat}</p>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wider">{f.statLabel}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: BRAND.body }}>{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: BRAND.cardPara }}>{f.description}</p>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{f.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed">{f.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

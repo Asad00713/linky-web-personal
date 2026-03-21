@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -322,17 +322,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">STEP BY STEP</span>
           <h2 className="heading-2 text-(--color-body) mb-4">Up and Running in Under a Minute</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>
@@ -377,7 +402,7 @@ function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const before = ["Hunting through brand guidelines for hex codes", "Copy-pasting colours into form fields one by one", "Guessing at dark-mode variants and contrast ratios", "Inconsistent colours across team members' cards", "Re-doing the entire process after a rebrand", "Relying on a designer for every small update"];
-  const after = ["Upload a logo and colours are extracted in seconds", "Primary, secondary, and accent tones applied automatically", "Light, dark, and high-contrast themes generated for you", "Team-wide sync keeps every card perfectly on-brand", "Re-upload a new logo and everything updates instantly", "Anyone on the team can apply branding \u2014 no design skills needed"];
+  const after = ["Upload a logo and colours are extracted in seconds", "Primary, secondary, and accent tones applied automatically", "Light, dark, and high-contrast themes generated for you", "Team-wide sync keeps every card perfectly on-brand", "Re-upload a new logo and everything updates instantly", "Anyone on the team can apply branding — no design skills needed"];
 
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
@@ -446,7 +471,7 @@ const faqs = [
   { q: "Can I override AI-suggested colours?", a: "Absolutely. Fine-tune any colour, swap accents, or enter exact hex codes from your brand book." },
   { q: "Does it work with website URLs instead of logos?", a: "Yes. Paste any URL and LINKey extracts favicons, meta images, and CSS colour variables." },
   { q: "Will it update my team's cards too?", a: "On team plans, updating your org palette syncs to every team member's card simultaneously." },
-  { q: "Is there a limit on brand profiles?", a: "Free: 1 profile. Pro: 5. Business: unlimited \u2014 perfect for agencies managing multiple clients." },
+  { q: "Is there a limit on brand profiles?", a: "Free: 1 profile. Pro: 5. Business: unlimited — perfect for agencies managing multiple clients." },
   { q: "What if I change my logo later?", a: "Upload the new logo, preview changes, and apply. Roll back to any previous palette at any time." },
   { q: "Does it work with dark mode?", a: "Yes. Automatically generates light, dark, and high-contrast variants. Card can adapt to viewer's device preference." },
 ];

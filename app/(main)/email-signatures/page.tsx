@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -36,6 +36,7 @@ import {
   FlaskConical,
   Phone,
   Globe,
+  RefreshCw,
 } from "lucide-react";
 import {
   LinkedinLogo,
@@ -232,9 +233,9 @@ function ImpressionStats() {
    ================================================================ */
 
 const featureRows = [
-  { icon: <Palette className="h-8 w-8" />, title: "Brand-Consistent Design", desc: "Colours, fonts, and layout pulled straight from your brand guidelines. Your logo, your palette \u2014 applied automatically across every team member's signature. No rogue Comic Sans ever again.", img: "brand-design" },
-  { icon: <Link2 className="h-8 w-8" />, title: "Clickable Card Link", desc: "A single call-to-action button that opens your full LINKey digital card in the recipient's browser. No app required. Your photo, bio, social links, portfolio, and contact-save button \u2014 one click away.", img: "card-link" },
-  { icon: <Share2 className="h-8 w-8" />, title: "Social Icons Row", desc: "LinkedIn, X, Instagram, GitHub, YouTube \u2014 add any social profile and it renders as a clean, clickable icon row. Drive traffic to the platforms that matter most to your business.", img: "social-icons" },
+  { icon: <Palette className="h-8 w-8" />, title: "Brand-Consistent Design", desc: "Colours, fonts, and layout pulled straight from your brand guidelines. Your logo, your palette — applied automatically across every team member's signature. No rogue Comic Sans ever again.", img: "brand-design" },
+  { icon: <Link2 className="h-8 w-8" />, title: "Clickable Card Link", desc: "A single call-to-action button that opens your full LINKey digital card in the recipient's browser. No app required. Your photo, bio, social links, portfolio, and contact-save button — one click away.", img: "card-link" },
+  { icon: <Share2 className="h-8 w-8" />, title: "Social Icons Row", desc: "LinkedIn, X, Instagram, GitHub, YouTube — add any social profile and it renders as a clean, clickable icon row. Drive traffic to the platforms that matter most to your business.", img: "social-icons" },
 ];
 
 function AlternatingFeatureRow({ f, i }: { f: typeof featureRows[number]; i: number }) {
@@ -273,9 +274,9 @@ function AlternatingFeatures() {
    ================================================================ */
 
 const gridFeatures = [
-  { icon: <Palette className="h-6 w-6" />, title: "Brand Design", desc: "Colours, fonts, and layout pulled from your brand. Update once \u2014 every signature updates everywhere." },
+  { icon: <Palette className="h-6 w-6" />, title: "Brand Design", desc: "Colours, fonts, and layout pulled from your brand. Update once — every signature updates everywhere." },
   { icon: <Link2 className="h-6 w-6" />, title: "Card Link", desc: "A CTA button opening your full LINKey card in the recipient's browser. No app required." },
-  { icon: <Share2 className="h-6 w-6" />, title: "Social Icons", desc: "LinkedIn, X, Instagram, GitHub \u2014 clean, clickable icon row in every email." },
+  { icon: <Share2 className="h-6 w-6" />, title: "Social Icons", desc: "LinkedIn, X, Instagram, GitHub — clean, clickable icon row in every email." },
   { icon: <Image className="h-6 w-6" />, title: "Banner Image", desc: "Rotating promotional banner for events, launches, or seasonal campaigns." },
   { icon: <CalendarClock className="h-6 w-6" />, title: "Meeting Scheduler", desc: "Embed Calendly or Cal.com links. Prospects book meetings in one click." },
   { icon: <Scale className="h-6 w-6" />, title: "Legal Disclaimers", desc: "Auto-append company-approved legal text, confidentiality notices, or regulatory disclosures." },
@@ -312,12 +313,41 @@ function FeatureGridSection() {
    ================================================================ */
 
 const bentoItems = [
-  { icon: <Users className="h-6 w-6" />, title: "Team-Wide Deployment", desc: "Roll out branded signatures to your entire organisation from one dashboard. New hires get their signature on day one.", wide: true },
-  { icon: <FlaskConical className="h-6 w-6" />, title: "A/B Testing", desc: "Test different CTA buttons, banner images, or layouts across segments and let the data decide which drives more clicks.", wide: false },
-  { icon: <BarChart3 className="h-6 w-6" />, title: "Click Analytics", desc: "Track total impressions, unique clicks, top-performing links, and engagement trends from your dashboard.", wide: false },
-  { icon: <Code className="h-6 w-6" />, title: "HTML & Plain-Text", desc: "Every signature comes with both a rich HTML version and a graceful plain-text fallback.", wide: false },
-  { icon: <Smartphone className="h-6 w-6" />, title: "Mobile-Responsive", desc: "Signatures adapt to any screen size. Crisp on phone, tablet, or desktop.", wide: true },
+  { icon: <Users className="h-6 w-6" />, title: "Team-Wide Deployment", desc: "Roll out branded signatures to your entire organisation from one dashboard. New hires get their signature on day one.", stat: "500+", statLabel: "teams onboarded" },
+  { icon: <FlaskConical className="h-6 w-6" />, title: "A/B Testing", desc: "Test different CTA buttons, banner images, or layouts across segments and let the data decide which drives more clicks.", stat: "36%", statLabel: "higher click-through" },
+  { icon: <BarChart3 className="h-6 w-6" />, title: "Click Analytics", desc: "Track total impressions, unique clicks, top-performing links, and engagement trends from your dashboard.", stat: "Real-time", statLabel: "reporting" },
+  { icon: <Code className="h-6 w-6" />, title: "HTML & Plain-Text", desc: "Every signature comes with both a rich HTML version and a graceful plain-text fallback.", stat: "100%", statLabel: "client compatible" },
+  { icon: <Smartphone className="h-6 w-6" />, title: "Mobile-Responsive", desc: "Signatures adapt to any screen size. Crisp on phone, tablet, or desktop.", stat: "99.7%", statLabel: "render accuracy" },
+  { icon: <RefreshCw className="h-6 w-6" />, title: "Auto-Update", desc: "Change your details once — every signature across your team updates automatically. No manual resending.", stat: "0", statLabel: "manual updates needed" },
 ];
+
+function BentoItem({ item, index }: { item: typeof bentoItems[0]; index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 25 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+      className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+          {item.icon}
+        </div>
+        <div className="text-right">
+          <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+          <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+        </div>
+      </div>
+      <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+      <p className="text-sm text-[#454545] leading-relaxed">{item.desc}</p>
+    </motion.div>
+  );
+}
 
 function BentoSection() {
   const ref = useRef(null);
@@ -325,19 +355,15 @@ function BentoSection() {
   return (
     <section ref={ref} className="px-[5%] py-20 md:py-28">
       <div className="mx-auto max-w-7xl">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
-          <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">SCALE & OPTIMISE</span>
-          <h2 className="heading-2 text-(--color-body) mb-4">Built for Teams. Tuned for Performance.</h2>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-14">
+          <span className="eyebrow text-[#16B8C3] mb-3 inline-block">SCALE & OPTIMISE</span>
+          <h2 className="heading-2 text-[#1F2323] mb-4">Built for Teams. Tuned for Performance.</h2>
         </motion.div>
-        <motion.div variants={stagger} initial="hidden" animate={isInView ? "visible" : "hidden"} className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {bentoItems.map((item, i) => (
-            <motion.div key={i} variants={fadeUp} {...springHover} className={`rounded-2xl border border-gray-100 bg-white p-8 shadow-sm hover:shadow-lg transition-shadow ${item.wide ? "md:col-span-2" : ""}`}>
-              <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-primary/5 text-primary mb-5">{item.icon}</div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{item.title}</h3>
-              <p className="para text-(--color-card-para)">{item.desc}</p>
-            </motion.div>
+            <BentoItem key={item.title} item={item} index={i} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -364,17 +390,42 @@ function HowItWorksSection() {
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FOUR SIMPLE STEPS</span>
           <h2 className="heading-2 text-(--color-body) mb-4">Live in Under Two Minutes</h2>
         </motion.div>
-        <div className="grid md:grid-cols-4 gap-8 relative">
-          <div className="hidden md:block absolute top-[60px] left-0 right-0 h-0.5 bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4]" />
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
           {steps.map((step, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.15 }} className="relative text-center">
-              <div className="relative z-10 mx-auto mb-6 h-[120px] w-[120px] rounded-full bg-white border-2 border-primary/10 shadow-lg flex flex-col items-center justify-center">
-                <span className="text-xs font-bold text-primary mb-1">{step.num}</span>
-                <div className="text-primary">{step.icon}</div>
-              </div>
-              <h3 className="text-lg font-semibold text-(--color-body) mb-2">{step.title}</h3>
-              <p className="para text-(--color-card-para)">{step.desc}</p>
-            </motion.div>
+            <React.Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex-1 text-center"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className="mx-auto mb-5 h-20 w-20 rounded-2xl bg-gradient-to-br from-[#F0F6FF] to-white border border-primary/10 shadow-md flex flex-col items-center justify-center cursor-default"
+                >
+                  <span className="text-[10px] font-bold tracking-wider mb-1" style={{ color: "#0052D4" }}>{step.num}</span>
+                  <div className="text-[#0052D4]">{step.icon}</div>
+                </motion.div>
+                <h3 className="text-base font-semibold text-[#1F2323] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#454545] leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+              </motion.div>
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex items-start pt-10 px-1">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.2 }}
+                    style={{ originX: 0 }}
+                  >
+                    <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+                      <path d="M0 6h32M28 1l6 5-6 5" stroke="url(#stepArrow)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <defs><linearGradient id="stepArrow" x1="0" y1="0" x2="40" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                    </svg>
+                  </motion.div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>

@@ -213,52 +213,41 @@ function NotificationBell() {
 /* ------------------------------------------------------------------ */
 
 function PipelineFlowAnimation() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const stages = ["Capture", "Qualify", "Nurture", "Convert"];
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      dotRefs.current.forEach((dot, i) => {
-        if (!dot) return;
-        gsap.fromTo(
-          dot,
-          { x: -20, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            delay: i * 0.3,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 70%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  const stages = [
+    { label: "Capture", icon: "📥", color: "#9CECFB" },
+    { label: "Qualify", icon: "⭐", color: "#65C7F7" },
+    { label: "Nurture", icon: "💬", color: "#3B9FE3" },
+    { label: "Convert", icon: "🤝", color: "#0052D4" },
+  ];
 
   return (
-    <div ref={sectionRef} className="flex items-center justify-center gap-2 md:gap-4 py-8 flex-wrap">
+    <div className="flex items-center justify-center gap-0 md:gap-2 py-10 overflow-x-auto">
       {stages.map((stage, i) => (
-        <React.Fragment key={stage}>
-          <div
-            ref={(el) => { dotRefs.current[i] = el; }}
-            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full border border-[#0052D4]/20 bg-white shadow-sm"
+        <React.Fragment key={stage.label}>
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 300, damping: 20, delay: i * 0.15 }}
+            whileHover={{ y: -4, boxShadow: "0 12px 30px rgba(0,82,212,0.12)" }}
+            className="flex flex-col items-center gap-2 px-4 py-4 md:px-8 md:py-5 rounded-2xl border border-gray-100 bg-white shadow-sm cursor-default min-w-[100px]"
           >
-            <div className="w-3 h-3 rounded-full" style={gradientBgStyle} />
-            <span className="text-sm font-medium text-[#1F2323]">{stage}</span>
-          </div>
+            <span className="text-2xl">{stage.icon}</span>
+            <span className="text-sm font-semibold text-[#1F2323]">{stage.label}</span>
+            <div className="h-1 w-8 rounded-full" style={{ background: stage.color }} />
+          </motion.div>
           {i < stages.length - 1 && (
-            <motion.div
-              animate={{ x: [0, 6, 0] }}
-              transition={{ duration: 1.2, repeat: Infinity }}
-            >
-              <CaretRight size={16} weight="bold" className="text-[#65C7F7]" />
-            </motion.div>
+            <div className="flex items-center px-1 md:px-2 shrink-0">
+              <motion.div
+                animate={{ x: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none">
+                  <path d="M0 6h24M20 1l6 5-6 5" stroke="url(#pipeArrow)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <defs><linearGradient id="pipeArrow" x1="0" y1="0" x2="32" y2="0"><stop stopColor="#9CECFB" /><stop offset="1" stopColor="#0052D4" /></linearGradient></defs>
+                </svg>
+              </motion.div>
+            </div>
           )}
         </React.Fragment>
       ))}
@@ -504,42 +493,12 @@ function InteractiveTabs() {
 /* ------------------------------------------------------------------ */
 
 const bentoItems = [
-  {
-    icon: <EnvelopeSimple size={24} weight="duotone" />,
-    title: "Email Integration",
-    description: "Send follow-up emails directly from the lead record. Replies are logged automatically.",
-    wide: false,
-  },
-  {
-    icon: <UsersThree size={24} weight="duotone" />,
-    title: "Team Collaboration",
-    description: "Assign leads, leave internal comments, and @mention colleagues across time zones.",
-    wide: false,
-  },
-  {
-    icon: <Star size={24} weight="duotone" />,
-    title: "Lead Scoring",
-    description: "Auto-score leads based on engagement, source quality, and recency. Focus where it counts.",
-    wide: true,
-  },
-  {
-    icon: <SlidersHorizontal size={24} weight="duotone" />,
-    title: "Custom Fields",
-    description: "Add fields for deal value, product interest, region — your inbox adapts to you.",
-    wide: false,
-  },
-  {
-    icon: <ListChecks size={24} weight="duotone" />,
-    title: "Bulk Actions",
-    description: "Select multiple leads and tag, move, export, or archive them in one go.",
-    wide: false,
-  },
-  {
-    icon: <Export size={24} weight="duotone" />,
-    title: "Export to CSV",
-    description: "Export individual leads or filtered batches. Your data is never locked in.",
-    wide: false,
-  },
+  { icon: <EnvelopeSimple size={24} weight="duotone" />, title: "Email Integration", description: "Send follow-up emails directly from the lead record. Replies are logged automatically.", stat: "Direct", statLabel: "email send" },
+  { icon: <UsersThree size={24} weight="duotone" />, title: "Team Collaboration", description: "Assign leads, leave internal comments, and @mention colleagues across time zones.", stat: "Real-time", statLabel: "team sync" },
+  { icon: <Star size={24} weight="duotone" />, title: "Lead Scoring", description: "Auto-score leads based on engagement, source quality, and recency. Focus where it counts.", stat: "Auto", statLabel: "scoring" },
+  { icon: <SlidersHorizontal size={24} weight="duotone" />, title: "Custom Fields", description: "Add fields for deal value, product interest, region — your inbox adapts to you.", stat: "∞", statLabel: "custom fields" },
+  { icon: <ListChecks size={24} weight="duotone" />, title: "Bulk Actions", description: "Select multiple leads and tag, move, export, or archive them in one go.", stat: "1-click", statLabel: "batch ops" },
+  { icon: <Export size={24} weight="duotone" />, title: "Export to CSV", description: "Export individual leads or filtered batches. Your data is never locked in.", stat: "Always", statLabel: "your data" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -939,26 +898,28 @@ export default function LeadInboxPage() {
           title="Built for Teams That Move Fast"
           description="Email integration, lead scoring, custom fields, and more — everything to close deals without switching between a dozen apps."
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {bentoItems.map((item, i) => (
             <motion.div
               key={item.title}
-              className={`bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow ${
-                item.wide ? "md:col-span-2" : ""
-              }`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(0,82,212,0.08)" }}
+              className="group rounded-2xl border border-gray-100 bg-white p-7 shadow-sm cursor-default transition-colors hover:border-[#0052D4]/15"
             >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4"
-                style={gradientBgStyle}
-              >
-                {item.icon}
+              <div className="flex items-start justify-between mb-4">
+                <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-[#F0F6FF] text-[#0052D4] group-hover:shadow-md transition-shadow">
+                  {item.icon}
+                </div>
+                <div className="text-right">
+                  <p className="text-xl font-bold" style={gradientTextStyle}>{item.stat}</p>
+                  <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.statLabel}</p>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-[#1F2323] mb-2">{item.title}</h3>
-              <p className="text-[#454545] text-sm leading-relaxed">{item.description}</p>
+              <h3 className="text-base font-semibold text-[#1F2323] mb-2">{item.title}</h3>
+              <p className="text-sm text-[#454545] leading-relaxed">{item.description}</p>
             </motion.div>
           ))}
         </div>

@@ -68,7 +68,7 @@ function HeroSection() {
             </h1>
             <p className="lead text-(--color-lead) mb-8 max-w-xl">
               Toggle visibility, approve contact saves, and set profile access
-              levels \u2014 all from one screen. Share exactly what you want, with
+              levels — all from one screen. Share exactly what you want, with
               exactly who you want.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -112,7 +112,7 @@ function HeroSection() {
 /* ------------------------------------------------------------------ */
 
 const showcaseFeatures = [
-  { icon: <ToggleRight className="h-6 w-6" />, title: "Granular Visibility Toggles", desc: "Choose exactly what each contact sees. Show your phone to clients, hide it from strangers \u2014 every field is independently controllable." },
+  { icon: <ToggleRight className="h-6 w-6" />, title: "Granular Visibility Toggles", desc: "Choose exactly what each contact sees. Show your phone to clients, hide it from strangers — every field is independently controllable." },
   { icon: <UserCheck className="h-6 w-6" />, title: "Save Approval Workflow", desc: "When someone tries to save your contact, you can require approval first. Nobody gets your details without explicit consent." },
   { icon: <Layers className="h-6 w-6" />, title: "Profile Access Levels", desc: "Create public, connection, and trusted tiers. Each level reveals a different amount of your information, automatically." },
 ];
@@ -127,7 +127,7 @@ function FeatureShowcaseSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
             <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">TOTAL CONTROL</span>
-            <h2 className="heading-2 text-(--color-body) mb-4">Granular Privacy \u2014 Down to <span style={gradientTextStyle}>Every Field</span></h2>
+            <h2 className="heading-2 text-(--color-body) mb-4">Granular Privacy — Down to <span style={gradientTextStyle}>Every Field</span></h2>
             <p className="para text-(--color-card-para) mb-8 max-w-lg">Other digital cards are all-or-nothing. LINKey lets you control visibility at the field level, set approval workflows, and define access tiers.</p>
             <div className="space-y-5">
               {showcaseFeatures.map((f, i) => (
@@ -160,12 +160,12 @@ function FeatureShowcaseSection() {
 /* ------------------------------------------------------------------ */
 
 const gridFeatures = [
-  { icon: <EyeOff className="h-6 w-6" />, title: "Visibility Toggles", desc: "Turn any field on or off with a single tap. Phone, email, address, social links \u2014 you decide." },
+  { icon: <EyeOff className="h-6 w-6" />, title: "Visibility Toggles", desc: "Turn any field on or off with a single tap. Phone, email, address, social links — you decide." },
   { icon: <UserCheck className="h-6 w-6" />, title: "Save Approval", desc: "Require approval before anyone saves your contact. Review, approve, or decline in seconds." },
   { icon: <Lock className="h-6 w-6" />, title: "Access Levels", desc: "Public, connection, and trusted tiers. Contacts see only the info appropriate to their level." },
-  { icon: <EyeOff className="h-6 w-6" />, title: "Hide Specific Fields", desc: "Going to an event but don\u2019t want to share your address? Hide individual fields situationally." },
+  { icon: <EyeOff className="h-6 w-6" />, title: "Hide Specific Fields", desc: "Going to an event but don\'t want to share your address? Hide individual fields situationally." },
   { icon: <Ban className="h-6 w-6" />, title: "Block Contacts", desc: "Block specific people from viewing your card entirely. They see a generic unavailable page." },
-  { icon: <Scale className="h-6 w-6" />, title: "POPIA & GDPR Compliance", desc: "Fully compliant with SA\u2019s POPIA and Europe\u2019s GDPR. Your data is never sold to third parties." },
+  { icon: <Scale className="h-6 w-6" />, title: "POPIA & GDPR Compliance", desc: "Fully compliant with SA\'s POPIA and Europe\'s GDPR. Your data is never sold to third parties." },
 ];
 
 function FeatureGridSection() {
@@ -260,7 +260,7 @@ const steps = [
   { step: "1", title: "Choose What to Share", desc: "Open card settings and decide which fields are visible.", icon: <Settings className="h-5 w-5" /> },
   { step: "2", title: "Toggle Visibility", desc: "Flip toggles on or off. Changes take effect immediately everywhere.", icon: <ToggleRight className="h-5 w-5" /> },
   { step: "3", title: "Control Who Saves", desc: "Turn on save approval or set access levels for automatic filtering.", icon: <ShieldCheck className="h-5 w-5" /> },
-  { step: "4", title: "Audit Everything", desc: "Check your privacy log \u2014 see who viewed, who saved, and every setting change.", icon: <FileSearch className="h-5 w-5" /> },
+  { step: "4", title: "Audit Everything", desc: "Check your privacy log — see who viewed, who saved, and every setting change.", icon: <FileSearch className="h-5 w-5" /> },
 ];
 
 function HowItWorksSection() {
@@ -354,7 +354,7 @@ function ComparisonSection() {
 /* ------------------------------------------------------------------ */
 
 const testimonials = [
-  { name: "Lerato Mokwena", role: "Privacy Officer", company: "Standard Trust", quote: "LINKey\u2019s privacy controls, audit logs, and data export capabilities ticked every box in our POPIA compliance checklist.", rating: 5 },
+  { name: "Lerato Mokwena", role: "Privacy Officer", company: "Standard Trust", quote: "LINKey\'s privacy controls, audit logs, and data export capabilities ticked every box in our POPIA compliance checklist.", rating: 5 },
   { name: "Ruan van der Merwe", role: "Freelance Consultant", company: "Independent", quote: "I use one card and hide or show fields depending on the situation. So much simpler than managing multiple profiles.", rating: 5 },
   { name: "Naledi Dlamini", role: "HR Director", company: "Vantage People", quote: "Save approval was a must-have for our executive team. They network freely without worrying about details being scraped.", rating: 5 },
 ];
@@ -396,7 +396,7 @@ const faqs = [
   { q: "Is LINKey POPIA compliant?", a: "Yes, fully. Lawful processing, secure storage, data export/deletion tools, audit logs, and zero third-party data sales." },
   { q: "Can I block someone?", a: "Yes. Blocked users see a generic unavailable page. They are not notified." },
   { q: "Can my company enforce privacy policies?", a: "On Business and Enterprise plans, admins set org-wide defaults, enforce minimum visibility, and lock settings." },
-  { q: "Can I export or delete all my data?", a: "Absolutely. Download in JSON or CSV, or request full deletion \u2014 permanently removed within 30 days." },
+  { q: "Can I export or delete all my data?", a: "Absolutely. Download in JSON or CSV, or request full deletion — permanently removed within 30 days." },
   { q: "Does enabling privacy controls affect performance?", a: "No. Controls are processed server-side before rendering. No extra load time or awkward error messages." },
 ];
 
