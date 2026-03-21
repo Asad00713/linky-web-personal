@@ -316,16 +316,17 @@ function StepIndicator({ currentStep }: { currentStep: number }) {
       <div className="max-w-md mx-auto">
         {/* Step circles + connecting line */}
         <div className="relative flex items-center justify-between">
-          {/* Background line */}
-          <div className="absolute top-5 left-5 right-5 h-[3px] bg-gray-200 rounded-full" />
-          {/* Animated gradient fill line */}
-          <motion.div
-            className="absolute top-5 left-5 h-[3px] rounded-full"
-            style={{ background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)" }}
-            initial={{ width: "0%" }}
-            animate={{ width: `${progressPercent}%` }}
-            transition={{ type: "spring", stiffness: 80, damping: 18 }}
-          />
+          {/* Background line — contained between first and last circle centers */}
+          <div className="absolute top-5 left-[20px] right-[20px] h-[3px] bg-gray-200 rounded-full overflow-hidden">
+            {/* Animated gradient fill */}
+            <motion.div
+              className="h-full rounded-full"
+              style={{ background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)" }}
+              initial={{ width: "0%" }}
+              animate={{ width: `${progressPercent}%` }}
+              transition={{ type: "spring", stiffness: 80, damping: 18 }}
+            />
+          </div>
 
           {/* Step circles */}
           {STEP_LABELS.map((label, i) => {
@@ -401,10 +402,9 @@ function StepIndicator({ currentStep }: { currentStep: number }) {
                 {/* Pulse ring for active step */}
                 {active && (
                   <motion.div
-                    className="absolute top-0 left-1/2 w-10 h-10 rounded-full border-2 border-[#0052D4]"
-                    style={{ translateX: "-50%" }}
+                    className="absolute inset-0 rounded-full border-2 border-[#0052D4]"
                     initial={{ scale: 1, opacity: 0.5 }}
-                    animate={{ scale: 1.5, opacity: 0 }}
+                    animate={{ scale: 1.6, opacity: 0 }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
                   />
                 )}
@@ -714,11 +714,11 @@ export default function CheckoutPage() {
     }
   }, [currentStep, clearCart]);
 
-  /* ---- Slide variants ---- */
+  /* ---- Simple fade variants (no slide — more reliable) ---- */
   const slideVariants = {
-    enter: (d: number) => ({ x: d > 0 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -300 : 300, opacity: 0 }),
+    enter: () => ({ opacity: 0, y: 20 }),
+    center: { opacity: 1, y: 0 },
+    exit: () => ({ opacity: 0, y: -20 }),
   };
 
   /* ---- Empty cart guard ---- */
@@ -768,19 +768,15 @@ export default function CheckoutPage() {
       <StepIndicator currentStep={currentStep} />
 
       {/* Step content */}
-      <AnimatePresence mode="wait" custom={direction}>
         {/* ======================================================== */}
         {/*  STEP 1: SHIPPING                                        */}
         {/* ======================================================== */}
         {currentStep === 1 && (
           <motion.div
             key="step1"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col-reverse lg:flex-row gap-8"
           >
             {/* Left: Form */}
@@ -902,12 +898,9 @@ export default function CheckoutPage() {
         {currentStep === 2 && (
           <motion.div
             key="step2"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col-reverse lg:flex-row gap-8"
           >
             {/* Left: Payment */}
@@ -929,7 +922,7 @@ export default function CheckoutPage() {
                     borderStyle: "solid",
                   }}
                   onClick={() => setPaymentMethod("payfast")}
-                  animate={paymentMethod === "payfast" ? { scale: [1, 1.01, 1] } : {}}
+                  animate={paymentMethod === "payfast" ? { scale: 1.01 } : { scale: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <div className="flex items-center gap-3">
@@ -1164,12 +1157,9 @@ export default function CheckoutPage() {
         {currentStep === 3 && (
           <motion.div
             key="step3"
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
             className="max-w-2xl mx-auto text-center"
           >
             {/* Animated checkmark */}
@@ -1313,7 +1303,6 @@ export default function CheckoutPage() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
     </section>
   );
 }
