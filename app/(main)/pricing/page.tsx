@@ -12,6 +12,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import Tilt from "react-parallax-tilt";
 import confetti from "canvas-confetti";
 
@@ -410,20 +411,24 @@ function PricingCard({
       </div>
 
       {/* CTA */}
-      <motion.a
-        href={plan.ctaHref}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        className={`relative z-20 mb-8 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-shadow ${
-          plan.highlighted
-            ? "text-white shadow-lg"
-            : "border-2 border-[#0052D4]/20 text-[#0052D4] hover:border-[#0052D4]/40 hover:bg-[#0052D4]/5"
-        }`}
-        style={plan.highlighted ? { ...gradientBgStyle, boxShadow: "0 8px 24px rgba(0,82,212,0.25)" } : undefined}
-      >
-        {plan.cta}
-        <ArrowRight className="h-4 w-4" />
-      </motion.a>
+      {plan.highlighted ? (
+        <AnimatedGradientButton asChild className="relative z-20 mb-8 w-full">
+          <a href={plan.ctaHref}>
+            {plan.cta}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </AnimatedGradientButton>
+      ) : (
+        <motion.a
+          href={plan.ctaHref}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="relative z-20 mb-8 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-shadow border-2 border-[#0052D4]/20 text-[#0052D4] hover:border-[#0052D4]/40 hover:bg-[#0052D4]/5"
+        >
+          {plan.cta}
+          <ArrowRight className="h-4 w-4" />
+        </motion.a>
+      )}
 
       {/* Features */}
       <ul className="flex-1 space-y-3 relative z-20">

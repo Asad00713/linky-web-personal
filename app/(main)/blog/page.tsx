@@ -19,6 +19,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -98,7 +99,7 @@ function HeroSection() {
           individuals and teams.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="flex flex-wrap justify-center gap-4">
-          <motion.a href="#articles" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25">Browse Articles</motion.a>
+          <AnimatedGradientButton asChild><a href="#articles">Browse Articles</a></AnimatedGradientButton>
           <motion.a href="#newsletter" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5">Subscribe</motion.a>
         </motion.div>
       </div>
@@ -250,9 +251,9 @@ function NewsletterSection() {
             </p>
             <div className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
               <input type="email" placeholder="you@company.co.za" className="flex-1 rounded-full border border-gray-200 bg-gray-50 px-5 py-3 text-sm outline-none focus:border-primary/40 focus:ring-2 focus:ring-primary/10" />
-              <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/25">
+              <AnimatedGradientButton>
                 Subscribe <ArrowRight className="h-4 w-4" />
-              </motion.button>
+              </AnimatedGradientButton>
             </div>
             <p className="mt-4 text-xs text-gray-400">Join 5,000+ professionals. Unsubscribe any time.</p>
           </div>

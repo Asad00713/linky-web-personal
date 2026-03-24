@@ -29,6 +29,7 @@ import {
   Crown,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  CONSTANTS                                                          */
@@ -350,9 +351,11 @@ export default function LoyaltyRewardsPage() {
               Paper loyalty cards get lost. Complicated apps get ignored. LINKey puts a beautiful digital loyalty card straight in your customers' wallets — with points, stamps, tiers, and automatic rewards that keep them coming back.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="/get-started" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm transition-transform hover:scale-105" style={{ background: `linear-gradient(135deg, ${GOLD}, #0052D4)` }}>
-                Launch Your Loyalty Programme <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">
+                  Launch Your Loyalty Programme <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <a href="#how-it-works" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 font-semibold text-sm text-[#1F2323] hover:bg-gray-50 transition-colors" style={{ borderColor: GOLD }}>
                 See How It Works
               </a>
@@ -645,9 +648,11 @@ export default function LoyaltyRewardsPage() {
               Launch a branded digital loyalty programme in minutes. Points, stamps, tiers, and automatic rewards — all without an app download or a single paper card.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/get-started" className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold transition-transform hover:scale-105" style={{ background: `linear-gradient(135deg, ${GOLD}, #0052D4)` }}>
-                Start Free <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">
+                  Start Free <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <a href="/pricing" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-gray-200 font-semibold text-[#1F2323] hover:bg-gray-50 transition-colors">
                 View Pricing
               </a>

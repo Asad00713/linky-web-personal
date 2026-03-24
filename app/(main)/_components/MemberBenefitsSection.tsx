@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { IMAGES } from "@/assets/images";
 import { Card, CardContent } from "@/components/ui/card";
@@ -221,7 +221,7 @@ export default function MemberBenefitsSection() {
               <span className="eyebrow text-(--color-eyebrow)">
                 Reward System
               </span>
-              <div className="mt-2 w-full h-px bg-(--color-eyebrow)/30" />
+              <div className="mt-2 w-full h-px bg-eyebrow/30" />
             </div>
           </div>
           <h2 className="heading-2 text-(--color-body)">
@@ -240,9 +240,7 @@ export default function MemberBenefitsSection() {
           </p>
           <div className="flex items-center gap-4 flex-wrap">
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Button variant="gradient" size="pill">
-                Start Free
-              </Button>
+              <AnimatedGradientButton>Start Free</AnimatedGradientButton>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <GradientOutlineButton>Create Your Card</GradientOutlineButton>

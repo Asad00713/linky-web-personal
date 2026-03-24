@@ -24,6 +24,7 @@ import {
   Star,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -59,9 +60,9 @@ function HeroSection() {
               QR stand, and a white-glove onboarding experience.
             </p>
             <div className="flex flex-wrap gap-4">
-              <motion.a href="/pricing" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25">
-                Get the Business Plan
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/pricing">Get the Business Plan</a>
+              </AnimatedGradientButton>
               <motion.a href="#whats-included" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5">
                 See What&apos;s Inside
               </motion.a>

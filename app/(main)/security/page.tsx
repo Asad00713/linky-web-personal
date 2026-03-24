@@ -19,6 +19,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Shared animation helpers                                           */
@@ -74,14 +75,9 @@ function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="#features"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-shadow hover:shadow-xl hover:shadow-primary/30"
-              >
-                Explore Our Standards
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="#features">Explore Our Standards</a>
+              </AnimatedGradientButton>
               <motion.a
                 href="mailto:security@linkey.app"
                 whileHover={{ scale: 1.03 }}

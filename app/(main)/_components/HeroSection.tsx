@@ -14,8 +14,8 @@ import { ChevronDown } from "lucide-react";
 
 import { IMAGES } from "@/assets/images";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
-import { Button } from "@/components/ui/button";
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import {
   Avatar,
   AvatarFallback,
@@ -61,47 +61,19 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-white">
-      {/* ── Floating gradient orbs (hidden on mobile) ── */}
-      <style>{`
-        @keyframes drift1 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(40px, -30px) scale(1.08); }
-        }
-        @keyframes drift2 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(-50px, 25px) scale(1.05); }
-        }
-        @keyframes drift3 {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(30px, 40px) scale(1.1); }
-        }
-        @keyframes blink-cursor {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @keyframes shimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes bounce-down {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(8px); }
-        }
-      `}</style>
-
       {/* Orb 1 – top-left */}
       <div
-        className="pointer-events-none absolute -top-24 -left-24 h-[420px] w-[420px] rounded-full opacity-[0.12] blur-[100px] hidden lg:block"
+        className="pointer-events-none absolute -top-24 -left-24 h-105 w-105 rounded-full opacity-[0.12] blur-[100px] hidden lg:block"
         style={{ background: "#65C7F7", animation: "drift1 12s ease-in-out infinite" }}
       />
       {/* Orb 2 – top-right */}
       <div
-        className="pointer-events-none absolute -top-16 right-0 h-[350px] w-[350px] rounded-full opacity-[0.10] blur-[90px] hidden lg:block"
+        className="pointer-events-none absolute -top-16 right-0 h-87.5 w-87.5 rounded-full opacity-[0.10] blur-[90px] hidden lg:block"
         style={{ background: "#9CECFB", animation: "drift2 15s ease-in-out infinite" }}
       />
       {/* Orb 3 – center-bottom */}
       <div
-        className="pointer-events-none absolute top-[55%] left-[30%] h-[300px] w-[300px] rounded-full opacity-[0.08] blur-[110px] hidden lg:block"
+        className="pointer-events-none absolute top-[55%] left-[30%] h-75 w-75 rounded-full opacity-[0.08] blur-[110px] hidden lg:block"
         style={{ background: "#0052D4", animation: "drift3 18s ease-in-out infinite" }}
       />
 
@@ -158,7 +130,7 @@ export default function HeroSection() {
           >
             <span style={gradientTextStyle}>{headlineWord2}</span>
             <span
-              className="inline-block w-[3px] ml-1 align-middle"
+              className="inline-block w-0.75 ml-1 align-middle"
               style={{
                 height: "0.85em",
                 background: "linear-gradient(to bottom, #9CECFB, #0052D4)",
@@ -204,19 +176,7 @@ export default function HeroSection() {
           transition={{ ...spring, delay: 1.9 }}
           className="flex items-center gap-4 mb-10"
         >
-          <Button
-            variant="gradient"
-            size="pill"
-            className="relative overflow-hidden"
-            style={{
-              backgroundSize: "200% 100%",
-              animation: "shimmer 3s linear infinite",
-              backgroundImage:
-                "linear-gradient(110deg, #9CECFB 0%, #65C7F7 25%, #0052D4 50%, #65C7F7 75%, #9CECFB 100%)",
-            }}
-          >
-            Start Free
-          </Button>
+          <AnimatedGradientButton>Start Free</AnimatedGradientButton>
           <GradientOutlineButton>Create Your Card</GradientOutlineButton>
         </motion.div>
 

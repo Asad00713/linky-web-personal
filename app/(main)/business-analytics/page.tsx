@@ -12,6 +12,7 @@ import {
   Target, ChevronDown, Check, X, ArrowRight, Star, Share2,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  HELPERS                                                            */
@@ -415,9 +416,9 @@ export default function BusinessAnalyticsPage() {
                 Leads per staff member, deal redemptions, loyalty engagement — all in one dashboard. Export to Excel or PDF, schedule reports, and finally make decisions backed by real data instead of gut feelings.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-12">
-                <a href="/demo" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm transition-transform hover:scale-105" style={gradientBgStyle}>
-                  Book a Demo <ArrowRight className="h-4 w-4" />
-                </a>
+                <AnimatedGradientButton asChild>
+                  <a href="/demo">Book a Demo <ArrowRight className="h-4 w-4" /></a>
+                </AnimatedGradientButton>
                 <a href="#features" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-gray-200 font-semibold text-sm text-[#1F2323] hover:bg-gray-50 transition-colors">
                   Explore Features
                 </a>
@@ -637,9 +638,9 @@ export default function BusinessAnalyticsPage() {
               Book a personalised demo and we will walk you through the dashboard with your own data. No commitment, no credit card — just clarity.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/demo" className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold transition-transform hover:scale-105" style={gradientBgStyle}>
-                Book a Demo <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/demo">Book a Demo <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <a href="/pricing" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-gray-200 font-semibold text-[#1F2323] hover:bg-gray-50 transition-colors">
                 View Pricing
               </a>

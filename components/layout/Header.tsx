@@ -45,6 +45,7 @@ import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton
 import { gradientBgStyle } from "@/lib/styles";
 import { MobileNav } from "./MobileNav";
 import { useCart } from "@/context/CartContext";
+import { AnimatedGradientButton } from "../shared/AnimatedGradientButton";
 
 // ---------------------------------------------------------------------------
 // Icon lookup — maps nav item titles to Phosphor duotone icons
@@ -380,9 +381,9 @@ export default function Header() {
           <GradientOutlineButton className="hidden lg:inline-flex">
             Login
           </GradientOutlineButton>
-          <Button variant="gradient" size="pill" className="hidden lg:inline-flex">
+          <AnimatedGradientButton>
             Sign Up Free
-          </Button>
+          </AnimatedGradientButton>
           <div className="lg:hidden">
             <MobileNav />
           </div>

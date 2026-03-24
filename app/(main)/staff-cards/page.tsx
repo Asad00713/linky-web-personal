@@ -16,6 +16,7 @@ import {
   Settings, Bell, Database,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -265,13 +266,6 @@ function AnimatedOrgChart() {
         </div>
       </div>
 
-      {/* Top-level horizontal bracket connecting 3 departments */}
-      <style>{`
-        .grid-cols-3 > div:first-child::before,
-        .grid-cols-3 > div:last-child::before {
-          content: none;
-        }
-      `}</style>
     </div>
   );
 }
@@ -933,13 +927,11 @@ export default function StaffCardsPage() {
                 Deploy, manage, and govern digital business cards for your entire workforce from head office. Centralised provisioning, brand-locked templates, and instant updates - so HR never chases a print vendor again.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-                <a
-                  href="/pricing"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white font-semibold text-sm transition-transform hover:scale-105"
-                  style={gradientBgStyle}
-                >
-                  Start Managing Cards <ArrowRight className="w-4 h-4" />
-                </a>
+                <AnimatedGradientButton asChild>
+                  <a href="/pricing">
+                    Start Managing Cards <ArrowRight className="w-4 h-4" />
+                  </a>
+                </AnimatedGradientButton>
                 <a
                   href="/contact"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm border-2 border-[#0052D4] text-[#0052D4] hover:bg-[#0052D4]/5 transition-colors"

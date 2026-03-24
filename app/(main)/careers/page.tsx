@@ -30,6 +30,7 @@ import {
   Shield,
 } from "lucide-react";
 import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  1. HERO — Word-by-word stagger                                     */
@@ -102,15 +103,9 @@ function HeroSection() {
           transition={{ delay: 1.2, duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <motion.a
-            href="#roles"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-          >
-            View Open Roles
-            <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          <AnimatedGradientButton asChild>
+            <a href="#roles">View Open Roles <ArrowRight className="h-4 w-4" /></a>
+          </AnimatedGradientButton>
           <motion.a
             href="/about"
             whileHover={{ scale: 1.03 }}
@@ -307,15 +302,9 @@ function OpenRolesSection() {
                   </div>
                 </div>
 
-                <motion.a
-                  href="#"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30 sm:self-center"
-                >
-                  Apply
-                  <ArrowRight className="h-4 w-4" />
-                </motion.a>
+                <AnimatedGradientButton asChild className="shrink-0 self-start sm:self-center">
+                  <a href="#">Apply <ArrowRight className="h-4 w-4" /></a>
+                </AnimatedGradientButton>
               </div>
             </motion.div>
           ))}

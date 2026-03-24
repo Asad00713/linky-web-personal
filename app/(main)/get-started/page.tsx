@@ -23,6 +23,7 @@ import {
   Star,
 } from "lucide-react";
 import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -140,9 +141,9 @@ function SignupForm() {
                   </div>
                   <p className="mt-1 text-xs text-gray-400">Must be at least 8 characters</p>
                 </div>
-                <motion.button type="submit" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 hover:shadow-xl">
+                <AnimatedGradientButton type="submit" className="w-full">
                   Create Free Account
-                </motion.button>
+                </AnimatedGradientButton>
                 <p className="text-center text-xs text-gray-400">
                   By signing up you agree to our{" "}
                   <a href="/terms" className="text-primary hover:underline">Terms</a> and{" "}

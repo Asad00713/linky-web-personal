@@ -43,6 +43,7 @@ import {
   AddressBook,
 } from "@phosphor-icons/react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ================================================================ */
 
@@ -175,9 +176,9 @@ function HeroSection() {
               Stop juggling spreadsheets, phone contacts, and scattered notes. LINKey Contact Wallet stores every connection you make in a single, searchable, beautifully organised hub &mdash; so you can find anyone in seconds and never waste rands on a lost lead again.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }} className="flex flex-wrap gap-4">
-              <motion.a href="/pricing" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25" style={gradientBgStyle}>
-                Get Started Free <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/pricing">Get Started Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#how-it-works" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5 transition-colors">
                 See How It Works
               </motion.a>

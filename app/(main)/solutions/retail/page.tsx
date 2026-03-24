@@ -26,6 +26,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ──────────────────────────── helpers ──────────────────────────── */
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
@@ -289,9 +290,9 @@ export default function RetailHospitalitySolutionPage() {
               Digital loyalty cards, instant deals, referral programmes, and customer wallet integration — everything your restaurant, cafe, salon, or retail store needs to keep customers coming back and spreading the word. Built for South African businesses that thrive on relationships.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <a href="/signup" className="px-8 py-4 rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" style={gradientBgStyle}>
-                Start Free Trial
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/signup">Start Free Trial</a>
+              </AnimatedGradientButton>
               <a href="#how-it-works" className="px-8 py-4 rounded-full border-2 border-[#0052D4] text-[#0052D4] font-semibold text-sm hover:bg-[#0052D4] hover:text-white transition-all duration-300">
                 See How It Works
               </a>

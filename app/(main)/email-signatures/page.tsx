@@ -48,6 +48,7 @@ import {
   CalendarBlank,
 } from "@phosphor-icons/react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ================================================================ */
 
@@ -164,9 +165,9 @@ function HeroSection() {
               You send dozens of emails a day. Right now, every single one ends with a forgettable block of plain text. LINKey turns your email signature into a branded, clickable gateway to your digital card &mdash; so every message becomes a networking moment worth thousands of rands in impressions.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.7 }} className="flex flex-wrap gap-4">
-              <motion.a href="/get-started" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25" style={gradientBgStyle}>
-                Create Your Signature <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">Create Your Signature <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#features" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5 transition-colors">
                 See It in Action
               </motion.a>

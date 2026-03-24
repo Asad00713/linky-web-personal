@@ -1,13 +1,13 @@
 "use client"
 
-import { useRef, useState, useEffect, useCallback } from "react"
+import { useRef } from "react"
 import Link from "next/link"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import CountUp from "react-countup"
 import { useInView as useInViewIO } from "react-intersection-observer"
 import { Check, Coffee, Scissors, UtensilsCrossed, Dumbbell, Flower2, Camera } from "lucide-react"
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles"
-import { Button } from "@/components/ui/button"
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton"
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -76,20 +76,7 @@ function WordStagger({
 /* ------------------------------------------------------------------ */
 
 function EcosystemVisualization({ size = 320 }: { size?: number }) {
-  const [activeConnection, setActiveConnection] = useState<[number, number] | null>(null)
   const scale = size / 320
-
-  // Cycle through random connections
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const a = Math.floor(Math.random() * 6)
-      let b = Math.floor(Math.random() * 5)
-      if (b >= a) b++
-      setActiveConnection([a, b])
-      setTimeout(() => setActiveConnection(null), 1500)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <div
@@ -100,7 +87,7 @@ function EcosystemVisualization({ size = 320 }: { size?: number }) {
       {orbitRadii.map((r, i) => (
         <div
           key={i}
-          className="absolute rounded-full border border-[#0052D4]/10"
+          className="absolute rounded-full border border-primary/10"
           style={{
             width: r * 2 * scale,
             height: r * 2 * scale,
@@ -153,9 +140,10 @@ function EcosystemVisualization({ size = 320 }: { size?: number }) {
               height: 0,
               top: "50%",
               left: "50%",
-              animation: `dir-orbit-${node.orbit} ${speed}s linear infinite`,
+              "--orbit-radius": `${radius}px`,
+              animation: `dir-orbit ${speed}s linear infinite`,
               animationDelay: `${-(node.angle / 360) * speed}s`,
-            }}
+            } as React.CSSProperties}
           >
             <div
               className="flex flex-col items-center"
@@ -167,13 +155,13 @@ function EcosystemVisualization({ size = 320 }: { size?: number }) {
               }}
             >
               <div
-                className="rounded-full bg-white shadow-md flex items-center justify-center border border-[#e0ecff]"
+                className="rounded-full bg-white shadow-md flex items-center justify-center border border-[#e0ecff] z-50"
                 style={{ width: nodeSize, height: nodeSize }}
               >
-                <Icon size={nodeSize * 0.5} className="text-[#0052D4]" />
+                <Icon size={nodeSize * 0.5} className="text-primary" />
               </div>
               <span
-                className="mt-1 text-[#454545] font-medium whitespace-nowrap"
+                className="mt-1 text-card-para font-medium whitespace-nowrap"
                 style={{ fontSize: Math.max(9, 10 * scale) }}
               >
                 {node.name}
@@ -183,91 +171,7 @@ function EcosystemVisualization({ size = 320 }: { size?: number }) {
         )
       })}
 
-      {/* Connection flash */}
-      <AnimatePresence>
-        {activeConnection && (
-          <ConnectionArc
-            key={`${activeConnection[0]}-${activeConnection[1]}`}
-            a={activeConnection[0]}
-            b={activeConnection[1]}
-            scale={scale}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* CSS keyframes for orbiting */}
-      <style>{`
-        @keyframes dir-orbit-0 {
-          from { transform: rotate(0deg) translateX(${orbitRadii[0] * scale}px); }
-          to { transform: rotate(360deg) translateX(${orbitRadii[0] * scale}px); }
-        }
-        @keyframes dir-orbit-1 {
-          from { transform: rotate(0deg) translateX(${orbitRadii[1] * scale}px); }
-          to { transform: rotate(360deg) translateX(${orbitRadii[1] * scale}px); }
-        }
-        @keyframes dir-orbit-2 {
-          from { transform: rotate(0deg) translateX(${orbitRadii[2] * scale}px); }
-          to { transform: rotate(360deg) translateX(${orbitRadii[2] * scale}px); }
-        }
-        @keyframes dir-counter-orbit {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-      `}</style>
     </div>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/*  Connection Arc                                                     */
-/* ------------------------------------------------------------------ */
-
-function ConnectionArc({ a, b, scale }: { a: number; b: number; scale: number }) {
-  // Use fixed center positions for the SVG overlay
-  const center = 160 * scale
-
-  return (
-    <motion.svg
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="absolute inset-0 z-20 pointer-events-none"
-      style={{ width: "100%", height: "100%" }}
-    >
-      <defs>
-        <linearGradient id={`conn-grad-${a}-${b}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#9CECFB" />
-          <stop offset="50%" stopColor="#65C7F7" />
-          <stop offset="100%" stopColor="#0052D4" />
-        </linearGradient>
-      </defs>
-      <motion.circle
-        cx={center}
-        cy={center}
-        r={60 * scale}
-        fill="none"
-        stroke={`url(#conn-grad-${a}-${b})`}
-        strokeWidth={2}
-        strokeDasharray="4 4"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: [0, 0.8, 0.8, 0] }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-      />
-      <motion.circle
-        cx={center}
-        cy={center - 60 * scale}
-        r={3 * scale}
-        fill="#0052D4"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: [0, 1, 1, 0],
-          cx: [center, center + 40 * scale, center - 20 * scale, center],
-          cy: [center - 60 * scale, center - 30 * scale, center + 40 * scale, center - 60 * scale],
-        }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-      />
-    </motion.svg>
   )
 }
 
@@ -353,7 +257,7 @@ export default function DirectoryShowcase() {
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ ...spring, delay: 0.5 + i * 0.1 }}
-                    className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+                    className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
                     style={gradientBgStyle}
                   >
                     <Check size={12} className="text-white" strokeWidth={3} />
@@ -400,9 +304,7 @@ export default function DirectoryShowcase() {
               transition={{ duration: 0.5, delay: 0.7 }}
             >
               <Link href="/directory">
-                <Button variant="gradient" size="pill">
-                  Explore Directory &rarr;
-                </Button>
+                <AnimatedGradientButton>Explore Directory →</AnimatedGradientButton>
               </Link>
             </motion.div>
           </div>

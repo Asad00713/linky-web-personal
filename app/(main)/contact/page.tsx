@@ -20,6 +20,7 @@ import {
   Quote,
 } from "lucide-react";
 import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  1. HERO — Split layout                                             */
@@ -85,15 +86,9 @@ function HeroSection() {
               do for your business — we are here, we are friendly, and we are fast.
             </p>
             <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="https://wa.me/27123456789"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-              >
-                Chat on WhatsApp
-                <MessageCircle className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="https://wa.me/27123456789">Chat on WhatsApp <MessageCircle className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a
                 href="mailto:hello@linkey.digital"
                 whileHover={{ scale: 1.03 }}
@@ -321,16 +316,14 @@ function ContactFormSection() {
               />
             </div>
 
-            <motion.button
+            <AnimatedGradientButton
               type="submit"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-shadow hover:shadow-xl hover:shadow-primary/30 disabled:opacity-60 sm:w-auto"
+              className="w-full sm:w-auto disabled:opacity-60"
             >
               {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="h-4 w-4" />
-            </motion.button>
+            </AnimatedGradientButton>
           </motion.form>
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
   Star,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  HELPERS                                                            */
@@ -362,9 +363,9 @@ export default function DealsPromotionsPage() {
               Forget paper coupons and email blasts nobody reads. Create percentage discounts, BOGO offers, free items, and digital vouchers — then push them live with a single tap. Real-time tracking tells you exactly what is working.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="/get-started" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-sm transition-transform hover:scale-105" style={gradientBgStyle}>
-                Start Pushing Deals <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">Start Pushing Deals <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <a href="#how-it-works" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-gray-200 font-semibold text-sm text-[#1F2323] hover:bg-gray-50 transition-colors">
                 See How It Works
               </a>
@@ -595,9 +596,9 @@ export default function DealsPromotionsPage() {
               Set up your LINKey account, create a deal in under a minute, and watch it land in your customers' wallets. No print costs. No guesswork. Just results.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/get-started" className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold transition-transform hover:scale-105" style={gradientBgStyle}>
-                Get Started Free <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">Get Started Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <a href="/pricing" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-gray-200 font-semibold text-[#1F2323] hover:bg-gray-50 transition-colors">
                 View Pricing
               </a>
