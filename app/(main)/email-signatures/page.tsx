@@ -212,7 +212,7 @@ const impressionStats = [
 function ImpressionStats() {
   const [ref, inView] = useRIOInView({ triggerOnce: true, threshold: 0.3 });
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {impressionStats.map((s, i) => (
@@ -262,7 +262,7 @@ function AlternatingFeatureRow({ f, i }: { f: typeof featureRows[number]; i: num
 
 function AlternatingFeatures() {
   return (
-    <section id="features" className="px-[5%] py-20 md:py-28">
+    <section id="features" className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl space-y-24">
         {featureRows.map((f, i) => <AlternatingFeatureRow key={i} f={f} i={i} />)}
       </div>
@@ -288,7 +288,7 @@ function FeatureGridSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">SIGNATURE FEATURES</span>
@@ -354,7 +354,7 @@ function BentoSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-14">
           <span className="eyebrow text-[#16B8C3] mb-3 inline-block">SCALE & OPTIMISE</span>
@@ -385,7 +385,7 @@ function HowItWorksSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-16">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FOUR SIMPLE STEPS</span>
@@ -445,7 +445,7 @@ function ComparisonSection() {
   const after = ["Rich HTML layout with your photo and brand colours", "Company logo, banner image, and consistent design", "Clickable social icons and direct card link", "Full analytics: impressions, clicks, and trends", "Responsive design that looks great on every device", "Centralised updates deploy to every team member instantly"];
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">THE DIFFERENCE</span>
@@ -473,7 +473,7 @@ function ComparisonSection() {
 function StatsBar() {
   const [ref, inView] = useRIOInView({ triggerOnce: true, threshold: 0.3 });
   return (
-    <section ref={ref} className="px-[5%] py-16">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl rounded-3xl p-10 md:p-16 text-white" style={gradientBgStyle}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {impressionStats.map((s, i) => (
@@ -502,7 +502,7 @@ function TestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">WHAT USERS SAY</span>
@@ -543,7 +543,7 @@ function FAQSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FAQ</span>
@@ -579,7 +579,7 @@ function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 30, scale: 0.97 }} animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.6 }} className="mx-auto max-w-4xl rounded-3xl p-12 md:p-16 text-center text-white" style={gradientBgStyle}>
         <h2 className="heading-2 mb-4">Turn Every Email Into a First Impression</h2>
         <p className="lead text-white/85 mb-8 max-w-xl mx-auto">Create a branded, trackable email signature in under two minutes. Free to start &mdash; no credit card required.</p>

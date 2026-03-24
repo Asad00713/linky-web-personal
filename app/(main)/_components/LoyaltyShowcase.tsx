@@ -254,7 +254,7 @@ export default function LoyaltyShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden py-20 lg:py-28 bg-white"
+      className="relative w-full overflow-hidden py-10 lg:py-20 bg-white"
     >
       <div className="mx-auto max-w-7xl px-[5%]">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">

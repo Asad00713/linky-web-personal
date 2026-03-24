@@ -49,7 +49,7 @@ function Section({ children, className = "", id }: { children: React.ReactNode; 
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <motion.section ref={ref} id={id} initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className={`py-20 md:py-28 ${className}`}>
+    <motion.section ref={ref} id={id} initial="hidden" animate={inView ? "visible" : "hidden"} variants={stagger} className={`py-10 lg:py-20 ${className}`}>
       {children}
     </motion.section>
   );
@@ -438,7 +438,7 @@ export default function EventMarketersPage() {
       </Section>
 
       {/* ═══════════ 8. STATS ═══════════ */}
-      <section ref={statsRef} className="py-20 md:py-28" style={gradientBgStyle}>
+      <section ref={statsRef} className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
             {stats.map((s, i) => (
@@ -507,7 +507,7 @@ export default function EventMarketersPage() {
       </Section>
 
       {/* ═══════════ 11. CTA ═══════════ */}
-      <section className="py-20 md:py-28" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-4xl mx-auto px-6 text-center text-white">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold mb-6">
             Make Your Next Event Your Best-Performing One

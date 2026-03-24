@@ -35,7 +35,7 @@ import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButt
 
 const GRADIENT = "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)";
 
-const sectionPadding = "px-[5%] py-20 md:py-28";
+const sectionPadding = "px-[5%] py-10 lg:py-20";
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -757,7 +757,7 @@ function UrgencyBanner() {
   const { ref, inView } = useScrollInView({ triggerOnce: true, threshold: 0.4 });
 
   return (
-    <section ref={ref} className="px-[5%] py-14">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -809,7 +809,7 @@ function FinalCTA() {
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className="mx-auto max-w-6xl rounded-3xl px-8 py-16 md:py-20 text-center"
+        className="mx-auto max-w-6xl rounded-3xl px-8 py-10 lg:py-20 text-center"
         style={gradientBgStyle}
       >
         <h2 className="heading-2 text-white mb-4 max-w-xl mx-auto">

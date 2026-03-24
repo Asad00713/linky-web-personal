@@ -46,7 +46,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden px-[5%] py-20 md:py-32 lg:py-40">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20 lg:py-40">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary-light/10 blur-3xl" />
         <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-primary-mid/10 blur-3xl" />
@@ -142,7 +142,7 @@ function CommissionStatsSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-14 md:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, i) => (
@@ -188,7 +188,7 @@ function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="how-it-works" ref={ref} className="px-[5%] py-16 md:py-24">
+    <section id="how-it-works" ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
@@ -251,7 +251,7 @@ function DashboardSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">PARTNER DASHBOARD</span>
@@ -365,7 +365,7 @@ const benefitItems = [
 
 function BenefitsSection() {
   return (
-    <section className="px-[5%] py-16 md:py-24">
+    <section className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-[#16B8C3] mb-3 inline-block">PARTNER PERKS</span>
@@ -452,7 +452,7 @@ function TiersSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">PARTNER TIERS</span>
@@ -564,7 +564,7 @@ function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">PARTNER STORIES</span>
@@ -657,7 +657,7 @@ function FAQPartnersSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -721,7 +721,7 @@ function CTAPartnersSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="apply" ref={ref} className="px-[5%] py-16 md:py-24">
+    <section id="apply" ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

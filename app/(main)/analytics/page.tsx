@@ -200,7 +200,7 @@ function SolutionBridge() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="relative px-[5%] py-24 md:py-36 overflow-hidden">
+    <section ref={ref} className="relative px-[5%] py-10 lg:py-20 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full animate-[pulse_4s_ease-in-out_infinite]" style={{ background: "radial-gradient(circle, rgba(156,236,251,0.15) 0%, transparent 70%)" }} />
       </div>
@@ -232,7 +232,7 @@ function MetricGridSection() {
   const [statsRef, statsInView] = useRIOInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section ref={ref} id="metrics" className="px-[5%] py-20 md:py-28">
+    <section ref={ref} id="metrics" className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FULL VISIBILITY</span>
@@ -288,7 +288,7 @@ function AlternatingShowcaseRow({ f, i }: { f: typeof showcaseFeatures[number]; 
 
 function AlternatingShowcase() {
   return (
-    <section className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl space-y-24">
         {showcaseFeatures.map((f, i) => <AlternatingShowcaseRow key={i} f={f} i={i} />)}
       </div>
@@ -310,7 +310,7 @@ function BentoSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">POWER FEATURES</span>
@@ -345,7 +345,7 @@ function HowItWorksSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-16">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
@@ -408,7 +408,7 @@ const statsData = [
 function StatsSection() {
   const [ref, inView] = useRIOInView({ triggerOnce: true, threshold: 0.3 });
   return (
-    <section ref={ref} className="px-[5%] py-16">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl rounded-3xl p-10 md:p-16 text-white" style={gradientBgStyle}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {statsData.map((s, i) => (
@@ -434,7 +434,7 @@ function ComparisonSection() {
   const after = ["Know exactly how many people engage after every event", "See who viewed, saved, and clicked — by name when possible", "Prioritise follow-ups based on real engagement signals", "Generate ROI reports for every conference and trade show", "Optimise your card layout using heatmap data", "Benchmark team members and coach underperformers"];
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">THE DIFFERENCE</span>
@@ -469,7 +469,7 @@ function TestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">REAL RESULTS</span>
@@ -510,7 +510,7 @@ function FAQSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FAQ</span>
@@ -546,7 +546,7 @@ function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 30, scale: 0.97 }} animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.6 }} className="mx-auto max-w-4xl rounded-3xl p-12 md:p-16 text-center text-white" style={gradientBgStyle}>
         <h2 className="heading-2 mb-4">Ready to See Who Is Actually Paying Attention?</h2>
         <p className="lead text-white/85 mb-8 max-w-xl mx-auto">Create your free LINKey card and start tracking views, taps, scans, and saves today. No credit card required.</p>

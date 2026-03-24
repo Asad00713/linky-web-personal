@@ -331,7 +331,7 @@ function ProductShowcase() {
   const active = showcaseProducts[activeIndex];
 
   return (
-    <section ref={ref} id="showcase" className="px-[5%] py-20 md:py-28 bg-[#F8FBFF]">
+    <section ref={ref} id="showcase" className="px-[5%] py-10 lg:py-20 bg-[#F8FBFF]">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
@@ -598,7 +598,7 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section ref={ref} id="how-it-works" className="px-[5%] py-20 md:py-28 bg-white">
+    <section ref={ref} id="how-it-works" className="px-[5%] py-10 lg:py-20 bg-white">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -814,7 +814,7 @@ function HowItWorksSection() {
 
 function ProductGrid() {
   return (
-    <section id="products" className="py-20 md:py-28 bg-[#f8fafb]">
+    <section id="products" className="py-10 lg:py-20 bg-[#f8fafb]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <p className="eyebrow text-[#16B8C3] mb-3">SHOP NFC PRODUCTS</p>
@@ -932,7 +932,7 @@ function FeaturesSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-10 lg:py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="eyebrow text-[#16B8C3] mb-3">WHY NFC OVER QR</p>
@@ -993,7 +993,7 @@ function StatsSection() {
   const [ref, inView] = useInViewObserver({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="py-20">
+    <section ref={ref} className="py-10 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           className="rounded-3xl py-14 px-6 md:px-12"
@@ -1036,7 +1036,7 @@ function StatsSection() {
 
 function ComparisonSection() {
   return (
-    <section className="py-20 md:py-28 bg-[#f8fafb]">
+    <section className="py-10 lg:py-20 bg-[#f8fafb]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <p className="eyebrow text-[#16B8C3] mb-3">THE DIFFERENCE</p>
@@ -1111,7 +1111,7 @@ function TestimonialSection() {
   const secondRow = testimonials.slice(4, 8);
 
   return (
-    <section className="py-20 md:py-28 bg-white overflow-hidden">
+    <section className="py-10 lg:py-20 bg-white overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
         <div className="text-center">
           <p className="eyebrow text-[#16B8C3] mb-3">CUSTOMER STORIES</p>
@@ -1172,7 +1172,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-20 md:py-28 bg-[#f8fafb]">
+    <section className="py-10 lg:py-20 bg-[#f8fafb]">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <p className="eyebrow text-[#16B8C3] mb-3">FAQ</p>
@@ -1235,10 +1235,10 @@ function FAQSection() {
 
 function CTASection() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-10 lg:py-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="rounded-3xl py-16 md:py-20 px-6 md:px-12 text-center text-white"
+          className="rounded-3xl py-10 lg:py-20 px-6 md:px-12 text-center text-white"
           style={gradientBgStyle}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

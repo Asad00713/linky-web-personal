@@ -80,7 +80,7 @@ const blogFaqs = [
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-[5%] py-20 md:py-28 lg:py-36">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary-light/10 blur-3xl" />
         <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-primary-mid/10 blur-3xl" />
@@ -116,7 +116,7 @@ function FeaturedArticle() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="group relative grid overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg hover:shadow-xl md:grid-cols-2">
           <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-primary-light/10 via-primary-mid/10 to-primary/10 md:aspect-auto md:min-h-[360px]">
@@ -153,7 +153,7 @@ function ArticleGrid() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="articles" ref={ref} className="px-[5%] py-16 md:py-24">
+    <section id="articles" ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">LATEST ARTICLES</span>
@@ -237,7 +237,7 @@ function NewsletterSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="newsletter" ref={ref} className="px-[5%] py-16 md:py-24">
+    <section id="newsletter" ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-lg md:p-12">
           <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary-light/10 blur-3xl" />
@@ -270,7 +270,7 @@ function NewsletterSection() {
 function BrandMarquee() {
   const brands = ["Deloitte", "Kobe", "Simplamo", "Appsmith", "EdIsOn", "Vigilant", "SoulPage"];
   return (
-    <section className="px-[5%] py-10 md:py-14">
+    <section className="px-[5%] py-10 lg:py-20">
       <p className="mb-6 text-center text-sm font-medium text-gray-400">
         Trusted by networking professionals at leading companies
       </p>
@@ -293,7 +293,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">BLOG FAQ</span>
@@ -330,7 +330,7 @@ function GradientCTA() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary-mid to-primary-light p-10 text-center md:p-16">
         <div className="pointer-events-none absolute -left-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-60 w-60 rounded-full bg-white/10 blur-2xl" />

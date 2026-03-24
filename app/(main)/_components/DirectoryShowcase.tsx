@@ -187,7 +187,7 @@ export default function DirectoryShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-28 bg-[#F8FBFF] overflow-hidden"
+      className="relative py-10 lg:py-20 bg-[#F8FBFF] overflow-hidden"
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
       <div className="mx-auto max-w-7xl px-6">
@@ -199,7 +199,9 @@ export default function DirectoryShowcase() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:hidden w-full flex justify-center"
           >
-            <EcosystemVisualization size={280} />
+            <div className="w-80 h-95 relative overflow-hidden">
+              <EcosystemVisualization size={320} />
+            </div>
           </motion.div>
 
           {/* LEFT — Text */}

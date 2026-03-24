@@ -62,7 +62,7 @@ const contactMethods = [
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-[5%] py-20 md:py-28 lg:py-36">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary-light/10 blur-3xl" />
         <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-primary-mid/10 blur-3xl" />
@@ -182,7 +182,7 @@ function ContactFormSection() {
     "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-(--color-body) placeholder:text-gray-400 outline-none transition-all focus:border-primary/40 focus:ring-2 focus:ring-primary/10";
 
   return (
-    <section id="contact-form" ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section id="contact-form" ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
           {/* Left — Text */}
@@ -346,7 +346,7 @@ function ResponseTimesSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">RESPONSE TIMES</span>
@@ -400,7 +400,7 @@ function OfficesSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">WHERE WE ARE</span>
@@ -452,7 +452,7 @@ function SocialProofSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-14 md:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, i) => (
@@ -532,7 +532,7 @@ function FAQContactSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -596,7 +596,7 @@ function CTAContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

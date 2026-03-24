@@ -750,7 +750,7 @@ export default function CheckoutPage() {
   /* ---- Render ---- */
   return (
     <section
-      className="max-w-6xl mx-auto px-4 py-10 md:py-16"
+      className="max-w-6xl mx-auto px-4 py-10 lg:py-20"
       style={{ fontFamily: "Poppins, sans-serif" }}
     >
       {/* Page title */}

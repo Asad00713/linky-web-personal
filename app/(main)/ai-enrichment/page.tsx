@@ -438,7 +438,7 @@ export default function AIEnrichmentPage() {
   return (
     <main className="bg-white overflow-x-hidden">
       {/* ───── 1. HERO WITH LIVE TRANSFORMATION ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <motion.div className="text-center mb-16" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <SectionEyebrow text="AI DATA ENRICHMENT" />
@@ -472,7 +472,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 3. COVERAGE COMPARISON GAUGES ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="DATA COVERAGE" />
@@ -490,7 +490,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 4. ENRICHMENT FEATURES ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="ENRICHMENT CAPABILITIES" />
@@ -515,7 +515,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 5. BENTO GRID ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="BUILT FOR SCALE" />
@@ -551,7 +551,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 6. HOW IT WORKS ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="THE PROCESS" />
@@ -576,7 +576,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 7. COMPARISON ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="THE DIFFERENCE" />
@@ -612,14 +612,14 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 8. STATS ───── */}
-      <section className="py-16 md:py-20" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-5xl mx-auto px-[5%] grid grid-cols-2 md:grid-cols-4 gap-10">
           {mainStats.map((s) => <Stat key={s.label} {...s} />)}
         </div>
       </section>
 
       {/* ───── 9. TESTIMONIALS ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FROM THE FIELD" />
@@ -643,7 +643,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── 10. FAQ ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FAQ" />
@@ -673,7 +673,7 @@ export default function AIEnrichmentPage() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <motion.div className="max-w-4xl mx-auto text-center rounded-3xl p-12 md:p-16 relative overflow-hidden" style={gradientBgStyle} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="heading-2 text-white mb-4">Ready to Turn Sparse Leads Into Full Profiles?</h2>
           <p className="para text-white/80 max-w-xl mx-auto mb-8">

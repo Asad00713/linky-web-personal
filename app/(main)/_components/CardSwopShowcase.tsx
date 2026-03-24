@@ -294,7 +294,7 @@ export default function CardSwopShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden py-20 lg:py-28"
+      className="relative w-full overflow-hidden py-10 lg:py-20"
       style={{ backgroundColor: "#F8FBFF" }}
     >
       <div className="mx-auto max-w-7xl px-[5%]">

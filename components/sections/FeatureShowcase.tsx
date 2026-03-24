@@ -48,7 +48,7 @@ export function FeatureShowcase({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-20 ${reversed ? "direction-rtl" : ""}`}>
           {/* Text + Features */}

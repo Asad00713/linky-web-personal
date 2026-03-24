@@ -145,7 +145,7 @@ export default function FeaturesSection() {
   return (
     <section className="overflow-hidden">
       {/* Row 1: For Members */}
-      <div ref={ref1} className="relative py-8 lg:py-24">
+      <div ref={ref1} className="relative py-10 lg:py-20">
         <div
           className="hidden lg:block absolute pointer-events-none"
           style={{ right: -180, top: "38%", transform: "translateY(-50%)" }}
@@ -195,7 +195,7 @@ export default function FeaturesSection() {
       <div className="mx-[5%] h-px opacity-20" style={gradientBgStyle} />
 
       {/* Row 2: For Business */}
-      <div ref={ref2} className="relative py-10 lg:py-24">
+      <div ref={ref2} className="relative py-10 lg:py-20">
         <div
           className="hidden lg:block absolute pointer-events-none"
           style={{ left: -100, top: "80%", transform: "translateY(-50%)" }}

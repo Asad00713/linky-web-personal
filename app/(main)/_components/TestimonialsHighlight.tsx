@@ -114,7 +114,7 @@ export default function TestimonialsHighlight() {
 
   return (
     <section
-      className="w-full py-16 md:py-24 px-6 bg-gray-50/50"
+      className="w-full py-10 lg:py-20 px-6 bg-gray-50/50"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
