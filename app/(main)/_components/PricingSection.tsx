@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Plus } from "lucide-react";
+import { Check } from "lucide-react";
+import Image from "next/image";
+import { IMAGES } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { ShineBorder } from "@/components/ui/shine-border";
 import { gradientTextStyle } from "@/lib/styles";
@@ -249,7 +251,7 @@ export default function PricingSection() {
   });
 
   return (
-    <section className="py-10 lg:py-24 px-[5%] bg-[#F6FAFB]">
+    <section className="py-10 lg:py-20 px-[5%] bg-[#F6FAFB]">
       <style>{`
         @keyframes shineBtn {
           0% { transform: translateX(-100%); }
@@ -265,9 +267,7 @@ export default function PricingSection() {
         animate={headerInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
       >
-        <div className="mb-4 p-3 rounded-2xl bg-white shadow-sm inline-flex">
-          <Plus className="w-6 h-6" style={{ color: "#65C7F7" }} />
-        </div>
+        <Image src={IMAGES.dashboardIcon} alt="Packages" width={64} height={64} className="mb-2" />
         <div className="mb-4 w-fit">
           <span className="eyebrow text-(--color-eyebrow)">Packages</span>
           <div className="mt-2 w-full h-px bg-(--color-eyebrow)/30" />

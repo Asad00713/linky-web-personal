@@ -313,9 +313,9 @@ function SocialProofSection() {
   const { ref, inView } = useRIOInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="px-4 py-16">
+    <section ref={ref} className="px-4 py-10 lg:py-20">
       <div
-        className="mx-auto max-w-5xl rounded-3xl px-8 py-14"
+        className="mx-auto max-w-5xl rounded-3xl px-8 py-10 lg:py-20"
         style={gradientBgStyle}
       >
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
@@ -345,7 +345,7 @@ function ProblemSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
         {/* Left: Animated messy stack */}
         <div className="relative mx-auto h-[320px] w-full max-w-[320px] flex items-center justify-center">
@@ -495,7 +495,7 @@ function SolutionSectionDesktop() {
 
   return (
     <div ref={pinRef} className="relative hidden min-h-screen md:flex">
-      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-20">
+      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-10 lg:py-20">
         {/* Left content */}
         <div className="flex-1 pr-16">
           <p className="eyebrow mb-4 text-[#16B8C3]">The LINKey Workflow</p>
@@ -579,7 +579,7 @@ function SolutionSectionDesktop() {
 
 function SolutionSectionMobile() {
   return (
-    <div className="px-4 py-20 md:hidden">
+    <div className="px-4 py-10 lg:py-20 md:hidden">
       <div className="mx-auto max-w-lg">
         <p className="eyebrow mb-4 text-[#16B8C3]">The LINKey Workflow</p>
         <h2 className="heading-2 mb-10">
@@ -720,7 +720,7 @@ function PipelineMobileArrow() {
 
 function PrimaryFeaturesSection() {
   return (
-    <section className="px-4 py-20 md:py-28">
+    <section className="px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">Capabilities</p>
@@ -836,7 +836,7 @@ function SecondaryFeaturesSection() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="bg-gray-50/60 px-4 py-20 md:py-28">
+    <section className="bg-gray-50/60 px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">Advanced Features</p>
@@ -959,7 +959,7 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="px-4 py-20 md:py-28" ref={containerRef}>
+    <section id="how-it-works" className="px-4 py-10 lg:py-20" ref={containerRef}>
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">Four Simple Steps</p>
@@ -1080,7 +1080,7 @@ function StatsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-4 py-20 md:py-28">
+    <section ref={sectionRef} className="px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-5xl" ref={ioRef}>
         <div className="mb-14 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">The Difference</p>
@@ -1166,7 +1166,7 @@ const COMPARISON_ROWS = [
 
 function ComparisonSection() {
   return (
-    <section className="bg-gray-50/60 px-4 py-20 md:py-28">
+    <section className="bg-gray-50/60 px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">Why Switch</p>
@@ -1298,7 +1298,7 @@ function TestimonialsSection() {
   const t = TESTIMONIALS[current];
 
   return (
-    <section className="px-4 py-20 md:py-28">
+    <section className="px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">Real Results</p>
@@ -1422,7 +1422,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="bg-gray-50/60 px-4 py-20 md:py-28">
+    <section className="bg-gray-50/60 px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p className="eyebrow mb-3 text-[#16B8C3]">FAQ</p>
@@ -1523,7 +1523,7 @@ function BadgeMockup() {
 
 function CTASection() {
   return (
-    <section className="px-4 py-20 md:py-28">
+    <section className="px-4 py-10 lg:py-20">
       <div className="mx-auto max-w-5xl">
         <div className="grid items-center gap-12 rounded-3xl border border-gray-100 bg-white p-8 shadow-sm md:grid-cols-2 md:p-14">
           {/* Left */}

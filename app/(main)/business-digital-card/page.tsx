@@ -273,7 +273,7 @@ function CardDepthSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-b from-white to-gray-50">
+    <section ref={sectionRef} className="py-10 lg:py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="BUILT WITH DEPTH"
@@ -504,7 +504,7 @@ function StickyFeatureScroll() {
   };
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-[#F8FBFF]">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-[#F8FBFF]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -697,7 +697,7 @@ function BentoCapItem({ item, index }: { item: typeof bentoItems[0]; index: numb
 
 function BentoCapabilities() {
   return (
-    <section className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -756,7 +756,7 @@ function HowItWorks() {
   }, []);
 
   return (
-    <section className="py-24">
+    <section className="py-10 lg:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="GET STARTED"
@@ -820,7 +820,7 @@ const comparisonRows = [
 
 function ComparisonTable() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-10 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="WHY SWITCH"
@@ -897,7 +897,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="py-24">
+    <section className="py-10 lg:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="REAL RESULTS"
@@ -955,7 +955,7 @@ function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-10 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="FAQ"
@@ -1082,7 +1082,7 @@ export default function BusinessDigitalCardPage() {
       </section>
 
       {/* ====================== 2. SOCIAL PROOF ====================== */}
-      <section className="py-16 border-y border-gray-100">
+      <section className="py-10 lg:py-20 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 text-center mb-8">
           <div className="flex items-center justify-center gap-3">
             <BusinessCountStat />
@@ -1099,7 +1099,7 @@ export default function BusinessDigitalCardPage() {
       </section>
 
       {/* ====================== 3. PROBLEM ====================== */}
-      <section className="py-24">
+      <section className="py-10 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             className="text-center max-w-3xl mx-auto"
@@ -1141,7 +1141,7 @@ export default function BusinessDigitalCardPage() {
       </section>
 
       {/* ====================== 4. SOLUTION BRIDGE ====================== */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-10 lg:py-20 relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(156,236,251,0.08), rgba(0,82,212,0.08))" }} />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
@@ -1173,7 +1173,7 @@ export default function BusinessDigitalCardPage() {
       <HowItWorks />
 
       {/* ====================== 8. STATS ====================== */}
-      <section className="py-20" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7, #9CECFB)" }}>
+      <section className="py-10 lg:py-20" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7, #9CECFB)" }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <CounterStat value={4200} suffix="+" label="Businesses Onboarded" />
@@ -1194,7 +1194,7 @@ export default function BusinessDigitalCardPage() {
       <FAQAccordion />
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="py-10 lg:py-20">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             className="rounded-3xl p-12 md:p-16 text-center text-white relative overflow-hidden"

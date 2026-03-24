@@ -253,7 +253,7 @@ function ProblemSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl grid items-center gap-16 md:grid-cols-2">
         <motion.div initial={{ opacity: 0, x: -40 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7 }}>
           <span className="eyebrow text-red-500 mb-4 inline-block">THE PROBLEM</span>
@@ -299,7 +299,7 @@ function SolutionBridge() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="relative px-[5%] py-24 md:py-36 overflow-hidden">
+    <section ref={ref} className="relative px-[5%] py-10 lg:py-20 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full animate-[pulse_4s_ease-in-out_infinite]" style={{ background: "radial-gradient(circle, rgba(156,236,251,0.15) 0%, transparent 70%)" }} />
       </div>
@@ -332,7 +332,7 @@ function CaptureChannelTabs() {
   const [statsRef, statsInView] = useRIOInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">CAPTURE CHANNELS</span>
@@ -416,7 +416,7 @@ function BentoSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">SMART FEATURES</span>
@@ -453,7 +453,7 @@ function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} id="how-it-works" className="px-[5%] py-20 md:py-28">
+    <section ref={ref} id="how-it-works" className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-16">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">STEP BY STEP</span>
@@ -517,7 +517,7 @@ const statsData = [
 function StatsSection() {
   const [ref, inView] = useRIOInView({ triggerOnce: true, threshold: 0.3 });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl rounded-3xl p-10 md:p-16 text-white" style={gradientBgStyle}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {statsData.map((s, i) => (
@@ -561,7 +561,7 @@ function ComparisonSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">WHY SWITCH</span>
@@ -609,7 +609,7 @@ function TestimonialSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">WHAT SALES LEADERS SAY</span>
@@ -657,7 +657,7 @@ function FAQSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center mb-12">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FAQ</span>
@@ -695,7 +695,7 @@ function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 30, scale: 0.97 }} animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}} transition={{ duration: 0.6 }} className="mx-auto max-w-4xl rounded-3xl p-12 md:p-16 text-center text-white" style={gradientBgStyle}>
         <h2 className="heading-2 mb-4">Never Lose a Lead Again</h2>
         <p className="lead text-white/85 mb-8 max-w-xl mx-auto">Every swop, scan, and share &mdash; captured, attributed, and ready for follow-up. Start turning interactions into pipeline today.</p>

@@ -321,7 +321,7 @@ function SocialProofSection() {
   const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -380,7 +380,7 @@ function ProblemSection() {
   }, [inView]);
 
   return (
-    <section className="px-[5%] py-20 md:py-32 bg-gray-50/60">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/60">
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-[#16B8C3] mb-3 inline-block">THE PROBLEM</span>
@@ -472,7 +472,7 @@ function SolutionSection() {
   const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -540,7 +540,7 @@ function ComparisonTable() {
   const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28 bg-gray-50/60">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/60">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">COMPARISON</span>
@@ -697,7 +697,7 @@ function ValuesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-[5%] py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="px-[5%] py-10 lg:py-20 overflow-hidden">
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR VALUES</span>
@@ -756,7 +756,7 @@ function StatsSection() {
   const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section ref={ref} className="relative px-[5%] py-20 md:py-28 overflow-hidden">
+    <section ref={ref} className="relative px-[5%] py-10 lg:py-20 overflow-hidden">
       {/* Morphing blob */}
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0052D4]/[0.04]"
@@ -926,7 +926,7 @@ function TimelineMilestone({ milestone, index, total }: { milestone: typeof mile
 
 function StoryTimeline() {
   return (
-    <section className="px-[5%] py-20 md:py-32 bg-gray-50/60">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/60">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR STORY</span>
@@ -996,7 +996,7 @@ function CapabilitiesTabs() {
   ];
 
   return (
-    <section className="px-[5%] py-20 md:py-28">
+    <section className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">CAPABILITIES</span>
@@ -1113,7 +1113,7 @@ function SAPrideSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative px-[5%] py-20 md:py-28 overflow-hidden bg-gray-50/60">
+    <section ref={sectionRef} className="relative px-[5%] py-10 lg:py-20 overflow-hidden bg-gray-50/60">
       {/* SA flag stripes — decorative */}
       <div className="pointer-events-none absolute left-0 top-[30%] -z-10 flex flex-col gap-3 w-full">
         <div className="sa-stripe h-[2px] bg-[#007749]/10 w-0" />
@@ -1220,7 +1220,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-28">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">TESTIMONIALS</span>
@@ -1297,7 +1297,7 @@ const cancelItems = [
 
 function WhatYouReplace() {
   return (
-    <section className="px-[5%] py-20 md:py-28 bg-gray-50/60">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/60">
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">SIMPLIFY</span>
@@ -1435,7 +1435,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="px-[5%] py-20 md:py-28">
+    <section className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FAQ</span>
@@ -1498,7 +1498,7 @@ function FAQSection() {
 /* ─────────────────── SECTION 14: FINAL CTA ─────────────────── */
 function FinalCTA() {
   return (
-    <section className="px-[5%] py-24 md:py-36">
+    <section className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

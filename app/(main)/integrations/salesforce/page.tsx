@@ -430,7 +430,7 @@ export default function SalesforceIntegrationPage() {
   return (
     <main className="bg-white overflow-x-hidden">
       {/* ───── 1. HERO ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <motion.div className="flex-1 text-center lg:text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
             <SectionEyebrow text="SALESFORCE INTEGRATION" />
@@ -471,7 +471,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 3. FEATURES GRID ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="CORE CAPABILITIES" />
@@ -496,7 +496,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 4. FIELD MAPPING VISUALISATION ───── */}
-      <section id="field-mapping" className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section id="field-mapping" className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FIELD MAPPING" />
@@ -510,7 +510,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 5. HOW IT WORKS ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="SETUP GUIDE" />
@@ -537,7 +537,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 6. ADVANCED FEATURES (BENTO) ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="ADVANCED FEATURES" />
@@ -553,7 +553,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 7. COMPARISON ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="WHY SWITCH" />
@@ -591,7 +591,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 8. STATS ───── */}
-      <section className="py-16 md:py-20" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-5xl mx-auto px-[5%] grid grid-cols-2 md:grid-cols-4 gap-10">
           {stats.map((s) => (
             <Stat key={s.label} {...s} />
@@ -600,7 +600,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 9. TESTIMONIALS ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FROM SALESFORCE TEAMS" />
@@ -624,7 +624,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── 10. FAQ ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FAQ" />
@@ -654,7 +654,7 @@ export default function SalesforceIntegrationPage() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <motion.div className="max-w-4xl mx-auto text-center rounded-3xl p-12 md:p-16 relative overflow-hidden" style={gradientBgStyle} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="heading-2 text-white mb-4">Stop Losing Leads to Manual Entry</h2>
           <p className="para text-white/80 max-w-xl mx-auto mb-8">

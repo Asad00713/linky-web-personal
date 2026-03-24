@@ -21,7 +21,7 @@ export function LogoCloud({
   const items = logos || Array.from({ length: count }, (_, i) => ({ name: `Company ${i + 1}` }));
 
   return (
-    <section ref={ref} className="px-[5%] py-12 md:py-16">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.p
           initial={{ opacity: 0 }}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, type ReactNode } from "react";
+import { useState, useCallback, useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -125,6 +126,11 @@ function HamburgerButton({
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggle = useCallback(() => {
     setIsOpen((prev) => {
@@ -162,6 +168,7 @@ export function MobileNav() {
     <>
       <HamburgerButton isOpen={isOpen} toggle={toggle} />
 
+      {mounted && createPortal(
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -311,7 +318,9 @@ export function MobileNav() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body
+      )}
     </>
   );
 }

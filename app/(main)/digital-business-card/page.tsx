@@ -388,7 +388,7 @@ function ProblemSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-[5%] py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="px-[5%] py-10 lg:py-20 overflow-hidden">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-16 md:grid-cols-2">
           {/* Left — scattered paper pile */}
@@ -447,7 +447,7 @@ function ProblemSection() {
 
 function SolutionBridge() {
   return (
-    <section className="relative px-[5%] py-24 md:py-40 overflow-hidden">
+    <section className="relative px-[5%] py-10 lg:py-20 overflow-hidden">
       {/* Pulsing radial glow */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
@@ -583,7 +583,7 @@ function SharingMethodsSection() {
   // Mobile fallback — vertical cards
   if (isMobile) {
     return (
-      <section className="px-[5%] py-20 md:py-32">
+      <section className="px-[5%] py-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-14">
             <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">SHARE YOUR WAY</span>
@@ -721,7 +721,7 @@ function CardFeaturesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="px-[5%] py-20 md:py-32 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FEATURE-RICH</span>
@@ -872,7 +872,7 @@ function HowItWorksTimeline() {
   const pathLength = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="px-[5%] py-20 md:py-32">
+    <section ref={sectionRef} id="how-it-works" className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-20">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">HOW IT WORKS</span>
@@ -1141,7 +1141,7 @@ function FloatingCapabilities() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="relative px-[5%] py-20 md:py-32 overflow-hidden">
+    <section ref={ref} className="relative px-[5%] py-10 lg:py-20 overflow-hidden">
       {/* Subtle grid background */}
       <div
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.03]"
@@ -1414,7 +1414,7 @@ function StatsDashboard() {
   return (
     <section
       ref={ref}
-      className="px-[5%] py-16 md:py-24"
+      className="px-[5%] py-10 lg:py-20"
       style={{
         background: "linear-gradient(135deg, #0052D4 0%, #1a1a2e 50%, #0052D4 100%)",
       }}
@@ -1551,7 +1551,7 @@ function ComparisonSection() {
   const isInView = useInView(refView, { once: true, margin: "-50px" });
 
   return (
-    <section ref={sectionRef} className="px-[5%] py-20 md:py-32">
+    <section ref={sectionRef} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl" ref={refView}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1771,7 +1771,7 @@ function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-32 bg-gray-50/50 overflow-hidden">
+    <section ref={ref} className="py-10 lg:py-20 bg-gray-50/50 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -1856,7 +1856,7 @@ function FAQSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-32">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-[800px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1946,7 +1946,7 @@ function FinalCTA() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-20 md:py-32">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.97 }}
         animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
@@ -2001,7 +2001,7 @@ export default function DigitalBusinessCardPage() {
       <SocialProofStrip />
       <ProblemSection />
       <SolutionBridge />
-      <SharingMethodsSection />
+      {/* <SharingMethodsSection /> */}
       <CardFeaturesSection />
       <HowItWorksTimeline />
       <FloatingCapabilities />

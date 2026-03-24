@@ -276,7 +276,7 @@ export default function Header() {
               <li key={link.title}>
                 <Link
                   href={link.href}
-                  className="px-3 py-2 rounded-lg text-sm font-medium text-[#454545] hover:text-[#1F2323] transition-colors duration-150"
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-[#454545] hover:text-[#1F2323] transition-colors duration-150 whitespace-nowrap"
                 >
                   {link.title}
                 </Link>

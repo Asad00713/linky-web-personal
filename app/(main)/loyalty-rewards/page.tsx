@@ -157,7 +157,7 @@ function TierProgressSection() {
   const { ref, inView } = useObserverInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <section ref={ref} className="py-20 bg-white">
+    <section ref={ref} className="py-10 lg:py-20 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -391,7 +391,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 3. PROBLEM ═══ */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <SectionFade>
             <p className="text-sm font-semibold tracking-widest mb-3" style={{ color: "#16B8C3" }}>THE PROBLEM</p>
@@ -425,7 +425,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 4. FEATURES — ALTERNATING ROWS ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -460,7 +460,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 5. HOW IT WORKS ═══ */}
-      <section id="how-it-works" className="py-20">
+      <section id="how-it-works" className="py-10 lg:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -497,7 +497,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 6. CAPABILITIES — BENTO GRID ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -537,7 +537,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 7. STATS ═══ */}
-      <section className="py-20" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
           <StatCard value={3} suffix="x" label="Repeat visits from loyalty members" />
           <StatCard value={68} suffix="%" label="Average deal redemption rate" />
@@ -549,7 +549,7 @@ export default function LoyaltyRewardsPage() {
       <TierProgressSection />
 
       {/* ═══ 8. COMPARISON ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -591,7 +591,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 9. TESTIMONIALS — MARQUEE ═══ */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-12">
@@ -620,7 +620,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* ═══ 10. FAQ + CTA ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-3xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-12">
@@ -635,7 +635,7 @@ export default function LoyaltyRewardsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <SectionFade>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">

@@ -177,7 +177,7 @@ export default function MemberBenefitsSection() {
   });
 
   return (
-    <section className="py-10 lg:py-24 px-[5%]">
+    <section className="py-10 lg:py-20 px-[5%]">
       <style>{`
         @keyframes statusPulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(22, 184, 195, 0.3); }

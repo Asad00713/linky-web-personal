@@ -215,7 +215,7 @@ function StepCard({ step, index }: { step: typeof STEPS[number]; index: number }
 
 export default function HowItWorksSection() {
   return (
-    <section className="pt-10 lg:pt-24 px-[5%]">
+    <section className="py-10 lg:py-20 px-[5%]">
       <SectionHeader
         icon={IMAGES.hashIcon}
         eyebrow="How It Works"

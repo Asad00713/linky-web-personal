@@ -71,7 +71,7 @@ function Section({
   return (
     <section
       id={id}
-      className={`py-20 md:py-28 ${className}`}
+      className={`py-10 lg:py-20 ${className}`}
       style={{ background: bg, fontFamily: "Poppins, sans-serif" }}
     >
       <div className="mx-auto max-w-7xl px-6">{children}</div>
@@ -359,7 +359,7 @@ function StatsSection() {
   const { ref, inView } = useInViewIO({ triggerOnce: true, threshold: 0.3 })
 
   return (
-    <section className="py-16" style={{ fontFamily: "Poppins, sans-serif" }}>
+    <section className="py-10 lg:py-20" style={{ fontFamily: "Poppins, sans-serif" }}>
       <div
         ref={ref}
         className="mx-auto max-w-5xl px-6 py-12 rounded-2xl"
@@ -1257,7 +1257,7 @@ function CTASection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" })
 
   return (
-    <section className="py-20 md:py-28" style={{ fontFamily: "Poppins, sans-serif" }}>
+    <section className="py-10 lg:py-20" style={{ fontFamily: "Poppins, sans-serif" }}>
       <div ref={ref} className="mx-auto max-w-4xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

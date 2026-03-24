@@ -135,7 +135,7 @@ export default function ShopPage() {
       <FeaturedProduct product={bestSeller} />
 
       {/* ── 3. PRODUCT GRID ── */}
-      <section className="px-[5%] py-16 md:py-24 max-w-[1400px] mx-auto">
+      <section className="px-[5%] py-10 lg:py-20 max-w-[1400px] mx-auto">
         {/* Filter + Sort bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
           {/* Category pills */}
@@ -212,7 +212,7 @@ export default function ShopPage() {
         </motion.div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-20">
+          <div className="text-center py-10 lg:py-20">
             <p className="text-[#6B7280]">No products in this category yet.</p>
           </div>
         )}
@@ -345,7 +345,7 @@ function FeaturedProduct({ product }: { product: Product }) {
   const inCart = isInCart(product.id);
 
   return (
-    <section className="px-[5%] py-16 md:py-24 max-w-[1400px] mx-auto">
+    <section className="px-[5%] py-10 lg:py-20 max-w-[1400px] mx-auto">
       <Reveal>
         <div className="relative rounded-3xl border border-gray-100 bg-gradient-to-br from-gray-50/80 to-white p-8 md:p-12 lg:p-16">
           {/* Glow */}
@@ -599,7 +599,7 @@ function CategoryCards() {
   ];
 
   return (
-    <section className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="max-w-[1400px] mx-auto">
         <Reveal>
           <div className="text-center mb-12">
@@ -644,7 +644,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="px-[5%] py-16 md:py-24 max-w-[1400px] mx-auto">
+    <section className="px-[5%] py-10 lg:py-20 max-w-[1400px] mx-auto">
       <Reveal>
         <div className="text-center mb-14">
           <span className="eyebrow text-[#0052D4]">How It Works</span>
@@ -683,7 +683,7 @@ function BundleDeals({ bundles }: { bundles: Product[] }) {
   const { addToCart, isInCart, openCart } = useCart();
 
   return (
-    <section className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="max-w-[1400px] mx-auto">
         <Reveal>
           <div className="text-center mb-12">
@@ -824,7 +824,7 @@ function WhyNFC() {
   ];
 
   return (
-    <section className="px-[5%] py-16 md:py-24 max-w-[1400px] mx-auto">
+    <section className="px-[5%] py-10 lg:py-20 max-w-[1400px] mx-auto">
       <Reveal>
         <div className="text-center mb-12">
           <span className="eyebrow text-[#0052D4]">Why NFC?</span>
@@ -874,7 +874,7 @@ function SocialProof() {
   ];
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden">
+    <section className="py-10 lg:py-20 overflow-hidden">
       <Reveal>
         <div className="text-center mb-12 px-[5%]">
           <span className="eyebrow text-[#0052D4]">Social Proof</span>
@@ -922,7 +922,7 @@ function TrustBadges() {
   ];
 
   return (
-    <section className="px-[5%] py-16 md:py-20 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
         {badges.map((b, i) => (
           <Reveal key={b.title} delay={i * 0.1}>
@@ -964,7 +964,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="px-[5%] py-16 md:py-24 max-w-[800px] mx-auto">
+    <section className="px-[5%] py-10 lg:py-20 max-w-[800px] mx-auto">
       <Reveal>
         <div className="text-center mb-12">
           <span className="eyebrow text-[#0052D4]">FAQ</span>
@@ -1015,7 +1015,7 @@ function FAQSection() {
 // ═══════════════════════════════════════════════════════════════════════════
 function RecommendedProducts({ products: recs }: { products: Product[] }) {
   return (
-    <section className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="max-w-[1400px] mx-auto">
         <Reveal>
           <h2 className="heading-2 mb-8">You May Also Like</h2>
@@ -1037,7 +1037,7 @@ function RecommendedProducts({ products: recs }: { products: Product[] }) {
 // ═══════════════════════════════════════════════════════════════════════════
 function FinalCTA() {
   return (
-    <section className="px-[5%] py-16 md:py-24">
+    <section className="px-[5%] py-10 lg:py-20">
       <Reveal>
         <div
           className="max-w-[1400px] mx-auto rounded-3xl p-10 md:p-16 text-center"

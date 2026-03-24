@@ -214,7 +214,7 @@ function FeatureTabs() {
   const current = dealTypes[active];
 
   return (
-    <section className="py-20 bg-gray-50/40">
+    <section className="py-10 lg:py-20 bg-gray-50/40">
       <div className="max-w-6xl mx-auto px-6">
         <SectionFade>
           <div className="text-center mb-12">
@@ -400,7 +400,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 3. PROBLEM ═══ */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <SectionFade>
             <p className="text-sm font-semibold tracking-widest text-[#16B8C3] mb-3">THE PROBLEM</p>
@@ -430,7 +430,7 @@ export default function DealsPromotionsPage() {
       <FeatureTabs />
 
       {/* ═══ 5. HOW IT WORKS ═══ */}
-      <section id="how-it-works" className="py-20">
+      <section id="how-it-works" className="py-10 lg:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -458,7 +458,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 6. CAPABILITIES ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -497,7 +497,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 7. STATS ═══ */}
-      <section className="py-20" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
           <StatCard value={3} suffix="x" label="Higher redemption vs paper coupons" />
           <StatCard value={85} suffix="%" label="Deals viewed within 1 hour" />
@@ -507,7 +507,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 8. COMPARISON ═══ */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-14">
@@ -539,7 +539,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 9. TESTIMONIALS ═══ */}
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-6xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-12">
@@ -571,7 +571,7 @@ export default function DealsPromotionsPage() {
       </section>
 
       {/* ═══ 10. FAQ + CTA ═══ */}
-      <section className="py-20">
+      <section className="py-10 lg:py-20">
         <div className="max-w-3xl mx-auto px-6">
           <SectionFade>
             <div className="text-center mb-12">
@@ -585,7 +585,7 @@ export default function DealsPromotionsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50/40">
+      <section className="py-10 lg:py-20 bg-gray-50/40">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <SectionFade>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1F2323] mb-4">
