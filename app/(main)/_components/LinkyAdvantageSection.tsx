@@ -52,7 +52,7 @@ export default function LinkyAdvantageSection() {
   const { ref: countRef, inView: countInView } = useInViewObserver({ triggerOnce: true, threshold: 0.5 })
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-10 lg:py-24">
+    <section ref={ref} className="relative overflow-hidden py-10 lg:py-20">
 
       {/* Animated blob — slides in from left, sits behind images */}
       <div className="hidden lg:block absolute pointer-events-none pb-10" style={{ left: -180, top: "70%", transform: "translateY(-50%)" }}>

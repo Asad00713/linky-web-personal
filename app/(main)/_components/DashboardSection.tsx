@@ -48,7 +48,7 @@ export default function DashboardSection() {
   });
 
   return (
-    <section className="w-full px-6 py-16 overflow-hidden">
+    <section className="w-full px-6 py-10 lg:py-20 overflow-hidden">
       <style>{`
         @keyframes gradientRotate {
           0% { --angle: 0deg; }

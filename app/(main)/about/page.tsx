@@ -31,7 +31,7 @@ const heroWords = ["We're", "Building", "the", "Future", "of", "Professional", "
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-[5%] py-20 md:py-32 lg:py-40">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20 lg:py-40">
       {/* SA-inspired subtle gradient accent */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#007749]/5 blur-[120px]" />
@@ -127,7 +127,7 @@ function MissionVisionSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">WHY WE EXIST</span>
@@ -175,7 +175,7 @@ function StatsCountUpSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-14 md:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, i) => (
@@ -250,7 +250,7 @@ function ValuesSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR VALUES</span>
@@ -311,7 +311,7 @@ function TeamSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">THE PEOPLE</span>
@@ -399,7 +399,7 @@ function TimelineSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-4xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR JOURNEY</span>
@@ -476,7 +476,7 @@ function SAPrideSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">OUR ROOTS</span>
@@ -540,7 +540,7 @@ function TeamTestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">LIFE AT LINKEY</span>
@@ -631,7 +631,7 @@ function FAQAboutSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -695,7 +695,7 @@ function CTAAboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

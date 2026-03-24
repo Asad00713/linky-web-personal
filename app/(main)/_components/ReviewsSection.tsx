@@ -97,7 +97,7 @@ function ReviewCard({
   img: string;
 }) {
   return (
-    <figure className="group relative w-full rounded-2xl border border-[#E2E8F0] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-transparent overflow-hidden">
+    <figure className="group relative w-full max-w-[350px] lg:max-w-max rounded-2xl border border-[#E2E8F0] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-transparent overflow-hidden">
       {/* Gradient border on hover */}
       <div
         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -191,7 +191,7 @@ export default function ReviewsSection() {
   });
 
   return (
-    <section className="w-full bg-[#F6FAFB] px-6 py-16">
+    <section className="w-full bg-[#F6FAFB] px-6 py-10 lg:py-20">
       {/* Header */}
       <div
         ref={headerRef}
@@ -234,8 +234,31 @@ export default function ReviewsSection() {
         </motion.p>
       </div>
 
-      {/* Marquee Cards */}
-      <div className="relative mx-auto mt-10 flex h-[800px] max-w-[1312px] flex-row items-center justify-center gap-6 overflow-hidden">
+      {/* Marquee Cards — Horizontal on mobile, Vertical on md+ */}
+
+      {/* Mobile: 3 horizontal rows */}
+      <div className="relative mx-auto mt-10 flex flex-col gap-4 overflow-hidden md:hidden">
+        <Marquee pauseOnHover className="[--duration:30s]">
+          {firstColumn.map((review) => (
+            <ReviewCard key={review.name} {...review} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:30s]">
+          {secondColumn.map((review) => (
+            <ReviewCard key={review.name} {...review} />
+          ))}
+        </Marquee>
+        <Marquee pauseOnHover className="[--duration:30s]">
+          {thirdColumn.map((review) => (
+            <ReviewCard key={review.name} {...review} />
+          ))}
+        </Marquee>
+        <div className="from-[#F6FAFB] pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-gradient-to-r" />
+        <div className="from-[#F6FAFB] pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-gradient-to-l" />
+      </div>
+
+      {/* Desktop: 3 vertical columns */}
+      <div className="relative mx-auto mt-10 hidden md:flex h-[800px] max-w-[1312px] flex-row items-center justify-center gap-6 overflow-hidden">
         <Marquee pauseOnHover vertical className="[--duration:25s]">
           {firstColumn.map((review) => (
             <ReviewCard key={review.name} {...review} />

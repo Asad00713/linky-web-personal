@@ -108,7 +108,7 @@ export default function ComparisonSection() {
   const headerInView = useInView(headerRef, { once: true, margin: "-50px" })
 
   return (
-    <section className="w-full py-16 md:py-24 px-6">
+    <section className="w-full py-10 lg:py-20 px-6">
       {/* Header */}
       <div ref={headerRef} className="mx-auto max-w-[900px] text-center mb-12">
         <motion.span

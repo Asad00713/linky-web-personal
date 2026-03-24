@@ -73,7 +73,7 @@ export function StatsSection({ stats, variant = "default" }: StatsSectionProps) 
   const labelClass = variant === "gradient" ? "text-white/70" : "text-(--color-card-para)";
 
   return (
-    <section ref={ref} className={`px-[5%] py-14 md:py-20 ${bgClass}`}>
+    <section ref={ref} className={`px-[5%] py-10 lg:py-20 ${bgClass}`}>
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, i) => (

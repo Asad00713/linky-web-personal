@@ -549,7 +549,7 @@ function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`py-20 md:py-28 px-6 md:px-12 lg:px-20 ${className}`}>
+    <section id={id} className={`py-10 lg:py-20 px-6 md:px-12 lg:px-20 ${className}`}>
       <div className="max-w-7xl mx-auto">{children}</div>
     </section>
   );

@@ -63,7 +63,7 @@ export default function StatsSection() {
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full py-16 md:py-20"
+      className="w-full py-10 lg:py-20"
       style={{
         background: "linear-gradient(135deg, #0052D4, #65C7F7, #9CECFB)",
       }}

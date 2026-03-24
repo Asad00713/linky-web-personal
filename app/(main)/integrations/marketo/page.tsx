@@ -274,7 +274,7 @@ export default function MarketoIntegrationPage() {
   return (
     <main className="bg-white overflow-x-hidden">
       {/* ───── 1. HERO ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <motion.div className="flex-1 text-center lg:text-left" initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
             <SectionEyebrow text="MARKETO INTEGRATION" />
@@ -350,7 +350,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 3. DATA PIPELINE VISUALISATION ───── */}
-      <section id="pipeline" className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section id="pipeline" className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="DATA FLOW" />
@@ -364,7 +364,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 4. FEATURES GRID ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="CORE CAPABILITIES" />
@@ -400,7 +400,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 5. HOW IT WORKS ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="HOW IT WORKS" />
@@ -425,7 +425,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 6. ADVANCED FEATURES (BENTO) ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="ADVANCED FEATURES" />
@@ -461,7 +461,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 7. COMPARISON ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="WHY LINKEY" />
@@ -497,14 +497,14 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 8. STATS ───── */}
-      <section className="py-16 md:py-20" style={gradientBgStyle}>
+      <section className="py-10 lg:py-20" style={gradientBgStyle}>
         <div className="max-w-5xl mx-auto px-[5%] grid grid-cols-2 md:grid-cols-4 gap-10">
           {stats.map((s) => <Stat key={s.label} {...s} />)}
         </div>
       </section>
 
       {/* ───── 9. TESTIMONIALS ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="MARKETING OPS LOVE IT" />
@@ -528,7 +528,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── 10. FAQ ───── */}
-      <section className="py-20 md:py-28 px-[5%] bg-gray-50/60">
+      <section className="py-10 lg:py-20 px-[5%] bg-gray-50/60">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <SectionEyebrow text="FAQ" />
@@ -558,7 +558,7 @@ export default function MarketoIntegrationPage() {
       </section>
 
       {/* ───── CTA ───── */}
-      <section className="py-20 md:py-28 px-[5%]">
+      <section className="py-10 lg:py-20 px-[5%]">
         <motion.div className="max-w-4xl mx-auto text-center rounded-3xl p-12 md:p-16 relative overflow-hidden" style={gradientBgStyle} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="heading-2 text-white mb-4">Ready to Supercharge Your Marketo Programmes?</h2>
           <p className="para text-white/80 max-w-xl mx-auto mb-8">

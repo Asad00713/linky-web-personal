@@ -489,7 +489,7 @@ function FeatureTabsSection() {
   const activeFeature = featureTabs.find((t) => t.id === activeTab)!;
 
   return (
-    <section className="py-24">
+    <section className="py-10 lg:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="CORE FEATURES"
@@ -584,7 +584,7 @@ const secondaryFeatures = [
 
 function SecondaryFeatures() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-10 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="ADVANCED FEATURES"
@@ -653,7 +653,7 @@ function HowItWorks() {
   }, []);
 
   return (
-    <section className="py-24">
+    <section className="py-10 lg:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="HOW IT WORKS"
@@ -717,7 +717,7 @@ const comparisonRows = [
 
 function ComparisonTable() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-10 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="WHY SWITCH"
@@ -792,7 +792,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="py-24">
+    <section className="py-10 lg:py-20">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="WHAT HR LEADERS SAY"
@@ -850,7 +850,7 @@ function FAQAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-10 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           eyebrow="FAQ"
@@ -983,7 +983,7 @@ export default function StaffCardsPage() {
       </section>
 
       {/* ====================== 3. PROBLEM ====================== */}
-      <section className="py-24">
+      <section className="py-10 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             className="text-center max-w-3xl mx-auto"
@@ -1025,7 +1025,7 @@ export default function StaffCardsPage() {
       </section>
 
       {/* ====================== 4. SOLUTION BRIDGE ====================== */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-10 lg:py-20 relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(156,236,251,0.08), rgba(0,82,212,0.08))" }} />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div
@@ -1054,7 +1054,7 @@ export default function StaffCardsPage() {
       <SecondaryFeatures />
 
       {/* ====================== CARD DEPLOY ANIMATION ====================== */}
-      <section className="py-24">
+      <section className="py-10 lg:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeader
             eyebrow="INSTANT DEPLOYMENT"
@@ -1066,7 +1066,7 @@ export default function StaffCardsPage() {
       </section>
 
       {/* ====================== DASHBOARD MOCKUP ====================== */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-10 lg:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHeader
             eyebrow="REAL-TIME INSIGHTS"
@@ -1081,7 +1081,7 @@ export default function StaffCardsPage() {
       <HowItWorks />
 
       {/* ====================== 8. STATS ====================== */}
-      <section className="py-20" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7, #9CECFB)" }}>
+      <section className="py-10 lg:py-20" style={{ background: "linear-gradient(135deg, #0052D4, #65C7F7, #9CECFB)" }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <CounterStat value={95} suffix="%" label="Time Saved on Card Management" />
@@ -1102,7 +1102,7 @@ export default function StaffCardsPage() {
       <FAQAccordion />
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="py-10 lg:py-20">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             className="rounded-3xl p-12 md:p-16 text-center text-white relative overflow-hidden"

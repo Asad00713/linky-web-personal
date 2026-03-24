@@ -12,7 +12,7 @@ interface ComingSoonPageProps {
 
 export function ComingSoonPage({ title, description, features }: ComingSoonPageProps) {
   return (
-    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-[5%] py-20">
+    <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden px-[5%] py-10 lg:py-20">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-light/8 blur-3xl" />

@@ -52,7 +52,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden px-[5%] py-20 md:py-28 lg:py-36">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary-light/10 blur-3xl" />
         <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-primary-mid/10 blur-3xl" />
@@ -123,7 +123,7 @@ function FeatureShowcaseSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.6 }}>
@@ -167,7 +167,7 @@ function FeatureGridSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">CAPABILITIES</span>
@@ -208,7 +208,7 @@ function BentoSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">POWERFUL INSIGHTS</span>
@@ -245,7 +245,7 @@ function HowItWorksSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section id="how-it-works" ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section id="how-it-works" ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">STEP BY STEP</span>
@@ -279,7 +279,7 @@ function StatsSection() {
   ];
 
   return (
-    <section ref={ref} className="px-[5%] py-14 md:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gradient-to-r from-primary via-primary-mid to-primary-light">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((s, i) => (
@@ -305,7 +305,7 @@ function ComparisonSection() {
   const after = ["Every card tracked — exact scans, signups, and revenue", "Unique codes create personal connection", "QR gives customers a reason to keep the card", "Staff attribution shows who drives conversions", "Reorder automation ensures you never run out", "Data-driven decisions backed by real-time dashboards"];
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">THE DIFFERENCE</span>
@@ -341,7 +341,7 @@ function TestimonialsSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24 bg-gray-50/50">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20 bg-gray-50/50">
       <div className="mx-auto max-w-7xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-14 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">REAL RESULTS</span>
@@ -383,7 +383,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="mb-12 text-center">
           <span className="eyebrow text-(--color-eyebrow) mb-3 inline-block">FAQ</span>
@@ -411,7 +411,7 @@ function GradientCTA() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-primary-mid to-primary-light p-10 text-center md:p-16">
         <div className="pointer-events-none absolute -left-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-60 w-60 rounded-full bg-white/10 blur-2xl" />

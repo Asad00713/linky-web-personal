@@ -26,7 +26,7 @@ export function PageHero({
   children,
 }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden px-[5%] py-16 md:py-24 lg:py-32">
+    <section className="relative overflow-hidden px-[5%] py-10 lg:py-20">
       {/* Background decorative elements */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-primary-light/10 blur-3xl" />

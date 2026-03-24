@@ -25,7 +25,7 @@ export function BentoGrid({ eyebrow, title, description, items }: BentoGridProps
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="px-[5%] py-16 md:py-24">
+    <section ref={ref} className="px-[5%] py-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-14 text-center">
