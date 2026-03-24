@@ -24,6 +24,7 @@ import {
   Palette,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ──────────────────────────── helpers ──────────────────────────── */
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
@@ -460,9 +461,9 @@ export default function FreelancersPage() {
               Stop juggling multiple profiles across platforms. LINKey gives freelancers and consultants a single, powerful digital identity — complete with multiple cards, AI-enhanced CVs, vanity URLs, and real-time networking analytics. Built for South African professionals who hustle hard.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <a href="/signup" className="px-8 py-4 rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" style={gradientBgStyle}>
-                Create Your Card Free
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/signup">Create Your Card Free</a>
+              </AnimatedGradientButton>
               <a href="#how-it-works" className="px-8 py-4 rounded-full border-2 border-[#0052D4] text-[#0052D4] font-semibold text-sm hover:bg-[#0052D4] hover:text-white transition-all duration-300">
                 See How It Works
               </a>

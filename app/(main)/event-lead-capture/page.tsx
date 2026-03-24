@@ -32,6 +32,7 @@ import {
   Scan,
 } from "@phosphor-icons/react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ═══════════════════════════════════════════════════════════════════
    GSAP — dynamic import
@@ -192,13 +193,11 @@ function HeroSection() {
           transition={{ duration: 0.5, delay: 1 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <a
-            href="/pricing"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
-            style={gradientBgStyle}
-          >
-            Start Capturing Leads <ArrowRight className="h-4 w-4" />
-          </a>
+          <AnimatedGradientButton asChild>
+            <a href="/pricing">
+              Start Capturing Leads <ArrowRight className="h-4 w-4" />
+            </a>
+          </AnimatedGradientButton>
           <a
             href="#how-it-works"
             className="inline-flex items-center gap-2 rounded-full border-2 border-[#0052D4] px-7 py-3.5 text-sm font-semibold text-[#0052D4] transition-colors hover:bg-[#0052D4]/5"
@@ -1540,13 +1539,11 @@ function CTASection() {
               South Africa and beyond.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="/pricing"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
-                style={gradientBgStyle}
-              >
-                Start capturing leads <ArrowRight className="h-4 w-4" />
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/pricing">
+                  Start capturing leads <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <a
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full border-2 border-[#0052D4] px-7 py-3.5 text-sm font-semibold text-[#0052D4] transition-colors hover:bg-[#0052D4]/5"

@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView as useRIOInView } from "react-intersection-observer";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import {
   MailCheck,
   Linkedin,
@@ -449,9 +450,9 @@ export default function AIEnrichmentPage() {
               Stop working with half-empty contact records. LINKey AI enrichment turns minimal data into full lead profiles — verified emails, LinkedIn URLs, company details, job titles, phone numbers — in seconds, not hours.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <motion.a href="/get-started" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-sm" style={gradientBgStyle} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
-                Start Enriching for Free <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">Start Enriching for Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#demo" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm border-2" style={{ borderColor: BRAND.primary, color: BRAND.primary }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
                 See a Live Demo
               </motion.a>

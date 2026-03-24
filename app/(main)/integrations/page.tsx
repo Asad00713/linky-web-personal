@@ -6,6 +6,7 @@ import CountUp from "react-countup";
 import { useInView as useRIOInView } from "react-intersection-observer";
 import Marquee from "react-fast-marquee";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import {
   Users,
   BarChart3,
@@ -573,16 +574,11 @@ export default function IntegrationsPage() {
               forever.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <motion.a
-                href="#categories"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-sm"
-                style={gradientBgStyle}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                transition={spring}
-              >
-                Explore Integrations <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="#categories">
+                  Explore Integrations <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <motion.a
                 href="/developers"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm border-2"

@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import Marquee from "react-fast-marquee";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -254,13 +255,11 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          <a
-            href="#products"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-white font-semibold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            style={gradientBgStyle}
-          >
-            Shop NFC Products <ArrowRight size={18} />
-          </a>
+          <AnimatedGradientButton asChild>
+            <a href="#products" className="inline-flex items-center justify-center gap-2">
+              Shop NFC Products <ArrowRight size={18} />
+            </a>
+          </AnimatedGradientButton>
           <a
             href="#how-it-works"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base border-2 border-[#0052D4] text-[#0052D4] transition-all duration-300 hover:bg-[#0052D4] hover:text-white"
@@ -464,11 +463,11 @@ function ProductShowcase() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="mt-6 flex gap-3"
             >
-              <a href="/shop" className="flex-1">
-                <button className="w-full px-6 py-3 rounded-full text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all hover:scale-[1.02]" style={gradientBgStyle}>
+              <AnimatedGradientButton asChild className="flex-1">
+                <a href="/shop" className="w-full inline-flex items-center justify-center">
                   Shop All Products →
-                </button>
-              </a>
+                </a>
+              </AnimatedGradientButton>
             </motion.div>
           </div>
         </div>

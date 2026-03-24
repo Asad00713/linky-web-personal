@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import { IdentificationBadge, UserCircle, Buildings, EnvelopeSimple } from "@phosphor-icons/react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ================================================================ */
 
@@ -175,9 +176,9 @@ function HeroSection() {
               The universal event badge scanner that reads printed, QR, and NFC badges from any event platform. Capture leads in two seconds, enrich them with AI, and push them straight to your CRM &mdash; even offline. Stop wasting rands on post-event data entry.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.65 }} className="flex flex-wrap gap-4">
-              <motion.a href="/pricing" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25" style={gradientBgStyle}>
-                Try Badge Scanner Free <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild className="shadow-lg shadow-primary/25">
+                <a href="/pricing">Try Badge Scanner Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#how-it-works" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} className="inline-flex items-center gap-2 rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5 transition-colors">
                 See How It Works
               </motion.a>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import confetti from "canvas-confetti";
 import { useCart } from "@/context/CartContext";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -739,13 +740,9 @@ export default function CheckoutPage() {
         <p className="text-sm" style={{ color: "#454545" }}>
           Add some NFC products to get started.
         </p>
-        <Link
-          href="/shop"
-          className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
-          style={gradientBgStyle}
-        >
-          Browse Products
-        </Link>
+        <AnimatedGradientButton asChild>
+          <Link href="/shop">Browse Products</Link>
+        </AnimatedGradientButton>
       </div>
     );
   }
@@ -863,15 +860,12 @@ export default function CheckoutPage() {
               </div>
 
               {/* Continue button */}
-              <motion.button
+              <AnimatedGradientButton
                 onClick={handleContinueToPayment}
-                className="mt-6 w-full sm:w-auto rounded-full px-8 py-3 text-sm font-semibold text-white"
-                style={gradientBgStyle}
-                whileHover={{ scale: 1.02, boxShadow: "0 8px 30px rgba(0,82,212,0.3)" }}
-                whileTap={{ scale: 0.98 }}
+                className="mt-6 w-full sm:w-auto"
               >
-                Continue to Payment &rarr;
-              </motion.button>
+                Continue to Payment →
+              </AnimatedGradientButton>
             </div>
 
             {/* Right: Order summary */}
@@ -1102,13 +1096,10 @@ export default function CheckoutPage() {
 
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <motion.button
+                <AnimatedGradientButton
                   onClick={handlePay}
                   disabled={isProcessing}
-                  className="rounded-full px-8 py-3 text-sm font-semibold text-white flex items-center gap-2 disabled:opacity-70"
-                  style={gradientBgStyle}
-                  whileHover={isProcessing ? {} : { scale: 1.02, boxShadow: "0 8px 30px rgba(0,82,212,0.3)" }}
-                  whileTap={isProcessing ? {} : { scale: 0.98 }}
+                  className="disabled:opacity-70"
                 >
                   {isProcessing ? (
                     <>
@@ -1119,9 +1110,9 @@ export default function CheckoutPage() {
                       Processing...
                     </>
                   ) : (
-                    <>Pay {formatRand(total)} &rarr;</>
+                    <>Pay {formatRand(total)} →</>
                   )}
-                </motion.button>
+                </AnimatedGradientButton>
 
                 <button
                   onClick={() => goToStep(1)}
@@ -1284,15 +1275,9 @@ export default function CheckoutPage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.a
-                href="#"
-                className="rounded-full px-8 py-3 text-sm font-semibold text-white inline-block"
-                style={gradientBgStyle}
-                whileHover={{ scale: 1.02, boxShadow: "0 8px 30px rgba(0,82,212,0.3)" }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Track My Order &rarr;
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="#">Track My Order →</a>
+              </AnimatedGradientButton>
               <Link
                 href="/shop"
                 className="rounded-full px-8 py-3 text-sm font-semibold border-2 inline-block"

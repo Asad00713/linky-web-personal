@@ -27,6 +27,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  1. HERO — Animated commission counter                              */
@@ -70,15 +71,9 @@ function HeroSection() {
               thank you for recommending.
             </p>
             <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="#apply"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-              >
-                Apply Now
-                <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="#apply">Apply Now <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a
                 href="#how-it-works"
                 whileHover={{ scale: 1.03 }}
@@ -512,19 +507,21 @@ function TiersSection() {
                     ))}
                   </ul>
 
-                  <motion.a
-                    href="#apply"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all ${
-                      tier.highlight
-                        ? "bg-gradient-to-r from-primary-light via-primary-mid to-primary text-white shadow-lg shadow-primary/25"
-                        : "border-2 border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5"
-                    }`}
-                  >
-                    Get Started
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.a>
+                  {tier.highlight ? (
+                    <AnimatedGradientButton asChild className="w-full justify-center">
+                      <a href="#apply">Get Started <ArrowRight className="h-4 w-4" /></a>
+                    </AnimatedGradientButton>
+                  ) : (
+                    <motion.a
+                      href="#apply"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all border-2 border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5"
+                    >
+                      Get Started
+                      <ArrowRight className="h-4 w-4" />
+                    </motion.a>
+                  )}
                 </div>
               </Tilt>
             </motion.div>

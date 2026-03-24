@@ -24,7 +24,8 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -66,7 +67,7 @@ function HeroSection() {
               seconds save lives.
             </p>
             <div className="flex flex-wrap gap-4">
-              <motion.a href="/get-started" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25">Set Up ICE Free</motion.a>
+              <AnimatedGradientButton asChild><a href="/get-started">Set Up ICE Free</a></AnimatedGradientButton>
               <motion.a href="#how-it-works" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center rounded-full border-2 border-primary/20 px-8 py-3.5 text-sm font-semibold text-primary hover:border-primary/40 hover:bg-primary/5">See How It Works</motion.a>
             </div>
           </motion.div>

@@ -52,6 +52,7 @@ import {
   ArrowSquareOut,
 } from "@phosphor-icons/react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ═══════════════════════════════════════════════════════════════════
    GSAP — imported dynamically, registered in useEffect
@@ -114,12 +115,9 @@ function LiveCardDemo() {
             ))}
           </div>
 
-          <button
-            className="w-full rounded-full py-2.5 text-sm font-semibold text-white shadow-md shadow-primary/20"
-            style={gradientBgStyle}
-          >
-            Save Contact &darr;
-          </button>
+          <AnimatedGradientButton className="w-full">
+            Save Contact ↓
+          </AnimatedGradientButton>
 
           <div className="flex items-center justify-center gap-3 mt-4">
             {[InstagramLogo, LinkedinLogo, Globe, ArrowSquareOut].map((Icon, i) => (
@@ -216,15 +214,11 @@ function HeroSection() {
               transition={{ duration: 0.5, delay: 0.65 }}
               className="flex flex-wrap gap-4 mb-10"
             >
-              <motion.a
-                href="/get-started"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-                style={gradientBgStyle}
-              >
-                Get my free card <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started" className="inline-flex items-center gap-2">
+                  Get my free card <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <motion.a
                 href="#how-it-works"
                 whileHover={{ scale: 1.04 }}
@@ -1284,21 +1278,6 @@ function FloatingCapabilities() {
               </div>
             </div>
 
-            {/* Custom keyframes for this card */}
-            <style>{`
-              @keyframes dbc-glow-pulse {
-                0%, 100% { box-shadow: 0 0 40px rgba(0,82,212,0.06), 0 0 80px rgba(156,236,251,0.04); }
-                50% { box-shadow: 0 0 60px rgba(0,82,212,0.12), 0 0 120px rgba(156,236,251,0.08); }
-              }
-              @keyframes dbc-border-spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-              }
-              @keyframes dbc-shimmer {
-                0% { background-position: 200% 0; }
-                100% { background-position: -200% 0; }
-              }
-            `}</style>
           </motion.div>
 
           {capabilities.map((cap, i) => (

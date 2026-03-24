@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView as useRIOInView } from "react-intersection-observer";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import {
   Users,
   Building2,
@@ -210,9 +211,9 @@ export default function HubSpotIntegrationPage() {
               Connect your networking touchpoints directly to HubSpot. Every contact, company, and deal flows in real time — no manual entry, no missed follow-ups, no revenue left on the table.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <motion.a href="/signup" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-sm" style={gradientBgStyle} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
-                Connect HubSpot Free <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/signup">Connect HubSpot Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#deep-dive" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm border-2" style={{ borderColor: BRAND.primary, color: BRAND.primary }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
                 See How It Works
               </motion.a>

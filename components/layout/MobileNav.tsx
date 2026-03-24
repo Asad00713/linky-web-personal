@@ -40,8 +40,8 @@ import {
 } from "@phosphor-icons/react";
 import { IMAGES } from "@/assets/images";
 import { NAV_GROUPS, NAV_LINKS, RESOURCE_LINKS } from "@/config/navigation";
-import { Button } from "@/components/ui/button";
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import { gradientBgStyle } from "@/lib/styles";
 
 // ---------------------------------------------------------------------------
@@ -297,14 +297,9 @@ export function MobileNav() {
 
             {/* ── Bottom CTAs ── */}
             <div className="shrink-0 px-[5%] py-5 border-t border-gray-100 space-y-3">
-              <Button
-                variant="gradient"
-                size="pill"
-                className="w-full"
-                onClick={closeNav}
-              >
+              <AnimatedGradientButton className="w-full" onClick={closeNav}>
                 Sign Up Free
-              </Button>
+              </AnimatedGradientButton>
               <GradientOutlineButton className="w-full" onClick={closeNav}>
                 Login
               </GradientOutlineButton>

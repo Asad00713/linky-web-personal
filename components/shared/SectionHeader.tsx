@@ -15,7 +15,7 @@ export function SectionHeader({ icon, eyebrow, heading, description }: SectionHe
       </div>
       <div className="mb-4 w-fit">
         <span className="eyebrow text-(--color-eyebrow)">{eyebrow}</span>
-        <div className="mt-2 w-full h-px bg-(--color-eyebrow)/30" />
+        <div className="mt-2 w-full h-px bg-eyebrow/30" />
       </div>
       <h2 className="heading-2 text-(--color-body) mb-4">{heading}</h2>
       {description && (

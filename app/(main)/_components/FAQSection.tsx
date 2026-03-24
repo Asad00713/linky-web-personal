@@ -4,6 +4,7 @@ import { useState, useRef } from "react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { gradientBgStyle } from "@/lib/styles"
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton"
 
 interface FAQItem {
   question: string
@@ -268,15 +269,11 @@ export default function FAQSection() {
             Our team is here to help. Reach out anytime.
           </p>
           <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="https://wa.me/27000000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium text-white transition-transform hover:scale-105"
-              style={gradientBgStyle}
-            >
-              Chat with us on WhatsApp
-            </a>
+            <AnimatedGradientButton asChild>
+              <a href="https://wa.me/27000000000" target="_blank" rel="noopener noreferrer">
+                Chat with us on WhatsApp
+              </a>
+            </AnimatedGradientButton>
             <a
               href="mailto:hello@linkey.digital"
               className="text-sm font-medium text-[#0052D4] hover:underline"

@@ -4,8 +4,8 @@ import Image from "next/image"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef } from "react"
 import { CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { GradientOutlineButton } from "@/components/shared/GradientOutlineButton"
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton"
 import { gradientBgStyle } from "@/lib/styles"
 import CubeIcon from "@/public/images/CubeIcon.svg"
 import ToolImage1 from "@/public/images/ToolsImage1.svg"
@@ -104,7 +104,7 @@ function CtaButtons() {
   return (
     <div className="flex items-center gap-4 flex-wrap">
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-        <Button variant="gradient" size="pill">Start Free</Button>
+        <AnimatedGradientButton>Start Free</AnimatedGradientButton>
       </motion.div>
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
         <GradientOutlineButton>

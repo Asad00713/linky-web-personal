@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { gradientTextStyle, gradientBgStyle, gradientBorderStyle } from "@/lib/styles"
 import { Button } from "@/components/ui/button"
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton"
 
 /* ------------------------------------------------------------------ */
 /*  Shared constants                                                   */
@@ -145,7 +146,7 @@ function EcosystemVisualization({ size = 500 }: { size?: number }) {
           left: "50%",
           transform: "translate(-50%, -50%)",
           background: "radial-gradient(circle, rgba(0,82,212,0.1) 0%, transparent 70%)",
-          animation: `dir-pulse-ring-${size} 3s ease-in-out infinite`,
+          animation: `dir-pulse-ring 3s ease-in-out infinite`,
         }}
       />
 
@@ -197,7 +198,7 @@ function EcosystemVisualization({ size = 500 }: { size?: number }) {
               left: "50%",
               marginTop: y - nodeSize / 2,
               marginLeft: x - nodeSize / 2,
-              animation: `dir-orbit-around-${size} ${speed}s linear infinite`,
+              animation: `dir-orbit-around ${speed}s linear infinite`,
               transformOrigin: `${-x}px ${-y}px`,
             }}
           >
@@ -259,20 +260,6 @@ function EcosystemVisualization({ size = 500 }: { size?: number }) {
         )}
       </AnimatePresence>
 
-      <style>{`
-        @keyframes dir-orbit-around-${size} {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes dir-counter-orbit {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(-360deg); }
-        }
-        @keyframes dir-pulse-ring-${size} {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-          50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
-        }
-      `}</style>
     </div>
   )
 }
@@ -331,9 +318,7 @@ function HeroSection() {
         transition={{ duration: 0.5, delay: 0.6 }}
         className="flex flex-col sm:flex-row gap-4 justify-center"
       >
-        <Button variant="gradient" size="pill">
-          List My Business &rarr;
-        </Button>
+        <AnimatedGradientButton>List My Business →</AnimatedGradientButton>
         <a href="#browse">
           <Button variant="outline" size="pill">
             Browse Directory

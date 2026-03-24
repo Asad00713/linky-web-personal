@@ -22,7 +22,8 @@ import {
   ChevronDown,
   MapPin,
 } from "lucide-react";
-import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { gradientTextStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  1. HERO — Cinematic word-by-word stagger                           */
@@ -83,15 +84,9 @@ function HeroSection() {
           transition={{ delay: 1.1, duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <motion.a
-            href="/signup"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-light via-primary-mid to-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-          >
-            Get Started Free
-            <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          <AnimatedGradientButton asChild>
+            <a href="/signup">Get Started Free <ArrowRight className="h-4 w-4" /></a>
+          </AnimatedGradientButton>
           <motion.a
             href="/careers"
             whileHover={{ scale: 1.03 }}

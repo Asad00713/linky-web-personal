@@ -41,6 +41,7 @@ import {
   Megaphone,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import type { Metadata } from "next";
 
 /* ─────────────────── PARTICLE FIELD ─────────────────── */
@@ -192,15 +193,11 @@ function HeroSection() {
               transition={{ duration: 0.5, delay: 1.5 }}
               className="flex flex-wrap gap-4"
             >
-              <motion.a
-                href="/get-started"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-primary/25"
-                style={gradientBgStyle}
-              >
-                See what you{"'"}ve been missing <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/get-started">
+                  See what you{"'"}ve been missing <ArrowRight className="h-4 w-4" />
+                </a>
+              </AnimatedGradientButton>
               <motion.a
                 href="/book-demo"
                 whileHover={{ scale: 1.04 }}
@@ -1524,14 +1521,11 @@ function FinalCTA() {
           transition={{ delay: 0.25 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <motion.a
-            href="/get-started"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#9CECFB] via-[#65C7F7] to-[#0052D4] px-10 py-4 text-sm font-semibold text-white shadow-lg shadow-[#0052D4]/25"
-          >
-            Get Started Free <ArrowRight className="h-4 w-4" />
-          </motion.a>
+          <AnimatedGradientButton asChild>
+            <a href="/get-started">
+              Get Started Free <ArrowRight className="h-4 w-4" />
+            </a>
+          </AnimatedGradientButton>
           <motion.a
             href="/pricing"
             whileHover={{ scale: 1.03 }}

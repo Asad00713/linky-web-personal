@@ -25,6 +25,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ──────────────────────────── helpers ──────────────────────────── */
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
@@ -240,9 +241,9 @@ export default function EventMarketersPage() {
               LINKey turns every badge scan, booth visit, and handshake into a tracked, enriched lead — so your event team can finally show exactly what their budget delivered. No more gut-feel reporting. Just hard numbers in rands.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-              <a href="/signup" className="px-8 py-4 rounded-full text-white font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" style={gradientBgStyle}>
-                Start Your First Campaign
-              </a>
+              <AnimatedGradientButton asChild>
+                <a href="/signup">Start Your First Campaign</a>
+              </AnimatedGradientButton>
               <a href="/demo" className="px-8 py-4 rounded-full border-2 border-[#0052D4] text-[#0052D4] font-semibold text-sm hover:bg-[#0052D4] hover:text-white transition-all duration-300">
                 See a Demo
               </a>

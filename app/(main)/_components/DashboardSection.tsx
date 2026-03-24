@@ -49,44 +49,6 @@ export default function DashboardSection() {
 
   return (
     <section className="w-full px-6 py-16 overflow-hidden">
-      <style>{`
-        @keyframes gradientRotate {
-          0% { --angle: 0deg; }
-          100% { --angle: 360deg; }
-        }
-        @keyframes floatY {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-3px); }
-        }
-        .dashboard-border {
-          position: relative;
-        }
-        .dashboard-border::before {
-          content: '';
-          position: absolute;
-          inset: -2px;
-          border-radius: 34px;
-          padding: 2px;
-          background: conic-gradient(from var(--angle, 0deg), #9CECFB, #65C7F7, #0052D4, #65C7F7, #9CECFB);
-          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          mask-composite: exclude;
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          animation: gradientRotate 6s linear infinite;
-        }
-        @property --angle {
-          syntax: '<angle>';
-          initial-value: 0deg;
-          inherits: false;
-        }
-        .float-badge {
-          animation: floatY 3s ease-in-out infinite;
-        }
-        .float-badge:nth-child(2) { animation-delay: 0.5s; }
-        .float-badge:nth-child(3) { animation-delay: 1s; }
-        .float-badge:nth-child(4) { animation-delay: 1.5s; }
-      `}</style>
-
       <div
         ref={ref}
         className="mx-auto flex max-w-[1232px] flex-col items-center text-center"

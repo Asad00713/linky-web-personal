@@ -16,6 +16,7 @@ import {
   Gift, ArrowRight, Sparkles,
 } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -1048,13 +1049,11 @@ export default function BusinessDigitalCardPage() {
                 A company-branded digital card with promo videos, live deals, WhatsApp chat, and a full team directory. Everything prospects need to choose you - shared in a single tap.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-                <a
-                  href="/signup"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-white font-semibold text-sm transition-transform hover:scale-105"
-                  style={gradientBgStyle}
-                >
-                  Get Started Free <ArrowRight className="w-4 h-4" />
-                </a>
+                <AnimatedGradientButton asChild>
+                  <a href="/signup">
+                    Get Started Free <ArrowRight className="w-4 h-4" />
+                  </a>
+                </AnimatedGradientButton>
                 <a
                   href="/demo"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-sm border-2 border-[#0052D4] text-[#0052D4] hover:bg-[#0052D4]/5 transition-colors"

@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ================================================================== */
 /*  SHARED                                                             */
@@ -295,16 +296,10 @@ function HeroSection() {
                     />
                   </div>
 
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#0052D4]/25 transition-shadow hover:shadow-xl hover:shadow-[#0052D4]/30 cursor-pointer"
-                    style={gradientBgStyle}
-                  >
+                  <AnimatedGradientButton type="submit" className="w-full">
                     Book My Demo
                     <ArrowRight className="h-4 w-4" />
-                  </motion.button>
+                  </AnimatedGradientButton>
                 </form>
               )}
             </div>
@@ -559,12 +554,6 @@ function HowItWorks() {
         </div>
       </div>
 
-      {/* Inline CSS for dash animation */}
-      <style>{`
-        @keyframes dash-flow {
-          to { stroke-dashoffset: -36; }
-        }
-      `}</style>
     </section>
   );
 }
@@ -793,20 +782,12 @@ function UrgencyBanner() {
                 slots remain.
               </p>
             </div>
-            <motion.a
-              href="#top"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white shrink-0 cursor-pointer shadow-lg shadow-[#0052D4]/20"
-              style={gradientBgStyle}
+            <AnimatedGradientButton
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               Grab your slot
               <ArrowRight className="h-4 w-4" />
-            </motion.a>
+            </AnimatedGradientButton>
           </div>
         </div>
       </motion.div>

@@ -8,6 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { Check } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
 import { Button } from "@/components/ui/button";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -434,18 +435,7 @@ export default function CardSwopShowcase() {
               transition={{ ...spring, delay: 1.6 }}
             >
               <Link href="/card-swop">
-                <Button
-                  variant="gradient"
-                  size="pill"
-                  className="relative overflow-hidden font-[Poppins]"
-                  style={{
-                    backgroundSize: "200% 100%",
-                    backgroundImage:
-                      "linear-gradient(110deg, #9CECFB 0%, #65C7F7 25%, #0052D4 50%, #65C7F7 75%, #9CECFB 100%)",
-                  }}
-                >
-                  Try Card Swop →
-                </Button>
+                <AnimatedGradientButton className="font-[Poppins]">Try Card Swop →</AnimatedGradientButton>
               </Link>
             </motion.div>
           </div>

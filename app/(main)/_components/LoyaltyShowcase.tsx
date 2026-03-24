@@ -7,7 +7,7 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { Check, Coffee } from "lucide-react";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
-import { Button } from "@/components/ui/button";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -390,9 +390,7 @@ export default function LoyaltyShowcase() {
               transition={{ ...spring, delay: 1.6 }}
             >
               <Link href="/loyalty-rewards">
-                <Button variant="gradient" size="pill">
-                  Explore Loyalty →
-                </Button>
+                <AnimatedGradientButton>Explore Loyalty →</AnimatedGradientButton>
               </Link>
             </motion.div>
           </div>

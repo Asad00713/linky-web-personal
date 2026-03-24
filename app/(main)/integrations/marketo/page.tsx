@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView as useRIOInView } from "react-intersection-observer";
 import { gradientTextStyle, gradientBgStyle } from "@/lib/styles";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import {
   UserPlus,
   BookOpen,
@@ -286,9 +287,9 @@ export default function MarketoIntegrationPage() {
               Push enriched leads from real-world networking straight into Marketo programmes and smart campaigns. No CSV uploads, no stale data, no pipeline leaks.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <motion.a href="/signup" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-white font-semibold text-sm" style={gradientBgStyle} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
-                Connect Marketo Free <ArrowRight className="h-4 w-4" />
-              </motion.a>
+              <AnimatedGradientButton asChild>
+                <a href="/signup">Connect Marketo Free <ArrowRight className="h-4 w-4" /></a>
+              </AnimatedGradientButton>
               <motion.a href="#pipeline" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm border-2" style={{ borderColor: BRAND.primary, color: BRAND.primary }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={spring}>
                 See the Data Flow
               </motion.a>

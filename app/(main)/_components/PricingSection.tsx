@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Check, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ShineBorder } from "@/components/ui/shine-border";
+import { AnimatedGradientButton } from "@/components/shared/AnimatedGradientButton";
 import { gradientTextStyle } from "@/lib/styles";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import Tilt from "react-parallax-tilt";
@@ -197,9 +197,9 @@ function PricingCard({
           {/* CTA */}
           {plan.featured ? (
             <div className="relative overflow-hidden rounded-full">
-              <Button variant="gradient" size="pill" className="w-full relative z-[1]">
+              <AnimatedGradientButton className="w-full relative z-[1]">
                 Get started for free
-              </Button>
+              </AnimatedGradientButton>
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
@@ -210,9 +210,9 @@ function PricingCard({
               />
             </div>
           ) : (
-            <Button variant="gradient" size="pill" className="w-full">
+            <AnimatedGradientButton className="w-full">
               Get started for free
-            </Button>
+            </AnimatedGradientButton>
           )}
 
           <ul className="flex flex-col gap-3">
@@ -250,13 +250,6 @@ export default function PricingSection() {
 
   return (
     <section className="py-10 lg:py-24 px-[5%] bg-[#F6FAFB]">
-      <style>{`
-        @keyframes shineBtn {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
-
       {/* Header */}
       <motion.div
         ref={headerRef}
@@ -282,6 +275,18 @@ export default function PricingSection() {
 
         {/* Monthly/Yearly Toggle */}
         <div className="relative flex items-center bg-white rounded-full p-1 shadow-sm border border-gray-100">
+          {/* Sliding pill */}
+          <motion.div
+            className="absolute top-1 bottom-1 rounded-full pointer-events-none"
+            style={{
+              background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)",
+              left: "4px",
+              width: "calc(50% - 6px)",
+            }}
+            animate={{ x: isYearly ? "calc(100% + 4px)" : "0%" }}
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            initial={false}
+          />
           <button
             onClick={() => setIsYearly(false)}
             className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer ${
@@ -292,49 +297,20 @@ export default function PricingSection() {
           </button>
           <button
             onClick={() => setIsYearly(true)}
-            className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-200 flex items-center gap-2 cursor-pointer ${
+            className={`relative z-10 px-5 py-2 text-sm font-medium rounded-full transition-colors duration-200 cursor-pointer ${
               isYearly ? "text-white" : "text-(--color-card-para)"
             }`}
           >
             Yearly
-            <AnimatePresence>
-              {isYearly && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="text-[10px] font-bold bg-white/20 rounded-full px-2 py-0.5"
-                >
-                  Save 20%
-                </motion.span>
-              )}
-            </AnimatePresence>
           </button>
-          <motion.div
-            className="absolute top-1 bottom-1 rounded-full"
+          <span
+            className="absolute -top-2 -right-2 text-[10px] font-bold rounded-full px-2 py-0.5 text-white pointer-events-none"
             style={{
-              background:
-                "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)",
+              background: "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)",
             }}
-            layout
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            initial={false}
-            animate={{
-              left: isYearly ? "calc(50% - 2px)" : "4px",
-              right: isYearly ? "4px" : "calc(50% - 2px)",
-            }}
-          />
-          {!isYearly && (
-            <span
-              className="absolute -top-2 -right-2 text-[10px] font-bold rounded-full px-2 py-0.5 text-white"
-              style={{
-                background:
-                  "linear-gradient(to right, #9CECFB, #65C7F7, #0052D4)",
-              }}
-            >
-              Save 20%
-            </span>
-          )}
+          >
+            Save 20%
+          </span>
         </div>
       </motion.div>
 
